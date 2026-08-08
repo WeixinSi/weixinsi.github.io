@@ -22,7 +22,7 @@ repository               : "WeixinSi/weixinsi.github.io"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           :
+  avatar           : "wxsi.jpg"
   name             : "Weixin Si"
   pronouns         :
   bio              : "Welcome to my academic homepage."

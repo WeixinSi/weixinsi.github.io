@@ -1,0 +1,4 @@
+interface:
+  display_name: "维护 Weixin Si 学术主页"
+  short_description: "编辑 Academic Pages 主页并执行受控的验证、提交与推送"
+  default_prompt: "Use $maintaining-weixinsi-homepage to update my Academic Pages homepage, validate the changes, and wait for explicit commit or push authorization."
