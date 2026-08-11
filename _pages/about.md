@@ -14,7 +14,7 @@ Shenzhen University of Advanced Technology
 **Associate Director**<br>
 Center for Evidence-Based Medicine and Artificial Intelligence
 
-[Email](mailto:siweixin@suat-sz.edu.cn) · [Google Scholar](https://scholar.google.com/citations?user=E4efwTgAAAAJ) · [Website](https://csce.suat-sz.edu.cn/info/1011/1311.htm) · [Curriculum Vitae](/files/weixin-si-cv.pdf)
+[Email](mailto:siweixin@suat-sz.edu.cn) · [Google Scholar](https://scholar.google.com/citations?user=E4efwTgAAAAJ) · [Website](https://csce.suat-sz.edu.cn/info/1011/1311.htm)
 
 Prof. Weixin Si is currently an Associate Professor (Teaching & Research)
 and Specially Appointed Full Professor in the Faculty of Computer Science
