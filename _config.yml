@@ -9,7 +9,7 @@
 # Basic Site Settings
 locale                   : "en-US"
 site_theme               : "default" # The available themes options are "default", "air", "sunrise", "mint", "dirt" and "contrast"
-title                    : "Weixin Si (司伟鑫)"
+title                    : "Weixin Si"
 title_separator          : "-"
 name                     : &name "Weixin Si"
 description              : &description "Academic homepage of Weixin Si"
@@ -25,16 +25,16 @@ author:
   avatar           : "wxsi.jpg"
   name             : "Weixin Si"
   pronouns         :
-  bio              : "Welcome to my academic homepage."
-  location         : "China"
-  employer         :
-  uri              :
-  email            :
+  bio              : "Associate Professor at Shenzhen University of Advanced Technology"
+  location         : "Shenzhen, China"
+  employer         : "Shenzhen University of Advanced Technology"
+  uri              : "https://csce.suat-sz.edu.cn/info/1011/1311.htm"
+  email            : "siweixin@suat-sz.edu.cn"
 
   # Academic websites
   academia         :
   arxiv            :
-  googlescholar    :
+  googlescholar    : "https://scholar.google.com/citations?user=E4efwTgAAAAJ"
   inspire-hep      :
   impactstory      :
   orcid            :
@@ -49,7 +49,7 @@ author:
   bitbucket        :
   codepen          :
   dribbble         :
-  github           : "WeixinSi"
+  github           :
   kaggle           :
   stackoverflow    :
 
@@ -222,6 +222,8 @@ collections:
   talks:
     output: true
     permalink: /:collection/:path/
+  gallery:
+    output: false
 
 # These settings control how pages and collections are included in the site
 defaults:
