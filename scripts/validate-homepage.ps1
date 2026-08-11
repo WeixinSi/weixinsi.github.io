@@ -65,7 +65,7 @@ if ($config -match '(?m)^\s*github\s*:[^\S\r\n]*\S+') {
     throw 'GitHub must be blank in author metadata.'
 }
 foreach ($collectionName in @('teaching', 'publications', 'portfolio', 'talks', 'gallery')) {
-    $collectionPattern = '(?ms)^  ' + [regex]::Escape($collectionName) + ':\s*\r?\n(?:(?:    .*?)\r?\n)*?    output:\s*false\s*$'
+    $collectionPattern = '(?m)^  ' + [regex]::Escape($collectionName) + ':\r?\n    output: false\s*$'
     Assert-Match $config $collectionPattern "Collection output must be false: $collectionName"
 }
 
