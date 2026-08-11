@@ -5,7 +5,7 @@
   margin: 1.25rem 0 2rem;
 
   article {
-    border-top: 2px solid mix(#000, $background-color, 18%);
+    border-top: 2px solid var(--global-border-color);
     padding: 1rem 0.25rem 0;
   }
 
@@ -20,9 +20,9 @@
 
   button {
     background: transparent;
-    border: 1px solid mix(#000, $background-color, 22%);
+    border: 1px solid var(--global-border-color);
     border-radius: 999px;
-    color: $text-color;
+    color: var(--global-text-color);
     cursor: pointer;
     padding: 0.4rem 0.85rem;
   }
@@ -30,22 +30,22 @@
   button:hover,
   button:focus-visible,
   button.is-active {
-    border-color: $link-color;
-    color: $link-color;
+    border-color: var(--global-link-color);
+    color: var(--global-link-color);
   }
 }
 
 .publication-group[hidden] { display: none; }
 
 .academic-gallery__item {
-  border-top: 1px solid mix(#000, $background-color, 14%);
+  border-top: 1px solid var(--global-border-color);
   margin: 1.25rem 0 2.25rem;
   padding-top: 1.25rem;
 }
 
 .academic-gallery__meta,
 .gallery-empty {
-  color: mix($text-color, $background-color, 70%);
+  color: var(--global-text-color-light);
   font-size: 0.9em;
 }
 

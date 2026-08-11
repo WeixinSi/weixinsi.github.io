@@ -128,4 +128,10 @@ if ($aboutPage -match '(?m)^##\s+Biography\s*$') {
 }
 Assert-Match $aboutPage 'Specially Appointed Full Professor' 'The specially appointed full professor title is missing.'
 
+$academicStyles = Read-Utf8File '_sass/layout/_academic-profile.scss'
+$undefinedThemeVariable = [regex]::Match($academicStyles, '\$(?:background|text|link)-color\b')
+if ($undefinedThemeVariable.Success) {
+    throw "Academic profile styles reference an undefined theme variable: $($undefinedThemeVariable.Value)"
+}
+
 Write-Host 'Homepage source validation passed.'
