@@ -43,7 +43,7 @@ foreach ($entry in $requiredPages.GetEnumerator()) {
 $config = Read-Utf8File '_config.yml'
 Assert-Match $config '(?m)^\s*uri\s*:\s*"https://csce\.suat-sz\.edu\.cn/info/1011/1311\.htm"\s*$' 'Institutional Website is not configured.'
 Assert-Match $config '(?m)^\s*googlescholar\s*:\s*"https://scholar\.google\.com/citations\?user=E4efwTgAAAAJ"\s*$' 'Google Scholar is not configured.'
-if ($config -match '(?m)^\s*github\s*:\s*\S+') {
+if ($config -match '(?m)^\s*github\s*:[^\S\r\n]*\S+') {
     throw 'GitHub must be blank in author metadata.'
 }
 
@@ -71,10 +71,10 @@ foreach ($heading in @('Distinguished Visitors', 'Publicity', 'Academic Events &
     Assert-Match $gallery ([regex]::Escape($heading)) "Gallery heading missing: $heading"
 }
 
-$home = Read-Utf8File '_pages/about.md'
-if ($home -match '(?m)^##\s+Biography\s*$') {
+$aboutPage = Read-Utf8File '_pages/about.md'
+if ($aboutPage -match '(?m)^##\s+Biography\s*$') {
     throw 'Home biography must not have a Biography heading.'
 }
-Assert-Match $home 'Specially Appointed Full Professor' 'The specially appointed full professor title is missing.'
+Assert-Match $aboutPage 'Specially Appointed Full Professor' 'The specially appointed full professor title is missing.'
 
 Write-Host 'Homepage source validation passed.'
