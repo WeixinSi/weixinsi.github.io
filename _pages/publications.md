@@ -7,9 +7,9 @@ author_profile: true
 <p><sup>#</sup> Co-first author · <sup>†</sup> Equal contribution · <sup>*</sup> Corresponding or co-corresponding author</p>
 
 <div class="publication-filter" role="group" aria-label="Filter publications">
-  <button type="button" class="is-active" data-publication-filter="all">All</button>
-  <button type="button" data-publication-filter="journal">Journal Articles</button>
-  <button type="button" data-publication-filter="conference">Conference Papers</button>
+  <button type="button" class="is-active" data-publication-filter="all" aria-pressed="true">All</button>
+  <button type="button" data-publication-filter="journal" aria-pressed="false">Journal Articles</button>
+  <button type="button" data-publication-filter="conference" aria-pressed="false">Conference Papers</button>
 </div>
 
 <section class="publication-group" data-publication-type="journal" markdown="1">
@@ -205,6 +205,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var filter = button.getAttribute('data-publication-filter');
       buttons.forEach(function (item) {
         item.classList.toggle('is-active', item === button);
+        item.setAttribute('aria-pressed', item === button ? 'true' : 'false');
       });
       groups.forEach(function (group) {
         group.hidden = filter !== 'all' && group.getAttribute('data-publication-type') !== filter;
