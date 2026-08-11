@@ -7,17 +7,14 @@ redirect_from:
   - /about.html
 ---
 
-**Associate Professor (Teaching & Research) 路 Specially Appointed Full Professor**<br>
+**Associate Professor (Teaching & Research) · Specially Appointed Full Professor**<br>
 Faculty of Computer Science and Artificial Intelligence<br>
 Shenzhen University of Advanced Technology
 
 **Associate Director**<br>
 Center for Evidence-Based Medicine and Artificial Intelligence
 
-[Email](mailto:siweixin@suat-sz.edu.cn) 路
-[Google Scholar](https://scholar.google.com/citations?user=E4efwTgAAAAJ) 路
-[Website](https://csce.suat-sz.edu.cn/info/1011/1311.htm) 路
-[Curriculum Vitae](/files/weixin-si-cv.pdf)
+[Email](mailto:siweixin@suat-sz.edu.cn) · [Google Scholar](https://scholar.google.com/citations?user=E4efwTgAAAAJ) · [Website](https://csce.suat-sz.edu.cn/info/1011/1311.htm) · [Curriculum Vitae](/files/weixin-si-cv.pdf)
 
 Prof. Weixin Si is currently an Associate Professor (Teaching & Research)
 and Specially Appointed Full Professor in the Faculty of Computer Science
