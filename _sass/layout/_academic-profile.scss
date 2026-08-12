@@ -24,6 +24,28 @@
   font-size: 0.9em;
 }
 
+/* Give long affiliations enough room in the desktop author profile. */
+@include breakpoint($large) {
+  .sidebar {
+    @include span(2.5 of 12);
+    max-width: none;
+  }
+
+  .page,
+  .archive {
+    @include span(9.5 of 12 last);
+  }
+
+  .masthead__menu {
+    @include span(9.5 of 12 last);
+    @include prefix(0.5 of 12);
+  }
+
+  .author__urls li {
+    white-space: normal;
+  }
+}
+
 @media (max-width: 600px) {
   .research-topics { grid-template-columns: 1fr; }
 }
