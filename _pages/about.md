@@ -7,18 +7,15 @@ redirect_from:
   - /about.html
 ---
 
-**Associate Professor (Teaching & Research) · Specially Appointed Full Professor**<br>
+**Associate Professor (Teaching & Research)**<br>
 Faculty of Computer Science and Artificial Intelligence<br>
 Shenzhen University of Advanced Technology
 
 **Associate Director**<br>
 Center for Evidence-Based Medicine and Artificial Intelligence
 
-[Email](mailto:siweixin@suat-sz.edu.cn) · [Google Scholar](https://scholar.google.com/citations?user=E4efwTgAAAAJ) · [Website](https://csce.suat-sz.edu.cn/info/1011/1311.htm)
-
 Prof. Weixin Si is currently an Associate Professor (Teaching & Research)
-and Specially Appointed Full Professor in the Faculty of Computer Science
-and Artificial Intelligence at Shenzhen University of Advanced Technology
+in the Faculty of Computer Science and Artificial Intelligence at Shenzhen University of Advanced Technology
 (SUAT). He is also the Associate Director of the
 Center for Evidence-Based Medicine and Artificial Intelligence. His
 research interests include medical image analysis, artificial
@@ -85,6 +82,3 @@ reality.
   received the Best Paper Award at CW 2025.
 - [04/2025] Joined Shenzhen University of Advanced Technology as an
   Associate Professor.
-- [06/2024] *Depth-Driven Geometric Prompt Learning for Laparoscopic Liver
-  Landmark Detection* was selected as an oral paper and a Best Paper
-  Award Finalist at MICCAI 2024.

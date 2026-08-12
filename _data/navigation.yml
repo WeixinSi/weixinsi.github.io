@@ -12,12 +12,12 @@ main:
     url: /
   - title: "Team"
     url: /team/
-  - title: "Research"
-    url: /research/
   - title: "Publications"
     url: /publications/
   - title: "Talks"
     url: /talks/
+  - title: "Teaching"
+    url: /teaching/
   - title: "Gallery"
     url: /gallery/
   - title: "More"

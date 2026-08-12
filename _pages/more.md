@@ -22,12 +22,6 @@ author_profile: true
 
 8. **Best Paper Award, Asia Simulation Conference & The International Conference on System Simulation and Scientific Computing 2012.** *An Energy Based Free Boundary Asynchronous Diffusion Model for 3D Warping of Tissue Dynamics.* Contribution rank: **1/5**.<br> Authors: **Weixin Si**, Zhiyong Yuan, Xiangyun Liao, Zhaoliang Duan, Jianhui Zhao.
 
-## Teaching
-
-- **FCAB335:** Human–Computer Interaction and Virtual Reality
-- **FCCA221:** Data Structures and Algorithm Analysis
-- **FCCA511:** Advanced Artificial Intelligence
-
 ## Professional Services
 
 ### Conference Services
@@ -73,51 +67,6 @@ author_profile: true
 13. Si Weixin, Qian Yinling, Dai Sha, Peng Liu, Sun Yinzi, Pheng-Ann Heng. Virtual microscopic ophthalmic surgery training method and system. 2020-09-01, China, ZL201810942749.6.
 
 14. Si Weixin, Peng Liu, Liao Xiangyun, Sun Yinzi, Pheng-Ann Heng. Surgical simulation method, apparatus, and system. 2020-07-31, China, ZL201811058325.X.
-
-## Professional Appointments
-
-**2025/04-Present**<br>
-Associate Professor (Teaching and Research), Faculty of Computer
-Science and Artificial Intelligence, Shenzhen University of Advanced
-Technology.
-
-**2018/11-2025/03**<br>
-Associate Researcher, Center for Cognitive Interaction, Institute of
-Advanced Integration Technology, Shenzhen Institutes of Advanced
-Technology, Chinese Academy of Sciences.
-
-**2017/08-2018/10**<br>
-Postdoctoral Fellow, Department of Computer Science and Engineering,
-The Chinese University of Hong Kong. Supervisor: Prof. Pheng-Ann Heng.
-
-## Education
-
-**2013/08-2017/07**<br>
-Ph.D., Department of Computer Science and Engineering, The Chinese
-University of Hong Kong. Advisors: Prof. Pheng-Ann Heng and
-Prof. Chi-Wing Fu.
-
-**2011/09-2013/06**<br>
-M.S., School of Computer Science, Wuhan University.<br>
-Advisor: Prof. Zhiyong Yuan.
-
-**2007/09-2011/06**<br>
-B.S., School of Computer Science, Wuhan University.
-
-## Contact
-
-**Weixin Si**<br>
-Faculty of Computer Science and Artificial Intelligence<br>
-Shenzhen University of Advanced Technology<br>
-Shenzhen, China
-
-Email: [siweixin@suat-sz.edu.cn](mailto:siweixin@suat-sz.edu.cn)
-
-Google Scholar:
-[scholar.google.com/citations?user=E4efwTgAAAAJ](https://scholar.google.com/citations?user=E4efwTgAAAAJ)
-
-Website:<br>
-[csce.suat-sz.edu.cn/info/1011/1311.htm](https://csce.suat-sz.edu.cn/info/1011/1311.htm)
 
 ---
 
