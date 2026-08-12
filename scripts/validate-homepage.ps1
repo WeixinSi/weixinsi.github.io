@@ -459,6 +459,8 @@ function Invoke-HomepageValidation {
     if ($undefinedThemeVariable.Success) {
         throw "Academic profile styles reference an undefined theme variable: $($undefinedThemeVariable.Value)"
     }
+    $balancedDesktopLayoutPattern = '(?ms)^\s*\.page,\r?\n\s*\.archive\s*\{\r?\n\s*@include span\(9\.5 of 12 last\);\r?\n\s*@include prefix\(0\.5 of 12\);\r?\n\s*padding-right:\s*0;\r?\n\s*\}'
+    Assert-Match $academicStyles $balancedDesktopLayoutPattern 'Desktop content must retain a half-column gutter and remove the inherited right padding.'
 
     Write-Host 'Homepage source validation passed.'
 }
