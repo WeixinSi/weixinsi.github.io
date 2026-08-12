@@ -148,6 +148,10 @@ function Assert-PublicationsContract([string]$Publications) {
         throw "Expected exactly one Selected Publications heading, found $selectedHeadingCount."
     }
 
+    if ($Publications.Contains('<sup>*</sup>')) {
+        throw 'Publication author markers must encode asterisks as &#42; so Kramdown does not corrupt the closing sup tag.'
+    }
+
     $yearContracts = @(
         [pscustomobject]@{ Year = '2026'; Start = 1; Count = 9 },
         [pscustomobject]@{ Year = '2025'; Start = 10; Count = 20 },
@@ -301,7 +305,7 @@ function Assert-PublicationsContract([string]$Publications) {
     # Reviewed digest of the 67 complete, unnumbered entries after CRLF/LF normalization,
     # joined with LF and no terminal newline.
     # Any intentional publication addition or text/order change requires review and a digest update.
-    $expectedPublicationDigest = 'f1fe81c3b3752209d57aac36d44d734ffd5540692091e599c9f81d26eae65ae4'
+    $expectedPublicationDigest = 'b0b0676960c95848f0c75d4c991a24e672d19ff908aca7d82925424039d5cbe3'
     $actualPublicationDigest = Get-Sha256Hex ($publicationBodies -join "`n")
     if ($actualPublicationDigest -ne $expectedPublicationDigest) {
         throw "Publication content digest mismatch: expected $expectedPublicationDigest, found $actualPublicationDigest."
