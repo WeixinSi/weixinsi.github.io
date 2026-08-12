@@ -16,26 +16,31 @@ Center for Evidence-Based Medicine and Artificial Intelligence
 
 Prof. Weixin Si is currently an Associate Professor (Teaching & Research)
 in the Faculty of Computer Science and Artificial Intelligence at Shenzhen University of Advanced Technology
-(SUAT), where he also serves as Associate Director of the Center for
-Evidence-Based Medicine and Artificial Intelligence. His research spans
-AI-enabled medical image analysis, surgical simulation, visualization,
-and extended reality, with applications in computer-assisted surgery,
-medical digital twins, and clinical data intelligence. Prof. Si is a
-recipient of the Guangdong Distinguished Young Scholars Program and the
-Shenzhen Excellent Young Scientist Program. His honors include the First
-Prize of the 7th Guangdong Medical Science and Technology Award, the 2025
-China Hospital Association R&D Innovation Award, the CW 2025 Best Paper
-Award, and a MICCAI 2024 Best Paper Award Finalist recognition. His
-research has appeared in *European Urology*, *eClinicalMedicine*,
-*Medical Image Analysis*, and *IEEE Transactions on Medical Imaging*;
-leading conference venues include CVPR, AAAI, MICCAI, and IEEE VR. He
-serves as Associate Editor of *The Visual Computer*, Young Editorial
-Board Member of *The Innovation Informatics*, and Organizing Chair for
-ChinaVR 2026. Before joining SUAT, he earned his B.S. and M.S. degrees
-from Wuhan University, followed by a Ph.D. from The Chinese University
-of Hong Kong. His previous appointments include Postdoctoral Fellow at
-The Chinese University of Hong Kong and Associate Researcher at the
-Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences.
+(SUAT). He concurrently serves as Associate Director of the Center for
+Evidence-Based Medicine and Artificial Intelligence. His research is
+situated at the intersection of artificial intelligence and medical
+technologies, spanning medical image analysis, surgical simulation,
+visualization, and extended reality. These research efforts address
+applications in computer-assisted surgery, medical digital twins, as well
+as clinical data intelligence. Prof. Si is a recipient of the Guangdong
+Distinguished Young Scholars Program, as well as the Shenzhen Excellent
+Young Scientist Program. His research work has received recognition at
+both national and provincial levels. Notable honors include the First
+Prize of the 7th Guangdong Medical Science and Technology Award, together
+with the 2025 China Hospital Association R&D Innovation Award. His
+publication honors include the Best Paper Award at CW 2025, together with
+a Best Paper Award Finalist recognition at MICCAI 2024. Representative
+research outputs appear in *European Urology*, *eClinicalMedicine*,
+*Medical Image Analysis*, and *IEEE Transactions on Medical Imaging*. His
+work has also been presented at top-tier conferences, including CVPR,
+AAAI, MICCAI, and IEEE VR. He serves as Associate Editor of *The Visual
+Computer*, Young Editorial Board Member of *The Innovation Informatics*,
+and Organizing Chair for ChinaVR 2026. Before joining the SUAT faculty, he
+obtained his B.S. and M.S. degrees from Wuhan University, followed by a
+Ph.D. from The Chinese University of Hong Kong. He previously worked as a
+Postdoctoral Fellow at The Chinese University of Hong Kong; he also served
+as an Associate Researcher at the Shenzhen Institutes of Advanced
+Technology, Chinese Academy of Sciences.
 
 ## Research Interest
 
