@@ -1,0 +1,68 @@
+current_members:
+  - id: phd-students
+    title: "Ph.D. Students"
+    members:
+      - name: "Member Name 01"
+        role: "Ph.D. Student (20XX - )"
+        background: "Previous education to be updated"
+        focus: "Research interests to be updated"
+        image: "/images/bio-photo.jpg"
+      - name: "Member Name 02"
+        role: "Ph.D. Student (20XX - )"
+        background: "Previous education to be updated"
+        focus: "Research interests to be updated"
+        image: "/images/bio-photo.jpg"
+      - name: "Member Name 03"
+        role: "Ph.D. Student (20XX - )"
+        background: "Previous education to be updated"
+        focus: "Research interests to be updated"
+        image: "/images/bio-photo.jpg"
+      - name: "Member Name 04"
+        role: "Ph.D. Student (20XX - )"
+        background: "Previous education to be updated"
+        focus: "Research interests to be updated"
+        image: "/images/bio-photo.jpg"
+      - name: "Member Name 05"
+        role: "Ph.D. Student (20XX - )"
+        background: "Previous education to be updated"
+        focus: "Research interests to be updated"
+        image: "/images/bio-photo.jpg"
+      - name: "Member Name 06"
+        role: "Ph.D. Student (20XX - )"
+        background: "Previous education to be updated"
+        focus: "Research interests to be updated"
+        image: "/images/bio-photo.jpg"
+
+  - id: research-assistants-interns
+    title: "Research Assistants & Interns"
+    members:
+      - name: "Member Name 07"
+        role: "Research Assistant"
+        background: "Academic background to be updated"
+        focus: "Research interests to be updated"
+        image: "/images/bio-photo.jpg"
+      - name: "Member Name 08"
+        role: "Research Assistant"
+        background: "Academic background to be updated"
+        focus: "Research interests to be updated"
+        image: "/images/bio-photo.jpg"
+      - name: "Member Name 09"
+        role: "Research Intern"
+        background: "Academic background to be updated"
+        focus: "Research interests to be updated"
+        image: "/images/bio-photo.jpg"
+
+alumni_groups:
+  - id: graduated-students
+    title: "Graduated Students"
+    members:
+      - "Alumnus Name 01 — degree year and current position to be updated."
+      - "Alumnus Name 02 — degree year and current position to be updated."
+      - "Alumnus Name 03 — degree year and current position to be updated."
+
+  - id: former-research-assistants-interns
+    title: "Former Research Assistants & Interns"
+    members:
+      - "Alumnus Name 04 — appointment period and next destination to be updated."
+      - "Alumnus Name 05 — appointment period and next destination to be updated."
+      - "Alumnus Name 06 — appointment period and next destination to be updated."

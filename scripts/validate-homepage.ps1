@@ -342,6 +342,41 @@ function Assert-TeachingContract([string]$TeachingPage) {
     }
 }
 
+function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$AcademicStyles) {
+    $frontMatter = [regex]::Match($TeamPage, '(?s)\A---\r?\n(?<yaml>.*?)\r?\n---(?:\r?\n|\z)(?<body>.*)\z')
+    if (-not $frontMatter.Success) {
+        throw 'Team page is missing valid YAML front matter.'
+    }
+    $yaml = $frontMatter.Groups['yaml'].Value
+    $body = $frontMatter.Groups['body'].Value
+    Assert-Match $yaml '(?m)^title:\s*"Team"\s*$' 'Team title must be exactly "Team".'
+    Assert-Match $yaml '(?m)^permalink:\s*/team/\s*$' 'Team permalink must be /team/.'
+    Assert-Match $yaml '(?m)^author_profile:\s*true\s*$' 'Team must enable the author profile.'
+
+    foreach ($requiredLoop in @('site.data.team.current_members', 'site.data.team.alumni_groups')) {
+        Assert-Match $body ([regex]::Escape($requiredLoop)) "Team page must render $requiredLoop."
+    }
+    foreach ($requiredClass in @('team-intro', 'team-grid', 'team-card', 'team-alumni')) {
+        Assert-Match $body ('class="[^"]*' + [regex]::Escape($requiredClass)) "Team page is missing the $requiredClass component."
+        Assert-Match $AcademicStyles ('(?m)^\.' + [regex]::Escape($requiredClass) + '\b') "Team styles are missing .$requiredClass."
+    }
+
+    foreach ($heading in @('Ph.D. Students', 'Research Assistants & Interns', 'Graduated Students', 'Former Research Assistants & Interns')) {
+        Assert-Match $TeamData ([regex]::Escape($heading)) "Team data is missing the $heading group."
+    }
+    $placeholderPortraitCount = [regex]::Matches($TeamData, '(?m)^\s+image:\s*"/images/bio-photo\.jpg"\s*$').Count
+    if ($placeholderPortraitCount -lt 8) {
+        throw "Expected at least 8 temporary team portraits, found $placeholderPortraitCount."
+    }
+    Assert-Match $AcademicStyles '(?m)^@media \(max-width: 600px\)' 'Team styles must include the mobile breakpoint.'
+
+    $placeholderAsset = 'images/bio-photo.jpg'
+    $trackedPlaceholderAsset = (& git -C $RepositoryRoot ls-files -- $placeholderAsset) -eq $placeholderAsset
+    if (-not $trackedPlaceholderAsset) {
+        throw "Team placeholder portrait must be tracked: $placeholderAsset"
+    }
+}
+
 function Invoke-HomepageValidation {
     $navigation = Read-Utf8File '_data/navigation.yml'
     Assert-NavigationContract $navigation
@@ -455,6 +490,9 @@ function Invoke-HomepageValidation {
     Assert-TeachingContract $teachingPage
 
     $academicStyles = Read-Utf8File '_sass/layout/_academic-profile.scss'
+    $teamPage = Read-Utf8File '_pages/team.md'
+    $teamData = Read-Utf8File '_data/team.yml'
+    Assert-TeamContract $teamPage $teamData $academicStyles
     $undefinedThemeVariable = [regex]::Match($academicStyles, '\$(?:background|text|link)-color\b')
     if ($undefinedThemeVariable.Success) {
         throw "Academic profile styles reference an undefined theme variable: $($undefinedThemeVariable.Value)"
