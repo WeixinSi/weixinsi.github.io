@@ -161,12 +161,7 @@ function Assert-PublicationsContract([string]$Publications) {
         [pscustomobject]@{ Year = '2021'; Start = 47; Count = 6 },
         [pscustomobject]@{ Year = '2020'; Start = 53; Count = 1 },
         [pscustomobject]@{ Year = '2019'; Start = 54; Count = 6 },
-        [pscustomobject]@{ Year = '2018'; Start = 60; Count = 2 },
-        [pscustomobject]@{ Year = '2017'; Start = 62; Count = 2 },
-        [pscustomobject]@{ Year = '2015'; Start = 64; Count = 1 },
-        [pscustomobject]@{ Year = '2014'; Start = 65; Count = 1 },
-        [pscustomobject]@{ Year = '2012'; Start = 66; Count = 1 },
-        [pscustomobject]@{ Year = '2011'; Start = 67; Count = 1 }
+        [pscustomobject]@{ Year = '2018'; Start = 60; Count = 2 }
     )
 
     $allYearHeadings = [regex]::Matches($Publications, '(?m)^(?<level>#{1,6})\s+(?<year>\d{4})\s*$')
@@ -298,14 +293,14 @@ function Assert-PublicationsContract([string]$Publications) {
     if (-not $currentYearHasIal) {
         throw "Publication year $($finalContract.Year) is missing its ordered-list start IAL."
     }
-    if ($publicationBodies.Count -ne 67) {
-        throw "Expected 67 publication entries, found $($publicationBodies.Count)."
+    if ($publicationBodies.Count -ne 61) {
+        throw "Expected 61 publication entries, found $($publicationBodies.Count)."
     }
 
-    # Reviewed digest of the 67 complete, unnumbered entries after CRLF/LF normalization,
+    # Reviewed digest of the 61 complete, unnumbered entries after CRLF/LF normalization,
     # joined with LF and no terminal newline.
     # Any intentional publication addition or text/order change requires review and a digest update.
-    $expectedPublicationDigest = 'b0b0676960c95848f0c75d4c991a24e672d19ff908aca7d82925424039d5cbe3'
+    $expectedPublicationDigest = 'd0cdcc449845efb5ee2f58ae9d3863c5a8d7f1118226e2bc3a43350977d42b8f'
     $actualPublicationDigest = Get-Sha256Hex ($publicationBodies -join "`n")
     if ($actualPublicationDigest -ne $expectedPublicationDigest) {
         throw "Publication content digest mismatch: expected $expectedPublicationDigest, found $actualPublicationDigest."
@@ -478,6 +473,11 @@ function Invoke-HomepageValidation {
     if ($aboutPage -match '(?m)^\[Email\]\(mailto:[^)]+\).+\[Google Scholar\]\([^)]+\).+\[Website\]\([^)]+\)\s*$') {
         throw 'Home must not contain an inline contact row.'
     }
+    $recruitmentNote = 'Note: I am looking for self-motivated Postdoc/PhD/RA/Interns. Feel free to drop me an email with your CV.'
+    $recruitmentPattern = '(?m)^<p class="recruitment-note">' + [regex]::Escape($recruitmentNote) + '</p>\s*$'
+    if ([regex]::Matches($aboutPage, $recruitmentPattern).Count -ne 1) {
+        throw 'Home must contain exactly one approved recruitment note below the biography.'
+    }
 
     $morePage = Read-Utf8File '_pages/more.md'
     foreach ($heading in @('Teaching', 'Professional Appointments', 'Education', 'Contact')) {
@@ -490,6 +490,7 @@ function Invoke-HomepageValidation {
     Assert-TeachingContract $teachingPage
 
     $academicStyles = Read-Utf8File '_sass/layout/_academic-profile.scss'
+    Assert-Match $academicStyles '(?ms)^\.recruitment-note\s*\{[^}]*color:\s*#c62828\s*;' 'Recruitment note must use the approved red text color.'
     $teamPage = Read-Utf8File '_pages/team.md'
     $teamData = Read-Utf8File '_data/team.yml'
     Assert-TeamContract $teamPage $teamData $academicStyles

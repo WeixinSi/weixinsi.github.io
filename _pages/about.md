@@ -42,6 +42,8 @@ Postdoctoral Fellow at The Chinese University of Hong Kong; he also served
 as an Associate Researcher at the Shenzhen Institutes of Advanced
 Technology, Chinese Academy of Sciences.
 
+<p class="recruitment-note">Note: I am looking for self-motivated Postdoc/PhD/RA/Interns. Feel free to drop me an email with your CV.</p>
+
 ## Research Interest
 
 Prof. Si's research is at the intersection of medical image analysis,

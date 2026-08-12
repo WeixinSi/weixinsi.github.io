@@ -157,31 +157,4 @@ author_profile: true
 61. Xiangyun Liao<sup>#</sup>, **Weixin Si**<sup>#</sup>, Zhiyong Yuan<sup>&#42;</sup>, Hanqiu Sun, Jing Qin, Qiong Wang<sup>&#42;</sup>, Pheng-Ann Heng. Animating Wall-bounded Turbulent Smoke via Filament-Mesh Particle-Particle Method. *IEEE Transactions on Visualization and Computer Graphics*, 2018, 24(3): 1260–1273.
 {: start="60"}
 
-### 2017
-
-62. **Weixin Si**<sup>#</sup>, Xiangyun Liao<sup>#</sup>, Qiong Wang<sup>&#42;</sup>, Pheng-Ann Heng. Personalized heterogeneous deformable model for fast volumetric registration. *BioMedical Engineering OnLine*, 2017, 16: 1–17.
-
-63. Xiangyun Liao<sup>#</sup>, **Weixin Si**<sup>#</sup>, Biao Xu, Zhiyong Yuan<sup>&#42;</sup>, Qiong Wang, Pheng-Ann Heng. Filament-based realistic turbulent wake synthesis. *Computer Animation & Virtual Worlds*, 2017, 28(3–4): 1–10.
-{: start="62"}
-
-### 2015
-
-64. Meng Zhang, **Weixin Si**<sup>&#42;</sup>, Yinling Qian, Hanqiu Sun<sup>&#42;</sup>, Jing Qin, Pheng-Ann Heng. Vortex Filaments in Grids for Scalable, Fine Smoke Simulation. *IEEE Computer Graphics and Applications*, 2015, 35(6): 60–68.
-{: start="64"}
-
-### 2014
-
-65. **Weixin Si**, Zhiyong Yuan<sup>&#42;</sup>, Xiangyun Liao, Zhaoliang Duan, Mingui Sun, Pengfei Hu, Jianhui Zhao. An Energy Based Free Boundary Asynchronous Diffusion Model for 3D Warping of Tissue Dynamics. *Journal of Statistical Computation and Simulation*, 2014, 84(6): 1280–1296.
-{: start="65"}
-
-### 2012
-
-66. Zhiyong Yuan<sup>&#42;</sup>, **Weixin Si**, Xiangyun Liao, Zhaoliang Duan, Yihua Ding, Jianhui Zhao. Parallel Computing of 3D Smoking Simulation Based on OpenCL Heterogeneous Platform. *Journal of Supercomputing*, 2012, Vol. 61, No. 1, pp. 84–102.
-{: start="66"}
-
-### 2011
-
-67. **Weixin Si**, Zhiyong Yuan<sup>&#42;</sup>, Xiangyun Liao, Zhaoliang Duan, Yihua Ding, Jianhui Zhao. 3D Soft Tissue Warping Dynamics Simulation Based on Force Asynchronous Diffusion Model. *Computer Animation and Virtual Worlds*, 2011, Vol. 22, pp. 251–259.
-{: start="67"}
-
 [View the complete publication record on Google Scholar →](https://scholar.google.com/citations?user=E4efwTgAAAAJ)
