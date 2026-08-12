@@ -4,6 +4,6 @@ permalink: /teaching/
 author_profile: true
 ---
 
-- **FCAB335:** Human–Computer Interaction and Virtual Reality
-- **FCCA221:** Data Structures and Algorithm Analysis
-- **FCCA511:** Advanced Artificial Intelligence
+- **Fall 2025:** FCAB335 Human–Computer Interaction and Virtual Reality
+- **Spring 2026:** FCCA221 Data Structures and Algorithm Analysis
+- **Fall 2026:** FCCA511 Advanced Artificial Intelligence

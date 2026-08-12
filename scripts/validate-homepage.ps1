@@ -333,9 +333,9 @@ function Assert-TeachingContract([string]$TeachingPage) {
             Where-Object { $_.Trim().Length -gt 0 }
     )
     $expectedCourses = @(
-        ('- **FCAB335:** Human' + [char]0x2013 + 'Computer Interaction and Virtual Reality'),
-        '- **FCCA221:** Data Structures and Algorithm Analysis',
-        '- **FCCA511:** Advanced Artificial Intelligence'
+        ('- **Fall 2025:** FCAB335 Human' + [char]0x2013 + 'Computer Interaction and Virtual Reality'),
+        '- **Spring 2026:** FCCA221 Data Structures and Algorithm Analysis',
+        '- **Fall 2026:** FCCA511 Advanced Artificial Intelligence'
     )
     if (($actualCourses -join "`n") -ne ($expectedCourses -join "`n")) {
         throw "Teaching courses mismatch. Expected exactly: $($expectedCourses -join '; ')"

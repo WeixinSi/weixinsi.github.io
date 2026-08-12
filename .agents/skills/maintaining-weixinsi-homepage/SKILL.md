@@ -7,7 +7,7 @@ description: Use when editing, personalizing, validating, committing, pushing, o
 
 ## Core contract
 
-Work in `D:/Program/Code/LaTexProject/SWXCV/weixinsi.github.io`. Preserve user changes, verify success, and require explicit authorization for commit or push.
+Work in `D:/Program/Code/LaTexProject/SWXCV/weixinsi.github.io`. Preserve user changes, verify success, and follow the standing repository authorization below.
 
 Communicate in Chinese outside code and commands.
 
@@ -44,14 +44,33 @@ git config user.email "2834913561@qq.com"
 
 Verify both values before committing. The authenticated account may differ but needs repository write access.
 
-## Commit and push authorization
+## Commit messages
+
+- Write a one-line English subject that briefly and specifically describes the completed change. Start with an imperative verb, for example: `Update teaching terms and publishing workflow`.
+- Do not use vague one-word subjects such as `Update`, `Fix`, or `Changes`.
+- After committing and before pushing, run `git log -1 --format=%s` and confirm that the stored subject exactly matches the intended subject. Amend it before publication if quoting or shell parsing changed the message.
+
+## Standing automatic commit and push authorization
+
+The repository owner has explicitly granted standing authorization for this repository:
+
+- After each authorized modification is complete and validated, automatically commit the task-related changes and push them to `origin/master`.
+- Do not ask whether to commit or push, and do not leave completed modifications uncommitted unless the user explicitly requests a local-only change or asks to review before publication.
+- This standing authorization remains active for future tasks that use this skill; a later task does not need to repeat the words "commit" or "push."
+- Stage only reviewed, task-related files. Preserve unrelated tracked changes and untracked files.
+- Never rewrite published history during normal updates. If the repository owner explicitly requests correcting an already-pushed commit message or metadata, first fetch and verify that the remote target has not advanced, then use `--force-with-lease`; never use an unguarded `--force`.
+- If pull, rebase, authentication, or push fails, report the failure instead of guessing through conflicts.
+
+## Fallback authorization for other repositories
+
+This fallback does not apply to `WeixinSi/weixinsi.github.io` while the standing authorization above is active.
 
 - “修改”或“完成修改”仅授权编辑与验证。
 - “提交”仅授权本地 Git commit。
 - “提交并推送”“推送”或“上传到 GitHub”才授权 push。
 - Never infer commit or push permission from requests to edit, fix, test, or preview. Never force-push.
 
-When authorized, use Git Bash at `D:/Program Files/Git/bin/bash.exe` for staging, committing, pulling, and pushing. Run from `/d/Program/Code/LaTexProject/SWXCV/weixinsi.github.io`. Stage only reviewed files, inspect `git diff --cached`, and use a concise factual commit message. Before pushing, use `git pull --rebase origin master`; report conflicts instead of guessing.
+When authorized, use Git Bash at `D:/Program Files/Git/bin/bash.exe` for staging, committing, pulling, and pushing. Run from `/d/Program/Code/LaTexProject/SWXCV/weixinsi.github.io`. Stage only reviewed files, inspect `git diff --cached`, and follow the commit-message contract above. Before pushing, use `git pull --rebase origin master`; report conflicts instead of guessing.
 
 ## Handoff
 
