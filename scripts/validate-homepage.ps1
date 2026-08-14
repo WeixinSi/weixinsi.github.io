@@ -348,7 +348,7 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
     Assert-Match $yaml '(?m)^permalink:\s*/team/\s*$' 'Team permalink must be /team/.'
     Assert-Match $yaml '(?m)^author_profile:\s*true\s*$' 'Team must enable the author profile.'
 
-    foreach ($requiredLoop in @('site.data.team.current_members')) {
+    foreach ($requiredLoop in @('site.data.team.current_members', 'site.data.team.alumni.groups')) {
         Assert-Match $body ([regex]::Escape($requiredLoop)) "Team page must render $requiredLoop."
     }
     Assert-Match $body "member\.image\s*==\s*'/images/bio-photo\.jpg'" 'Team portrait alt text must distinguish placeholder images from confirmed portraits.'
@@ -357,6 +357,13 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
     foreach ($requiredClass in @('team-intro', 'team-grid', 'team-card')) {
         Assert-Match $body ('class="[^"]*' + [regex]::Escape($requiredClass)) "Team page is missing the $requiredClass component."
         Assert-Match $AcademicStyles ('(?m)^\.' + [regex]::Escape($requiredClass) + '\b') "Team styles are missing .$requiredClass."
+    }
+    foreach ($requiredAlumniClass in @('team-alumni', 'team-alumni__group', 'team-alumni__list')) {
+        Assert-Match $body ('class="[^"]*' + [regex]::Escape($requiredAlumniClass)) "Team page is missing the $requiredAlumniClass component."
+        Assert-Match $AcademicStyles ('(?m)^\.' + [regex]::Escape($requiredAlumniClass) + '\b') "Team styles are missing .$requiredAlumniClass."
+    }
+    if ($body.IndexOf('class="team-alumni"', [System.StringComparison]::Ordinal) -lt $body.IndexOf('site.data.team.current_members', [System.StringComparison]::Ordinal)) {
+        throw 'The Alumni section must appear after current team members.'
     }
 
     foreach ($heading in @('Research Assistant Professor', 'Postdoctoral Fellows', 'Ph.D. Students', 'Research Assistants', "Master's Students")) {
@@ -397,6 +404,15 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
             throw "Team member roles must not repeat group headings: $redundantRole"
         }
     }
+    $alumni2023Period = '2023' + [char]0x2013 + 'present'
+    $alumni2022Period = '2022' + [char]0x2013 + 'present'
+    foreach ($requiredAlumniFact in @('title: "Alumni"', 'title: "Former Team Members"', 'name: "Ruotong Li"', 'name: "Linxia Xiao"', ('period: "' + $alumni2023Period + '"'), ('period: "' + $alumni2022Period + '"'), 'current: "Research Assistant at PCL"', 'current: "Associate Researcher at SIAT"')) {
+        Assert-Match $TeamData ([regex]::Escape($requiredAlumniFact)) "Team Alumni data is missing required information: $requiredAlumniFact"
+    }
+    $alumniMemberCount = [regex]::Matches($TeamData, '(?m)^\s{8}- name:\s*"').Count
+    if ($alumniMemberCount -ne 2) {
+        throw "Expected exactly 2 Alumni entries, found $alumniMemberCount."
+    }
     $expectedMemberPortraits = [ordered]@{
         'Yingying Wang' = '/images/wyy.jpg'
         'Peiji Li' = '/images/lpj.jpg'
@@ -421,6 +437,7 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
     Assert-Match $AcademicStyles '(?ms)^\.team-card\s*\{[^}]*border:\s*0\s*;[^}]*box-shadow:\s*none\s*;' 'Team member blocks must not use the former large card treatment.'
     Assert-Match $AcademicStyles '(?ms)^\.team-card__portrait\s*\{[^}]*max-width:\s*8\.5rem\s*;[^}]*aspect-ratio:\s*5\s*/\s*7\s*;[^}]*object-fit:\s*cover\s*;[^}]*object-position:\s*center\s+top\s*;[^}]*border-radius:\s*0\.15rem\s*;' 'Team portraits must use the standard one-inch photo ratio with head-safe cropping.'
     Assert-Match $AcademicStyles '(?ms)^\.team-card__body\s*\{[^}]*padding:\s*0\.5rem\s+0\.1rem\s+0\s*;' 'Team card text spacing must use the reduced compact size.'
+    Assert-Match $AcademicStyles '(?ms)^\.team-alumni__list\s*\{[^}]*display:\s*block\s*;[^}]*padding-left:\s*1\.25rem\s*;' 'Team Alumni must use a compact single-column text list.'
     Assert-Match $AcademicStyles '(?ms)^@media \(max-width: 600px\)\s*\{.*?\.team-grid\s*\{\s*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)\s*;' 'Team mobile layout must retain two compact columns.'
     Assert-Match $AcademicStyles '(?ms)^@media \(min-width: 601px\) and \(max-width: 960px\)\s*\{.*?\.team-grid\s*\{\s*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)\s*;' 'Team tablet layout must use two compact columns.'
 

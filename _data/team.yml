@@ -73,3 +73,16 @@ current_members:
         role: "2025–"
         background: "SUSTech–SUAT Joint Training Program"
         image: "/images/lzl.jpg"
+
+alumni:
+  title: "Alumni"
+  groups:
+    - id: former-team-members
+      title: "Former Team Members"
+      members:
+        - name: "Ruotong Li"
+          period: "2023–present"
+          current: "Research Assistant at PCL"
+        - name: "Linxia Xiao"
+          period: "2022–present"
+          current: "Associate Researcher at SIAT"

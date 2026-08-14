@@ -32,3 +32,19 @@ author_profile: true
   </div>
 </section>
 {% endfor %}
+
+{% if site.data.team.alumni and site.data.team.alumni.groups %}
+<section class="team-alumni" aria-labelledby="alumni">
+  <h2 id="alumni">{{ site.data.team.alumni.title }}</h2>
+  {% for group in site.data.team.alumni.groups %}
+  <div class="team-alumni__group" aria-labelledby="{{ group.id }}">
+    <h3 id="{{ group.id }}">{{ group.title }}</h3>
+    <ul class="team-alumni__list">
+      {% for alumnus in group.members %}
+      <li><strong>{{ alumnus.name }}</strong> ({{ alumnus.period }}), {{ alumnus.current }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endfor %}
+</section>
+{% endif %}
