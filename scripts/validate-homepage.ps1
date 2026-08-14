@@ -368,13 +368,17 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
     $researchAssistantProfessorRole = "Research Assistant Professor ($yearRange)"
     $phdStudentRole = "Ph.D. Student ($yearRange)"
     $mastersStudentRole = "Master's Student ($yearRange)"
-    foreach ($requiredTeamFact in @($researchAssistantProfessorRole, $phdStudentRole, $mastersStudentRole, 'Shenzhen University of Advanced Technology (SUAT)', 'Beihang University (BUAA)', 'Fudan University (FDU)', 'Southern University of Science and Technology (SUSTech)', 'Joint Training Program')) {
+    $institutionSeparator = [char]0x2013
+    $buaaSuatJointProgram = "BUAA${institutionSeparator}SUAT Joint Training Program"
+    $fduSuatJointProgram = "FDU${institutionSeparator}SUAT Joint Training Program"
+    $sustechSuatJointProgram = "SUSTech${institutionSeparator}SUAT Joint Training Program"
+    foreach ($requiredTeamFact in @($researchAssistantProfessorRole, $phdStudentRole, $mastersStudentRole, 'SUAT', 'BUAA', 'FDU', 'SUSTech', $buaaSuatJointProgram, $fduSuatJointProgram, $sustechSuatJointProgram)) {
         Assert-Match $TeamData ([regex]::Escape($requiredTeamFact)) "Team data is missing required information: $requiredTeamFact"
     }
     $expectedTeamFactCounts = [ordered]@{}
     $expectedTeamFactCounts[$phdStudentRole] = 3
     $expectedTeamFactCounts[$mastersStudentRole] = 8
-    $expectedTeamFactCounts['Joint Training Program: Southern University of Science and Technology (SUSTech) and Shenzhen University of Advanced Technology (SUAT)'] = 8
+    $expectedTeamFactCounts[$sustechSuatJointProgram] = 8
     foreach ($teamFact in $expectedTeamFactCounts.GetEnumerator()) {
         $actualCount = [regex]::Matches($TeamData, [regex]::Escape($teamFact.Key)).Count
         if ($actualCount -ne $teamFact.Value) {
@@ -384,6 +388,11 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
     foreach ($obsoletePlaceholder in @('Member Name 01', 'Alumnus Name 01', 'site.data.team.alumni_groups', 'Member information to be updated', 'Full name to be confirmed')) {
         if ($TeamData -match [regex]::Escape($obsoletePlaceholder) -or $body -match [regex]::Escape($obsoletePlaceholder)) {
             throw "Team still contains obsolete placeholder content: $obsoletePlaceholder"
+        }
+    }
+    foreach ($expandedInstitutionName in @('Shenzhen University of Advanced Technology', 'Beihang University', 'Fudan University', 'Southern University of Science and Technology')) {
+        if ($TeamData -match [regex]::Escape($expandedInstitutionName)) {
+            throw "Team affiliations must use institution abbreviations only: $expandedInstitutionName"
         }
     }
     $expectedMemberPortraits = [ordered]@{
