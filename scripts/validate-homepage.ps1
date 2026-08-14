@@ -371,7 +371,11 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
     if ($placeholderPortraitCount -ne 8) {
         throw "Expected exactly 8 temporary team portraits, found $placeholderPortraitCount."
     }
-    Assert-Match $AcademicStyles '(?m)^@media \(max-width: 600px\)' 'Team styles must include the mobile breakpoint.'
+    Assert-Match $AcademicStyles '(?ms)^\.team-grid\s*\{[^}]*grid-template-columns:\s*repeat\(4,\s*minmax\(0,\s*1fr\)\)\s*;' 'Team desktop layout must use four compact columns.'
+    Assert-Match $AcademicStyles '(?ms)^\.team-card\s*\{[^}]*border:\s*0\s*;[^}]*box-shadow:\s*none\s*;' 'Team member blocks must not use the former large card treatment.'
+    Assert-Match $AcademicStyles '(?ms)^\.team-card__portrait\s*\{[^}]*max-width:\s*11rem\s*;[^}]*aspect-ratio:\s*1\s*/\s*1\s*;[^}]*border-radius:\s*0\.15rem\s*;' 'Team portraits must be compact square images.'
+    Assert-Match $AcademicStyles '(?ms)^@media \(max-width: 600px\)\s*\{.*?\.team-grid\s*\{\s*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)\s*;' 'Team mobile layout must retain two compact columns.'
+    Assert-Match $AcademicStyles '(?ms)^@media \(min-width: 601px\) and \(max-width: 960px\)\s*\{.*?\.team-grid\s*\{\s*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)\s*;' 'Team tablet layout must use two compact columns.'
 
     $placeholderAsset = 'images/bio-photo.jpg'
     $trackedPlaceholderAsset = (& git -C $RepositoryRoot ls-files -- $placeholderAsset) -eq $placeholderAsset
