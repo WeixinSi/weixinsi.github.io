@@ -63,8 +63,9 @@
   display: block;
   width: 100%;
   max-width: 8.5rem;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 3 / 4;
   object-fit: cover;
+  object-position: center top;
   margin: 0 auto;
   border: 1px solid var(--global-border-color);
   border-radius: 0.15rem;
