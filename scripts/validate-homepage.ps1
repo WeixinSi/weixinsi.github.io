@@ -353,6 +353,7 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
     }
     Assert-Match $body "member\.image\s*==\s*'/images/bio-photo\.jpg'" 'Team portrait alt text must distinguish placeholder images from confirmed portraits.'
     Assert-Match $body 'Portrait of' 'Confirmed Team portraits must use factual alt text.'
+    Assert-Match $body '(?s)\{%\s*if\s+member\.role\s*%\}.*?team-card__role.*?\{%\s*endif\s*%\}' 'Team role rows must render only when a concise value exists.'
     foreach ($requiredClass in @('team-intro', 'team-grid', 'team-card')) {
         Assert-Match $body ('class="[^"]*' + [regex]::Escape($requiredClass)) "Team page is missing the $requiredClass component."
         Assert-Match $AcademicStyles ('(?m)^\.' + [regex]::Escape($requiredClass) + '\b') "Team styles are missing .$requiredClass."
@@ -364,20 +365,16 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
     foreach ($memberName in @('Yingying Wang', 'Jiawen Yang', 'Peiji Li', 'Congyu Tian', 'Haipeng Wang', 'Incoming Postdoctoral Fellow', 'Incoming Research Assistant', 'Yufan Ding', 'Jincai Huang', 'Yixin Wang', 'Ziqiao Qu', 'Yang Liu', 'Jiaxin Ni', 'Shunduo Zhang', 'Zili Li')) {
         Assert-Match $TeamData ([regex]::Escape($memberName)) "Team data is missing $memberName."
     }
-    $yearRange = '2025' + [char]0x2013
-    $researchAssistantProfessorRole = "Research Assistant Professor ($yearRange)"
-    $phdStudentRole = "Ph.D. Student ($yearRange)"
-    $mastersStudentRole = "Master's Student ($yearRange)"
+    $membershipYear = '2025' + [char]0x2013
     $institutionSeparator = [char]0x2013
     $buaaSuatJointProgram = "BUAA${institutionSeparator}SUAT Joint Training Program"
     $fduSuatJointProgram = "FDU${institutionSeparator}SUAT Joint Training Program"
     $sustechSuatJointProgram = "SUSTech${institutionSeparator}SUAT Joint Training Program"
-    foreach ($requiredTeamFact in @($researchAssistantProfessorRole, $phdStudentRole, $mastersStudentRole, 'SUAT', 'BUAA', 'FDU', 'SUSTech', $buaaSuatJointProgram, $fduSuatJointProgram, $sustechSuatJointProgram)) {
+    foreach ($requiredTeamFact in @($membershipYear, 'SUAT', 'BUAA', 'FDU', 'SUSTech', $buaaSuatJointProgram, $fduSuatJointProgram, $sustechSuatJointProgram)) {
         Assert-Match $TeamData ([regex]::Escape($requiredTeamFact)) "Team data is missing required information: $requiredTeamFact"
     }
     $expectedTeamFactCounts = [ordered]@{}
-    $expectedTeamFactCounts[$phdStudentRole] = 3
-    $expectedTeamFactCounts[$mastersStudentRole] = 8
+    $expectedTeamFactCounts[('role: "' + $membershipYear + '"')] = 12
     $expectedTeamFactCounts[$sustechSuatJointProgram] = 8
     foreach ($teamFact in $expectedTeamFactCounts.GetEnumerator()) {
         $actualCount = [regex]::Matches($TeamData, [regex]::Escape($teamFact.Key)).Count
@@ -393,6 +390,11 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
     foreach ($expandedInstitutionName in @('Shenzhen University of Advanced Technology', 'Beihang University', 'Fudan University', 'Southern University of Science and Technology')) {
         if ($TeamData -match [regex]::Escape($expandedInstitutionName)) {
             throw "Team affiliations must use institution abbreviations only: $expandedInstitutionName"
+        }
+    }
+    foreach ($redundantRole in @('Research Assistant Professor', 'Ph.D. Student', 'Research Assistant', 'Incoming Postdoctoral Fellow', 'Incoming Research Assistant', "Master's Student")) {
+        if ($TeamData -match ('(?m)^\s+role:\s*"[^"\r\n]*' + [regex]::Escape($redundantRole))) {
+            throw "Team member roles must not repeat group headings: $redundantRole"
         }
     }
     $expectedMemberPortraits = [ordered]@{

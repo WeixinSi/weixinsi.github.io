@@ -17,7 +17,9 @@ author_profile: true
       {% if member.profile %}</a>{% endif %}
       <div class="team-card__body">
         <h3>{% if member.profile %}<a href="{{ member.profile }}">{{ member.name }}</a>{% else %}{{ member.name }}{% endif %}</h3>
+        {% if member.role %}
         <p class="team-card__role">{{ member.role }}</p>
+        {% endif %}
         {% if member.background %}
         <p>{{ member.background }}</p>
         {% endif %}
