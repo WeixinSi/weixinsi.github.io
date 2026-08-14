@@ -404,7 +404,7 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
     }
     Assert-Match $AcademicStyles '(?ms)^\.team-grid\s*\{[^}]*grid-template-columns:\s*repeat\(4,\s*minmax\(0,\s*1fr\)\)\s*;' 'Team desktop layout must use four compact columns.'
     Assert-Match $AcademicStyles '(?ms)^\.team-card\s*\{[^}]*border:\s*0\s*;[^}]*box-shadow:\s*none\s*;' 'Team member blocks must not use the former large card treatment.'
-    Assert-Match $AcademicStyles '(?ms)^\.team-card__portrait\s*\{[^}]*max-width:\s*8\.5rem\s*;[^}]*aspect-ratio:\s*3\s*/\s*4\s*;[^}]*object-fit:\s*cover\s*;[^}]*object-position:\s*center\s+top\s*;[^}]*border-radius:\s*0\.15rem\s*;' 'Team portraits must use a compact portrait ratio with head-safe cropping.'
+    Assert-Match $AcademicStyles '(?ms)^\.team-card__portrait\s*\{[^}]*max-width:\s*8\.5rem\s*;[^}]*aspect-ratio:\s*5\s*/\s*7\s*;[^}]*object-fit:\s*cover\s*;[^}]*object-position:\s*center\s+top\s*;[^}]*border-radius:\s*0\.15rem\s*;' 'Team portraits must use the standard one-inch photo ratio with head-safe cropping.'
     Assert-Match $AcademicStyles '(?ms)^\.team-card__body\s*\{[^}]*padding:\s*0\.5rem\s+0\.1rem\s+0\s*;' 'Team card text spacing must use the reduced compact size.'
     Assert-Match $AcademicStyles '(?ms)^@media \(max-width: 600px\)\s*\{.*?\.team-grid\s*\{\s*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)\s*;' 'Team mobile layout must retain two compact columns.'
     Assert-Match $AcademicStyles '(?ms)^@media \(min-width: 601px\) and \(max-width: 960px\)\s*\{.*?\.team-grid\s*\{\s*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)\s*;' 'Team tablet layout must use two compact columns.'
