@@ -4,7 +4,7 @@ permalink: /team/
 author_profile: true
 ---
 
-<p class="team-intro">Our team works at the intersection of medical artificial intelligence, computer-assisted surgery, medical digital twins, and immersive technologies. The profiles below are temporary placeholders for layout review and will be replaced with confirmed member information.</p>
+<p class="team-intro">Meet the current and incoming members of our team. Portraits and additional profile details will be updated as confirmed information becomes available.</p>
 
 {% for group in site.data.team.current_members %}
 <section class="team-section" aria-labelledby="{{ group.id }}">
@@ -18,25 +18,15 @@ author_profile: true
       <div class="team-card__body">
         <h3>{% if member.profile %}<a href="{{ member.profile }}">{{ member.name }}</a>{% else %}{{ member.name }}{% endif %}</h3>
         <p class="team-card__role">{{ member.role }}</p>
+        {% if member.background %}
         <p>{{ member.background }}</p>
+        {% endif %}
+        {% if member.focus %}
         <p class="team-card__focus">{{ member.focus }}</p>
+        {% endif %}
       </div>
     </article>
     {% endfor %}
   </div>
 </section>
 {% endfor %}
-
-<section class="team-alumni" aria-labelledby="alumni">
-  <h2 id="alumni">Alumni</h2>
-  {% for group in site.data.team.alumni_groups %}
-  <div class="team-alumni__group">
-    <h3 id="{{ group.id }}">{{ group.title }}</h3>
-    <ul class="team-alumni__list">
-      {% for member in group.members %}
-      <li>{{ member }}</li>
-      {% endfor %}
-    </ul>
-  </div>
-  {% endfor %}
-</section>

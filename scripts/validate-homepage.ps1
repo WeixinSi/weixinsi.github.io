@@ -348,20 +348,28 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
     Assert-Match $yaml '(?m)^permalink:\s*/team/\s*$' 'Team permalink must be /team/.'
     Assert-Match $yaml '(?m)^author_profile:\s*true\s*$' 'Team must enable the author profile.'
 
-    foreach ($requiredLoop in @('site.data.team.current_members', 'site.data.team.alumni_groups')) {
+    foreach ($requiredLoop in @('site.data.team.current_members')) {
         Assert-Match $body ([regex]::Escape($requiredLoop)) "Team page must render $requiredLoop."
     }
-    foreach ($requiredClass in @('team-intro', 'team-grid', 'team-card', 'team-alumni')) {
+    foreach ($requiredClass in @('team-intro', 'team-grid', 'team-card')) {
         Assert-Match $body ('class="[^"]*' + [regex]::Escape($requiredClass)) "Team page is missing the $requiredClass component."
         Assert-Match $AcademicStyles ('(?m)^\.' + [regex]::Escape($requiredClass) + '\b') "Team styles are missing .$requiredClass."
     }
 
-    foreach ($heading in @('Ph.D. Students', 'Research Assistants & Interns', 'Graduated Students', 'Former Research Assistants & Interns')) {
+    foreach ($heading in @('Research Assistant Professor', 'Postdoctoral Fellows', 'Ph.D. Students', 'Research Assistants', "Master's Students")) {
         Assert-Match $TeamData ([regex]::Escape($heading)) "Team data is missing the $heading group."
     }
+    foreach ($memberName in @('Yingying Wang', 'Jiawen Yang', 'Peiji', 'Congyu Tian', 'Haipeng Wang', 'Incoming Postdoctoral Fellow', 'Incoming Research Assistant', 'Member information to be updated')) {
+        Assert-Match $TeamData ([regex]::Escape($memberName)) "Team data is missing $memberName."
+    }
+    foreach ($obsoletePlaceholder in @('Member Name 01', 'Alumnus Name 01', 'site.data.team.alumni_groups')) {
+        if ($TeamData -match [regex]::Escape($obsoletePlaceholder) -or $body -match [regex]::Escape($obsoletePlaceholder)) {
+            throw "Team still contains obsolete placeholder content: $obsoletePlaceholder"
+        }
+    }
     $placeholderPortraitCount = [regex]::Matches($TeamData, '(?m)^\s+image:\s*"/images/bio-photo\.jpg"\s*$').Count
-    if ($placeholderPortraitCount -lt 8) {
-        throw "Expected at least 8 temporary team portraits, found $placeholderPortraitCount."
+    if ($placeholderPortraitCount -ne 8) {
+        throw "Expected exactly 8 temporary team portraits, found $placeholderPortraitCount."
     }
     Assert-Match $AcademicStyles '(?m)^@media \(max-width: 600px\)' 'Team styles must include the mobile breakpoint.'
 

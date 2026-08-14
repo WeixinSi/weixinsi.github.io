@@ -1,68 +1,44 @@
 current_members:
+  - id: research-assistant-professor
+    title: "Research Assistant Professor"
+    members:
+      - name: "Yingying Wang"
+        role: "Research Assistant Professor"
+        image: "/images/bio-photo.jpg"
+
+  - id: postdoctoral-fellows
+    title: "Postdoctoral Fellows"
+    members:
+      - name: "Incoming Postdoctoral Fellow"
+        role: "Incoming Postdoctoral Fellow"
+        image: "/images/bio-photo.jpg"
+
   - id: phd-students
     title: "Ph.D. Students"
     members:
-      - name: "Member Name 01"
-        role: "Ph.D. Student (20XX - )"
-        background: "Previous education to be updated"
-        focus: "Research interests to be updated"
+      - name: "Jiawen Yang"
+        role: "Ph.D. Student"
         image: "/images/bio-photo.jpg"
-      - name: "Member Name 02"
-        role: "Ph.D. Student (20XX - )"
-        background: "Previous education to be updated"
-        focus: "Research interests to be updated"
+      - name: "Peiji"
+        role: "Ph.D. Student · Full name to be confirmed"
         image: "/images/bio-photo.jpg"
-      - name: "Member Name 03"
-        role: "Ph.D. Student (20XX - )"
-        background: "Previous education to be updated"
-        focus: "Research interests to be updated"
-        image: "/images/bio-photo.jpg"
-      - name: "Member Name 04"
-        role: "Ph.D. Student (20XX - )"
-        background: "Previous education to be updated"
-        focus: "Research interests to be updated"
-        image: "/images/bio-photo.jpg"
-      - name: "Member Name 05"
-        role: "Ph.D. Student (20XX - )"
-        background: "Previous education to be updated"
-        focus: "Research interests to be updated"
-        image: "/images/bio-photo.jpg"
-      - name: "Member Name 06"
-        role: "Ph.D. Student (20XX - )"
-        background: "Previous education to be updated"
-        focus: "Research interests to be updated"
+      - name: "Congyu Tian"
+        role: "Ph.D. Student"
         image: "/images/bio-photo.jpg"
 
-  - id: research-assistants-interns
-    title: "Research Assistants & Interns"
+  - id: research-assistants
+    title: "Research Assistants"
     members:
-      - name: "Member Name 07"
+      - name: "Haipeng Wang"
         role: "Research Assistant"
-        background: "Academic background to be updated"
-        focus: "Research interests to be updated"
         image: "/images/bio-photo.jpg"
-      - name: "Member Name 08"
-        role: "Research Assistant"
-        background: "Academic background to be updated"
-        focus: "Research interests to be updated"
-        image: "/images/bio-photo.jpg"
-      - name: "Member Name 09"
-        role: "Research Intern"
-        background: "Academic background to be updated"
-        focus: "Research interests to be updated"
+      - name: "Incoming Research Assistant"
+        role: "Incoming Research Assistant"
         image: "/images/bio-photo.jpg"
 
-alumni_groups:
-  - id: graduated-students
-    title: "Graduated Students"
+  - id: masters-students
+    title: "Master's Students"
     members:
-      - "Alumnus Name 01 — degree year and current position to be updated."
-      - "Alumnus Name 02 — degree year and current position to be updated."
-      - "Alumnus Name 03 — degree year and current position to be updated."
-
-  - id: former-research-assistants-interns
-    title: "Former Research Assistants & Interns"
-    members:
-      - "Alumnus Name 04 — appointment period and next destination to be updated."
-      - "Alumnus Name 05 — appointment period and next destination to be updated."
-      - "Alumnus Name 06 — appointment period and next destination to be updated."
+      - name: "Member information to be updated"
+        role: "Master's Student"
+        image: "/images/bio-photo.jpg"
