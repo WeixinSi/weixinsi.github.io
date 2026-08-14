@@ -407,9 +407,9 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
             throw "Team member roles must not repeat group headings: $redundantRole"
         }
     }
-    $alumni2023Period = '2023' + [char]0x2013 + 'present'
-    $alumni2022Period = '2022' + [char]0x2013 + 'present'
-    foreach ($requiredAlumniFact in @('title: "Alumni"', 'title: "Former Team Members"', 'name: "Ruotong Li"', 'name: "Linxia Xiao"', ('period: "' + $alumni2023Period + '"'), ('period: "' + $alumni2022Period + '"'), 'current: "Research Assistant at PCL"', 'current: "Associate Researcher at SIAT"')) {
+    $ruotongAlumniPeriod = '2019' + [char]0x2013 + '2022'
+    $linxiaAlumniPeriod = '2021' + [char]0x2013 + '2023'
+    foreach ($requiredAlumniFact in @('title: "Alumni"', 'title: "Former Team Members"', 'name: "Ruotong Li"', 'name: "Linxia Xiao"', ('period: "' + $ruotongAlumniPeriod + '"'), ('period: "' + $linxiaAlumniPeriod + '"'), 'current: "Assistant Researcher at Peng Cheng Laboratory"', 'current: "Associate Researcher at SIAT"')) {
         Assert-Match $TeamData ([regex]::Escape($requiredAlumniFact)) "Team Alumni data is missing required information: $requiredAlumniFact"
     }
     $alumniMemberCount = [regex]::Matches($TeamData, '(?m)^\s{8}- name:\s*"').Count
