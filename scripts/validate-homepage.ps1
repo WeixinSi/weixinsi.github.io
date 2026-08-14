@@ -351,6 +351,8 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
     foreach ($requiredLoop in @('site.data.team.current_members')) {
         Assert-Match $body ([regex]::Escape($requiredLoop)) "Team page must render $requiredLoop."
     }
+    Assert-Match $body "member\.image\s*==\s*'/images/bio-photo\.jpg'" 'Team portrait alt text must distinguish placeholder images from confirmed portraits.'
+    Assert-Match $body 'Portrait of' 'Confirmed Team portraits must use factual alt text.'
     foreach ($requiredClass in @('team-intro', 'team-grid', 'team-card')) {
         Assert-Match $body ('class="[^"]*' + [regex]::Escape($requiredClass)) "Team page is missing the $requiredClass component."
         Assert-Match $AcademicStyles ('(?m)^\.' + [regex]::Escape($requiredClass) + '\b') "Team styles are missing .$requiredClass."
@@ -367,9 +369,17 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
             throw "Team still contains obsolete placeholder content: $obsoletePlaceholder"
         }
     }
+    $expectedMemberPortraits = [ordered]@{
+        'Yingying Wang' = '/images/wyy.jpg'
+        'Peiji' = '/images/lpj.jpg'
+    }
+    foreach ($portrait in $expectedMemberPortraits.GetEnumerator()) {
+        $portraitPattern = '(?ms)^\s{6}- name:\s*"' + [regex]::Escape($portrait.Key) + '"\s*\r?\n(?:(?!^\s{6}- name:).)*?^\s{8}image:\s*"' + [regex]::Escape($portrait.Value) + '"\s*$'
+        Assert-Match $TeamData $portraitPattern "Team portrait mismatch for $($portrait.Key): expected $($portrait.Value)"
+    }
     $placeholderPortraitCount = [regex]::Matches($TeamData, '(?m)^\s+image:\s*"/images/bio-photo\.jpg"\s*$').Count
-    if ($placeholderPortraitCount -ne 8) {
-        throw "Expected exactly 8 temporary team portraits, found $placeholderPortraitCount."
+    if ($placeholderPortraitCount -ne 6) {
+        throw "Expected exactly 6 temporary team portraits, found $placeholderPortraitCount."
     }
     Assert-Match $AcademicStyles '(?ms)^\.team-grid\s*\{[^}]*grid-template-columns:\s*repeat\(4,\s*minmax\(0,\s*1fr\)\)\s*;' 'Team desktop layout must use four compact columns.'
     Assert-Match $AcademicStyles '(?ms)^\.team-card\s*\{[^}]*border:\s*0\s*;[^}]*box-shadow:\s*none\s*;' 'Team member blocks must not use the former large card treatment.'
@@ -381,6 +391,12 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
     $trackedPlaceholderAsset = (& git -C $RepositoryRoot ls-files -- $placeholderAsset) -eq $placeholderAsset
     if (-not $trackedPlaceholderAsset) {
         throw "Team placeholder portrait must be tracked: $placeholderAsset"
+    }
+    foreach ($portraitAsset in @('images/wyy.jpg', 'images/lpj.jpg')) {
+        $trackedPortraitAsset = (& git -C $RepositoryRoot ls-files -- $portraitAsset) -eq $portraitAsset
+        if (-not $trackedPortraitAsset) {
+            throw "Team portrait must be tracked: $portraitAsset"
+        }
     }
 }
 
@@ -404,6 +420,12 @@ function Invoke-HomepageValidation {
     Assert-Match (Read-Utf8File '_pages/research.md') '(?m)^permalink:\s*/research/\s*$' 'Wrong or missing permalink in _pages/research.md'
 
     $config = Read-Utf8File '_config.yml'
+    Assert-Match $config '(?m)^\s*avatar\s*:\s*"swx\.jpg"\s*$' 'The sidebar avatar must use swx.jpg.'
+    $avatarAsset = 'images/swx.jpg'
+    $trackedAvatarAsset = (& git -C $RepositoryRoot ls-files -- $avatarAsset) -eq $avatarAsset
+    if (-not $trackedAvatarAsset) {
+        throw "Sidebar avatar must be tracked: $avatarAsset"
+    }
     Assert-Match $config '(?m)^\s*bio\s*:\s*"IEEE/CCF Senior Member"\s*$' 'The sidebar biography is not the requested membership line.'
     Assert-Match $config '(?m)^\s*uri\s*:\s*"https://csce\.suat-sz\.edu\.cn/info/1011/1311\.htm"\s*$' 'Institutional Website is not configured.'
     Assert-Match $config '(?m)^\s*googlescholar\s*:\s*"https://scholar\.google\.com/citations\?user=E4efwTgAAAAJ"\s*$' 'Google Scholar is not configured.'

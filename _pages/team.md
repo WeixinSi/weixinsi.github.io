@@ -13,7 +13,7 @@ author_profile: true
     {% for member in group.members %}
     <article class="team-card">
       {% if member.profile %}<a class="team-card__portrait-link" href="{{ member.profile }}" aria-label="View {{ member.name }}'s profile">{% endif %}
-      <img class="team-card__portrait" src="{{ member.image | relative_url }}" alt="Temporary portrait for {{ member.name }}" loading="lazy">
+      <img class="team-card__portrait" src="{{ member.image | relative_url }}" alt="{% if member.image == '/images/bio-photo.jpg' %}Temporary portrait for{% else %}Portrait of{% endif %} {{ member.name }}" loading="lazy">
       {% if member.profile %}</a>{% endif %}
       <div class="team-card__body">
         <h3>{% if member.profile %}<a href="{{ member.profile }}">{{ member.name }}</a>{% else %}{{ member.name }}{% endif %}</h3>

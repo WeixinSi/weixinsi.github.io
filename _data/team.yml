@@ -4,7 +4,7 @@ current_members:
     members:
       - name: "Yingying Wang"
         role: "Research Assistant Professor"
-        image: "/images/bio-photo.jpg"
+        image: "/images/wyy.jpg"
 
   - id: postdoctoral-fellows
     title: "Postdoctoral Fellows"
@@ -21,7 +21,7 @@ current_members:
         image: "/images/bio-photo.jpg"
       - name: "Peiji"
         role: "Ph.D. Student · Full name to be confirmed"
-        image: "/images/bio-photo.jpg"
+        image: "/images/lpj.jpg"
       - name: "Congyu Tian"
         role: "Ph.D. Student"
         image: "/images/bio-photo.jpg"
