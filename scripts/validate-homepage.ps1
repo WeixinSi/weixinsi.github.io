@@ -467,6 +467,15 @@ function Invoke-HomepageValidation {
     $navigation = Read-Utf8File '_data/navigation.yml'
     Assert-NavigationContract $navigation
 
+    $navigationStyles = Read-Utf8File '_sass/layout/_navigation.scss'
+    if ($navigationStyles -match '(?ms)\.visible-links\s*\{.*?&:first-child\s*\{(?:(?!\r?\n\s+a\s*\{).)*font-weight:\s*(?:bold|[6-9]00)\s*;') {
+        throw 'The first navigation item must not be permanently bold.'
+    }
+    $mastheadStyles = Read-Utf8File '_sass/layout/_masthead.scss'
+    Assert-Match $mastheadStyles '(?ms)\.masthead__menu-item\.selected a\s*\{[^}]*font-weight:\s*700\s*;' 'Only the selected navigation item must use bold typography.'
+    $mastheadTemplate = Read-Utf8File '_includes/masthead.html'
+    Assert-Match $mastheadTemplate "(?ms)if link\.url == '/'\s*%}.*?page\.url == '/' or page\.url == '/index\.html'.*?masthead__menu-item\{% if link_selected %\} selected" 'The masthead must select Home only on the home page.'
+
     $requiredPages = [ordered]@{
         '_pages/about.md'        = '/'
         '_pages/team.md'         = '/team/'
