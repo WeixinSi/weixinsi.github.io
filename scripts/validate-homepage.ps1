@@ -418,6 +418,7 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
     }
     $expectedMemberPortraits = [ordered]@{
         'Yingying Wang' = '/images/wyy.jpg'
+        'Jiawen Yang' = '/images/yjw.jpg'
         'Peiji Li' = '/images/lpj.jpg'
         'Congyu Tian' = '/images/tcy.jpg'
         'Haipeng Wang' = '/images/whp.jpg'
@@ -435,8 +436,8 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
         Assert-Match $TeamData $portraitPattern "Team portrait mismatch for $($portrait.Key): expected $($portrait.Value)"
     }
     $placeholderPortraitCount = [regex]::Matches($TeamData, '(?m)^\s+image:\s*"/images/bio-photo\.jpg"\s*$').Count
-    if ($placeholderPortraitCount -ne 3) {
-        throw "Expected exactly 3 temporary team portraits, found $placeholderPortraitCount."
+    if ($placeholderPortraitCount -ne 2) {
+        throw "Expected exactly 2 temporary team portraits, found $placeholderPortraitCount."
     }
     Assert-Match $AcademicStyles '(?ms)^\.team-grid\s*\{[^}]*grid-template-columns:\s*repeat\(4,\s*minmax\(0,\s*1fr\)\)\s*;' 'Team desktop layout must use four compact columns.'
     Assert-Match $AcademicStyles '(?ms)^\.team-card\s*\{[^}]*border:\s*0\s*;[^}]*box-shadow:\s*none\s*;' 'Team member blocks must not use the former large card treatment.'
@@ -454,7 +455,7 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
     if (-not $trackedPlaceholderAsset) {
         throw "Team placeholder portrait must be tracked: $placeholderAsset"
     }
-    foreach ($portraitAsset in @('images/wyy.jpg', 'images/lpj.jpg', 'images/tcy.jpg', 'images/whp.jpg', 'images/dyf.jpg', 'images/hjc.jpg', 'images/wyx.jpg', 'images/qzq.jpg', 'images/ly.jpg', 'images/njx.jpg', 'images/zsd.jpg', 'images/lzl.jpg')) {
+    foreach ($portraitAsset in @('images/wyy.jpg', 'images/yjw.jpg', 'images/lpj.jpg', 'images/tcy.jpg', 'images/whp.jpg', 'images/dyf.jpg', 'images/hjc.jpg', 'images/wyx.jpg', 'images/qzq.jpg', 'images/ly.jpg', 'images/njx.jpg', 'images/zsd.jpg', 'images/lzl.jpg')) {
         $trackedPortraitAsset = (& git -C $RepositoryRoot ls-files -- $portraitAsset) -eq $portraitAsset
         if (-not $trackedPortraitAsset) {
             throw "Team portrait must be tracked: $portraitAsset"
