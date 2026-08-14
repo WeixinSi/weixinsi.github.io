@@ -361,29 +361,51 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
     foreach ($heading in @('Research Assistant Professor', 'Postdoctoral Fellows', 'Ph.D. Students', 'Research Assistants', "Master's Students")) {
         Assert-Match $TeamData ([regex]::Escape($heading)) "Team data is missing the $heading group."
     }
-    foreach ($memberName in @('Yingying Wang', 'Jiawen Yang', 'Peiji', 'Congyu Tian', 'Haipeng Wang', 'Incoming Postdoctoral Fellow', 'Incoming Research Assistant', 'Member information to be updated')) {
+    foreach ($memberName in @('Yingying Wang', 'Jiawen Yang', 'Peiji Li', 'Congyu Tian', 'Haipeng Wang', 'Incoming Postdoctoral Fellow', 'Incoming Research Assistant', 'Yufan Ding', 'Jincai Huang', 'Yixin Wang', 'Ziqiao Qu', 'Yang Liu', 'Jiaxin Ni', 'Shunduo Zhang', 'Zili Li')) {
         Assert-Match $TeamData ([regex]::Escape($memberName)) "Team data is missing $memberName."
     }
-    foreach ($obsoletePlaceholder in @('Member Name 01', 'Alumnus Name 01', 'site.data.team.alumni_groups')) {
+    $yearRange = '2025' + [char]0x2013
+    $researchAssistantProfessorRole = "Research Assistant Professor ($yearRange)"
+    $phdStudentRole = "Ph.D. Student ($yearRange)"
+    $mastersStudentRole = "Master's Student ($yearRange)"
+    foreach ($requiredTeamFact in @($researchAssistantProfessorRole, $phdStudentRole, $mastersStudentRole, 'Shenzhen University of Advanced Technology (SUAT)', 'Beihang University (BUAA)', 'Fudan University (FDU)', 'Southern University of Science and Technology (SUSTech)', 'Joint Training Program')) {
+        Assert-Match $TeamData ([regex]::Escape($requiredTeamFact)) "Team data is missing required information: $requiredTeamFact"
+    }
+    $expectedTeamFactCounts = [ordered]@{}
+    $expectedTeamFactCounts[$phdStudentRole] = 3
+    $expectedTeamFactCounts[$mastersStudentRole] = 8
+    $expectedTeamFactCounts['Joint Training Program: Southern University of Science and Technology (SUSTech) and Shenzhen University of Advanced Technology (SUAT)'] = 8
+    foreach ($teamFact in $expectedTeamFactCounts.GetEnumerator()) {
+        $actualCount = [regex]::Matches($TeamData, [regex]::Escape($teamFact.Key)).Count
+        if ($actualCount -ne $teamFact.Value) {
+            throw "Expected $($teamFact.Value) occurrences of '$($teamFact.Key)', found $actualCount."
+        }
+    }
+    foreach ($obsoletePlaceholder in @('Member Name 01', 'Alumnus Name 01', 'site.data.team.alumni_groups', 'Member information to be updated', 'Full name to be confirmed')) {
         if ($TeamData -match [regex]::Escape($obsoletePlaceholder) -or $body -match [regex]::Escape($obsoletePlaceholder)) {
             throw "Team still contains obsolete placeholder content: $obsoletePlaceholder"
         }
     }
     $expectedMemberPortraits = [ordered]@{
         'Yingying Wang' = '/images/wyy.jpg'
-        'Peiji' = '/images/lpj.jpg'
+        'Peiji Li' = '/images/lpj.jpg'
+        'Jincai Huang' = '/images/hjc.jpg'
+        'Yang Liu' = '/images/ly.jpg'
+        'Jiaxin Ni' = '/images/njx.jpg'
+        'Shunduo Zhang' = '/images/zsd.jpg'
     }
     foreach ($portrait in $expectedMemberPortraits.GetEnumerator()) {
         $portraitPattern = '(?ms)^\s{6}- name:\s*"' + [regex]::Escape($portrait.Key) + '"\s*\r?\n(?:(?!^\s{6}- name:).)*?^\s{8}image:\s*"' + [regex]::Escape($portrait.Value) + '"\s*$'
         Assert-Match $TeamData $portraitPattern "Team portrait mismatch for $($portrait.Key): expected $($portrait.Value)"
     }
     $placeholderPortraitCount = [regex]::Matches($TeamData, '(?m)^\s+image:\s*"/images/bio-photo\.jpg"\s*$').Count
-    if ($placeholderPortraitCount -ne 6) {
-        throw "Expected exactly 6 temporary team portraits, found $placeholderPortraitCount."
+    if ($placeholderPortraitCount -ne 9) {
+        throw "Expected exactly 9 temporary team portraits, found $placeholderPortraitCount."
     }
     Assert-Match $AcademicStyles '(?ms)^\.team-grid\s*\{[^}]*grid-template-columns:\s*repeat\(4,\s*minmax\(0,\s*1fr\)\)\s*;' 'Team desktop layout must use four compact columns.'
     Assert-Match $AcademicStyles '(?ms)^\.team-card\s*\{[^}]*border:\s*0\s*;[^}]*box-shadow:\s*none\s*;' 'Team member blocks must not use the former large card treatment.'
-    Assert-Match $AcademicStyles '(?ms)^\.team-card__portrait\s*\{[^}]*max-width:\s*11rem\s*;[^}]*aspect-ratio:\s*1\s*/\s*1\s*;[^}]*border-radius:\s*0\.15rem\s*;' 'Team portraits must be compact square images.'
+    Assert-Match $AcademicStyles '(?ms)^\.team-card__portrait\s*\{[^}]*max-width:\s*8\.5rem\s*;[^}]*aspect-ratio:\s*1\s*/\s*1\s*;[^}]*border-radius:\s*0\.15rem\s*;' 'Team portraits must use the reduced compact square size.'
+    Assert-Match $AcademicStyles '(?ms)^\.team-card__body\s*\{[^}]*padding:\s*0\.5rem\s+0\.1rem\s+0\s*;' 'Team card text spacing must use the reduced compact size.'
     Assert-Match $AcademicStyles '(?ms)^@media \(max-width: 600px\)\s*\{.*?\.team-grid\s*\{\s*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)\s*;' 'Team mobile layout must retain two compact columns.'
     Assert-Match $AcademicStyles '(?ms)^@media \(min-width: 601px\) and \(max-width: 960px\)\s*\{.*?\.team-grid\s*\{\s*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)\s*;' 'Team tablet layout must use two compact columns.'
 
@@ -392,7 +414,7 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
     if (-not $trackedPlaceholderAsset) {
         throw "Team placeholder portrait must be tracked: $placeholderAsset"
     }
-    foreach ($portraitAsset in @('images/wyy.jpg', 'images/lpj.jpg')) {
+    foreach ($portraitAsset in @('images/wyy.jpg', 'images/lpj.jpg', 'images/hjc.jpg', 'images/ly.jpg', 'images/njx.jpg', 'images/zsd.jpg')) {
         $trackedPortraitAsset = (& git -C $RepositoryRoot ls-files -- $portraitAsset) -eq $portraitAsset
         if (-not $trackedPortraitAsset) {
             throw "Team portrait must be tracked: $portraitAsset"
