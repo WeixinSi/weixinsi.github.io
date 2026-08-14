@@ -75,12 +75,6 @@
 .team-card__body {
   padding: 0.5rem 0.1rem 0;
 
-  h3 {
-    margin: 0 0 0.2rem;
-    font-size: 0.9em;
-    line-height: 1.2;
-  }
-
   p {
     margin: 0 0 0.25rem;
     font-size: 0.75em;
@@ -92,9 +86,28 @@
   }
 }
 
+.team-card__heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.1rem 0.35rem;
+  margin: 0 0 0.25rem;
+
+  h3 {
+    margin: 0;
+    font-size: 0.9em;
+    line-height: 1.2;
+  }
+}
+
 .team-card__role {
-  color: var(--global-link-color);
+  color: var(--global-text-color-light);
+  flex: 0 0 auto;
+  font-size: 0.72em;
   font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .team-card__focus {
@@ -135,6 +148,26 @@
   .sidebar {
     @include span(2.5 of 12);
     max-width: none;
+  }
+
+  .author__avatar img {
+    max-width: 12rem;
+  }
+
+  .sidebar .author__name {
+    font-size: 1.2rem;
+    line-height: 1.25;
+  }
+
+  .sidebar .author__bio {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .sidebar .author__urls li,
+  .sidebar .author__urls a {
+    font-size: 0.9rem;
+    line-height: 1.45;
   }
 
   .page,

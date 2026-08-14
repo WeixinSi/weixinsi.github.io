@@ -16,10 +16,12 @@ author_profile: true
       <img class="team-card__portrait" src="{{ member.image | relative_url }}" alt="{% if member.image == '/images/bio-photo.jpg' %}Temporary portrait for{% else %}Portrait of{% endif %} {{ member.name }}" loading="lazy">
       {% if member.profile %}</a>{% endif %}
       <div class="team-card__body">
-        <h3>{% if member.profile %}<a href="{{ member.profile }}">{{ member.name }}</a>{% else %}{{ member.name }}{% endif %}</h3>
+        <div class="team-card__heading">
+          <h3>{% if member.profile %}<a href="{{ member.profile }}">{{ member.name }}</a>{% else %}{{ member.name }}{% endif %}</h3>
         {% if member.role %}
-        <p class="team-card__role">{{ member.role }}</p>
+          <span class="team-card__role">{{ member.role }}</span>
         {% endif %}
+        </div>
         {% if member.background %}
         <p>{{ member.background }}</p>
         {% endif %}

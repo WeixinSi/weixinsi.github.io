@@ -353,8 +353,11 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
     }
     Assert-Match $body "member\.image\s*==\s*'/images/bio-photo\.jpg'" 'Team portrait alt text must distinguish placeholder images from confirmed portraits.'
     Assert-Match $body 'Portrait of' 'Confirmed Team portraits must use factual alt text.'
-    Assert-Match $body '(?s)\{%\s*if\s+member\.role\s*%\}.*?team-card__role.*?\{%\s*endif\s*%\}' 'Team role rows must render only when a concise value exists.'
-    foreach ($requiredClass in @('team-intro', 'team-grid', 'team-card')) {
+    Assert-Match $body '(?s)<div class="team-card__heading">\s*<h3>.*?</h3>\s*\{%\s*if\s+member\.role\s*%\}\s*<span class="team-card__role">\{\{\s*member\.role\s*\}\}</span>\s*\{%\s*endif\s*%\}\s*</div>' 'Team member names and dates must share one compact heading row.'
+    if ($body -match '<p class="team-card__role">') {
+        throw 'Team membership dates must not render as a separate paragraph.'
+    }
+    foreach ($requiredClass in @('team-intro', 'team-grid', 'team-card', 'team-card__heading')) {
         Assert-Match $body ('class="[^"]*' + [regex]::Escape($requiredClass)) "Team page is missing the $requiredClass component."
         Assert-Match $AcademicStyles ('(?m)^\.' + [regex]::Escape($requiredClass) + '\b') "Team styles are missing .$requiredClass."
     }
@@ -437,7 +440,10 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
     Assert-Match $AcademicStyles '(?ms)^\.team-card\s*\{[^}]*border:\s*0\s*;[^}]*box-shadow:\s*none\s*;' 'Team member blocks must not use the former large card treatment.'
     Assert-Match $AcademicStyles '(?ms)^\.team-card__portrait\s*\{[^}]*max-width:\s*8\.5rem\s*;[^}]*aspect-ratio:\s*5\s*/\s*7\s*;[^}]*object-fit:\s*cover\s*;[^}]*object-position:\s*center\s+top\s*;[^}]*border-radius:\s*0\.15rem\s*;' 'Team portraits must use the standard one-inch photo ratio with head-safe cropping.'
     Assert-Match $AcademicStyles '(?ms)^\.team-card__body\s*\{[^}]*padding:\s*0\.5rem\s+0\.1rem\s+0\s*;' 'Team card text spacing must use the reduced compact size.'
+    Assert-Match $AcademicStyles '(?ms)^\.team-card__heading\s*\{[^}]*display:\s*flex\s*;[^}]*align-items:\s*baseline\s*;[^}]*justify-content:\s*center\s*;[^}]*flex-wrap:\s*wrap\s*;' 'Team member names and dates must use a centered baseline-aligned flex row.'
+    Assert-Match $AcademicStyles '(?ms)^\.team-card__role\s*\{[^}]*color:\s*var\(--global-text-color-light\)\s*;[^}]*font-size:\s*0\.72em\s*;[^}]*white-space:\s*nowrap\s*;' 'Team membership dates must use compact secondary typography.'
     Assert-Match $AcademicStyles '(?ms)^\.team-alumni__list\s*\{[^}]*display:\s*block\s*;[^}]*padding-left:\s*1\.25rem\s*;' 'Team Alumni must use a compact single-column text list.'
+    Assert-Match $AcademicStyles '(?ms)^@include breakpoint\(\$large\)\s*\{.*?\.author__avatar img\s*\{[^}]*max-width:\s*12rem\s*;.*?\.sidebar \.author__name\s*\{[^}]*font-size:\s*1\.2rem\s*;[^}]*line-height:\s*1\.25\s*;.*?\.sidebar \.author__bio\s*\{[^}]*font-size:\s*0\.9rem\s*;[^}]*line-height:\s*1\.5\s*;.*?\.sidebar \.author__urls li,\s*\.sidebar \.author__urls a\s*\{[^}]*font-size:\s*0\.9rem\s*;[^}]*line-height:\s*1\.45\s*;' 'Desktop author profile must be visibly larger than Team member profiles.'
     Assert-Match $AcademicStyles '(?ms)^@media \(max-width: 600px\)\s*\{.*?\.team-grid\s*\{\s*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)\s*;' 'Team mobile layout must retain two compact columns.'
     Assert-Match $AcademicStyles '(?ms)^@media \(min-width: 601px\) and \(max-width: 960px\)\s*\{.*?\.team-grid\s*\{\s*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)\s*;' 'Team tablet layout must use two compact columns.'
 
