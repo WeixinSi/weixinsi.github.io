@@ -27,14 +27,14 @@ current_members:
       - name: "Congyu Tian"
         role: "2025–"
         background: "FDU–SUAT Joint Training Program"
-        image: "/images/bio-photo.jpg"
+        image: "/images/tcy.jpg"
 
   - id: research-assistants
     title: "Research Assistants"
     members:
       - name: "Haipeng Wang"
         background: "SUAT"
-        image: "/images/bio-photo.jpg"
+        image: "/images/whp.jpg"
       - name: "Incoming Research Assistant"
         image: "/images/bio-photo.jpg"
 
