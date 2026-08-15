@@ -24,18 +24,7 @@ visualization, and extended reality. These research efforts address
 applications in computer-assisted surgery, medical digital twins, as well
 as clinical data intelligence. Prof. Si is a recipient of the Guangdong
 Distinguished Young Scholars Program, as well as the Shenzhen Excellent
-Young Scientist Program. His research work has received recognition at
-both national and provincial levels. Notable honors include the First
-Prize of the 7th Guangdong Medical Science and Technology Award, together
-with the 2025 China Hospital Association R&D Innovation Award. His
-publication honors include the Best Paper Award at CW 2025, together with
-a Best Paper Award Finalist recognition at MICCAI 2024. Representative
-research outputs appear in *European Urology*, *eClinicalMedicine*,
-*Medical Image Analysis*, and *IEEE Transactions on Medical Imaging*. His
-work has also been presented at top-tier conferences, including CVPR,
-AAAI, MICCAI, and IEEE VR. He serves as Associate Editor of *The Visual
-Computer*, Young Editorial Board Member of *The Innovation Informatics*,
-and Organizing Chair for ChinaVR 2026. Before joining the SUAT faculty, he
+Young Scientist Program. Before joining the SUAT faculty, he
 obtained his B.S. and M.S. degrees from Wuhan University, followed by a
 Ph.D. from The Chinese University of Hong Kong. He previously worked as a
 Postdoctoral Fellow at The Chinese University of Hong Kong; he also served

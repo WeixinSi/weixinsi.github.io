@@ -77,12 +77,15 @@ current_members:
 alumni:
   title: "Alumni"
   groups:
-    - id: former-team-members
-      title: "Former Team Members"
+    - id: interns
+      title: "Interns"
       members:
         - name: "Ruotong Li"
-          period: "2019–2022"
-          current: "Assistant Researcher at Peng Cheng Laboratory"
+          period: "2019–2022 PhD"
+          current: "Current: Assistant Researcher at Peng Cheng Laboratory"
         - name: "Linxia Xiao"
-          period: "2021–2023"
-          current: "Associate Researcher at SIAT"
+          period: "2021–2023 PhD"
+          current: "Current: Associate Researcher at SIAT"
+        - name: "Zehua Liu"
+          period: "2022–2025 RA"
+          current: "Current: PhD at BUAA"

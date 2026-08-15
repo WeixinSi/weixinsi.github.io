@@ -409,14 +409,18 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
             throw "Team member roles must not repeat group headings: $redundantRole"
         }
     }
-    $ruotongAlumniPeriod = '2019' + [char]0x2013 + '2022'
-    $linxiaAlumniPeriod = '2021' + [char]0x2013 + '2023'
-    foreach ($requiredAlumniFact in @('title: "Alumni"', 'title: "Former Team Members"', 'name: "Ruotong Li"', 'name: "Linxia Xiao"', ('period: "' + $ruotongAlumniPeriod + '"'), ('period: "' + $linxiaAlumniPeriod + '"'), 'current: "Assistant Researcher at Peng Cheng Laboratory"', 'current: "Associate Researcher at SIAT"')) {
-        Assert-Match $TeamData ([regex]::Escape($requiredAlumniFact)) "Team Alumni data is missing required information: $requiredAlumniFact"
+    $ruotongInternPeriod = '2019' + [char]0x2013 + '2022 PhD'
+    $linxiaInternPeriod = '2021' + [char]0x2013 + '2023 PhD'
+    $zehuaInternPeriod = '2022' + [char]0x2013 + '2025 RA'
+    foreach ($requiredInternFact in @('title: "Alumni"', 'id: interns', 'title: "Interns"', 'name: "Ruotong Li"', 'name: "Linxia Xiao"', 'name: "Zehua Liu"', ('period: "' + $ruotongInternPeriod + '"'), ('period: "' + $linxiaInternPeriod + '"'), ('period: "' + $zehuaInternPeriod + '"'), 'current: "Current: Assistant Researcher at Peng Cheng Laboratory"', 'current: "Current: Associate Researcher at SIAT"', 'current: "Current: PhD at BUAA"')) {
+        Assert-Match $TeamData ([regex]::Escape($requiredInternFact)) "Team Interns data is missing required information: $requiredInternFact"
+    }
+    if ($TeamData -match [regex]::Escape('Former Team Members')) {
+        throw 'Team still contains the former Former Team Members heading.'
     }
     $alumniMemberCount = [regex]::Matches($TeamData, '(?m)^\s{8}- name:\s*"').Count
-    if ($alumniMemberCount -ne 2) {
-        throw "Expected exactly 2 Alumni entries, found $alumniMemberCount."
+    if ($alumniMemberCount -ne 3) {
+        throw "Expected exactly 3 Intern entries, found $alumniMemberCount."
     }
     $expectedMemberPortraits = [ordered]@{
         'Yingying Wang' = '/images/wyy.jpg'
@@ -574,6 +578,11 @@ function Invoke-HomepageValidation {
     }
     if ($aboutPage -match 'Specially Appointed Full Professor') {
         throw 'Home must not mention the specially appointed full professor title.'
+    }
+    foreach ($removedBiographyPhrase in @('His research work has received recognition at', 'Organizing Chair for ChinaVR 2026')) {
+        if ($aboutPage -match [regex]::Escape($removedBiographyPhrase)) {
+            throw "Home still contains removed biography text: $removedBiographyPhrase"
+        }
     }
     if ($aboutPage -match '(?ms)^- \[06/2024\] \*Depth-Driven Geometric Prompt Learning for Laparoscopic Liver\s+Landmark Detection\* was selected as an oral paper and a Best Paper\s+Award Finalist at MICCAI 2024\.\s*$') {
         throw 'Home still contains the removed June 2024 MICCAI news sentence.'
