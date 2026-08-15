@@ -375,16 +375,18 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
     foreach ($memberName in @('Yingying Wang', 'Jiawen Yang', 'Peiji Li', 'Congyu Tian', 'Haipeng Wang', 'Incoming Postdoctoral Fellow', 'Incoming Research Assistant', 'Yufan Ding', 'Jincai Huang', 'Yixin Wang', 'Ziqiao Qu', 'Yang Liu', 'Jiaxin Ni', 'Shunduo Zhang', 'Zili Li')) {
         Assert-Match $TeamData ([regex]::Escape($memberName)) "Team data is missing $memberName."
     }
-    $membershipYear = '2025' + [char]0x2013
+    $membershipYear2025 = '2025' + [char]0x2013
+    $membershipYear2026 = '2026' + [char]0x2013
     $institutionSeparator = [char]0x2013
     $buaaSuatJointProgram = "BUAA${institutionSeparator}SUAT Joint Training Program"
     $fduSuatJointProgram = "FDU${institutionSeparator}SUAT Joint Training Program"
     $sustechSuatJointProgram = "SUSTech${institutionSeparator}SUAT Joint Training Program"
-    foreach ($requiredTeamFact in @($membershipYear, 'SUAT', 'BUAA', 'FDU', 'SUSTech', $buaaSuatJointProgram, $fduSuatJointProgram, $sustechSuatJointProgram)) {
+    foreach ($requiredTeamFact in @($membershipYear2025, $membershipYear2026, 'SUAT', 'BUAA', 'FDU', 'SUSTech', $buaaSuatJointProgram, $fduSuatJointProgram, $sustechSuatJointProgram)) {
         Assert-Match $TeamData ([regex]::Escape($requiredTeamFact)) "Team data is missing required information: $requiredTeamFact"
     }
     $expectedTeamFactCounts = [ordered]@{}
-    $expectedTeamFactCounts[('role: "' + $membershipYear + '"')] = 12
+    $expectedTeamFactCounts[('role: "' + $membershipYear2025 + '"')] = 11
+    $expectedTeamFactCounts[('role: "' + $membershipYear2026 + '"')] = 1
     $expectedTeamFactCounts[$sustechSuatJointProgram] = 8
     foreach ($teamFact in $expectedTeamFactCounts.GetEnumerator()) {
         $actualCount = [regex]::Matches($TeamData, [regex]::Escape($teamFact.Key)).Count
