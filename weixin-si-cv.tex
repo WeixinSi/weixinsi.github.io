@@ -1,0 +1,596 @@
+% This CV is based on the curve document class template
+% by LianTze Lim (liantze@gmail.com)
+% Adapted for Weixin Si's CV
+\documentclass[a4paper,12pt,english]{curve}
+
+% Bibliography formatting retained for the synchronized publication-records.bib data source.
+\PassOptionsToPackage{style=ieee,sorting=none,giveninits=false,maxbibnames=99,minbibnames=99,defernumbers=true}{biblatex}
+
+% -----------------------------------------------------------------------------
+% Inlined CV style definitions (formerly cv-style.sty)
+% -----------------------------------------------------------------------------
+\makeatletter
+
+\RequirePackage{silence}
+\WarningsOff[longtable]
+\WarningsOff[array]
+
+\usepackage{ifxetex,ifluatex}
+\newif\ifxetexorluatex
+\ifxetex
+  \xetexorluatextrue
+\else
+  \ifluatex
+    \xetexorluatextrue
+  \else
+    \xetexorluatexfalse
+  \fi
+\fi
+
+\RequirePackage{graphicx}
+\RequirePackage[hyphens]{url}
+\RequirePackage{babel}
+\raggedright
+
+\RequirePackage[fixed]{fontawesome5}
+
+\newcommand{\smallcaps}[1]{\textsc{\lowercase{#1}}}
+
+\RequirePackage[a4paper,nohead,nofoot,hmargin=2.25cm,vmargin=2cm]{geometry}
+\RequirePackage{relsize}
+\RequirePackage[dvipsnames,svgnames]{xcolor}
+\RequirePackage{tikz}
+\RequirePackage{xltabular}
+\usetikzlibrary{shapes,shadows}
+
+\RequirePackage{comment}
+\definecolor{SwishLineColour}{HTML}{88AC0B}
+\definecolor{MarkerColour}{HTML}{B6073F}
+
+\RequirePackage{biblatex}
+\RequirePackage{csquotes}
+
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+   \node[shape=circle,text=white,fill=MarkerColour!80!black,font=\sffamily\scriptsize\bfseries,inner sep=1pt,text height=1.35ex,minimum width=1.5em,text centered] (char) {#1};}}
+
+\newcounter{bibitem}
+\AtBeginBibliography{\setcounter{bibitem}{1}}
+\iffieldformatundef{labelnumberwidth}{%
+  \AtEveryBibitem{\makebox[2.5em][l]{\circled{\thebibitem}\stepcounter{bibitem}}}%
+}{%
+  \DeclareFieldFormat{labelnumberwidth}{\makebox[2.5em][l]{\circled{\thebibitem}}}%
+  \setlength{\biblabelsep}{0pt}%
+  \AtEveryBibitem{\stepcounter{bibitem}}%
+}
+\AtEveryBibitem{\iffieldundef{doi}{}{\clearfield{url}}}
+
+\setlength{\bibitemsep}{1.5ex}
+\setlength{\bibhang}{2.5em}
+\RequirePackage{xpatch}
+\xpretofieldformat{doi}
+  {\textcolor{MarkerColour!80!black}{\scriptsize\faLink}}
+  {}{}
+\xpretofieldformat{url}
+  {\textcolor{MarkerColour!80!black}{\scriptsize\faLink}}
+  {}{}
+
+\DeclareFieldFormat{cvpubtag}{\mkbibparens{\textcolor{MarkerColour!80!black}{\sffamily\scriptsize #1}}}
+\DeclareFieldFormat{cvpubdetail}{\mkbibparens{\textcolor{black!70}{\footnotesize #1}}}
+
+\headerscale{1}
+\rubricfont{\Large\bfseries\sffamily}
+\setlength{\rubricspace}{2pt}
+\setlength{\rubricafterspace}{-3pt}
+\setlength{\subrubricspace}{3pt}
+\setlength{\subrubricbeforespace}{4pt}
+\def\@@rubrichead#1{%
+  \begin{tikzpicture}[baseline]%
+  \shade[left color=SwishLineColour!60!white, right color=white] rectangle (\@almosttextwidth,2.5pt);
+  \node[font={\@rubricfont},inner sep=0pt,text ragged,anchor=south west,text depth=.5ex,text height=1.5ex] at (1pt,2pt) {#1};
+  \end{tikzpicture}%
+  \vspace\rubricspace%
+}
+
+\subrubricfont{\large\bfseries\sffamily}
+\subrubricalignment{l}
+
+\newcommand{\makefield}[2]{\makebox[1.5em]{\color{MarkerColour!80!black}#1} #2\hspace{2em}}
+
+\keyalignment{r}
+\rubricalignment{l}
+\renewcommand{\arraystretch}{1.25}
+\urlstyle{tt}
+
+\newcommand{\prefixmarker}[1]{\def\@prefixmarker{#1}}
+\def\@prefixmarker{\relscale{.9}\faBookmark}
+
+\prefix{%
+  \hspace*{-1ex}
+  \color{MarkerColour!80!black}\@prefixmarker%
+  \hspace*{1ex}%
+}
+
+\newcommand{\makerubrichead}[1]{\vskip\baselineskip\@@rubrichead{#1}}
+
+% curve's original rubric environment relies on \LTXtable reading an external
+% file. These macros keep its setup and teardown while the literal xltabular
+% boundaries in the document provide an inline, multipage X column.
+\newcommand{\cvbeginrubric}[1]{%
+  \setlength{\LTpre}{0pt}%
+  \setlength{\LTpost}{0pt}%
+  \def\raggedright{%
+    \@rightskip\@flushglue\rightskip\@rightskip\leftskip\z@skip}%
+  \def\raggedleft{%
+    \rightskip\z@skip\leftskip\@flushglue\parfillskip\z@skip}%
+  \gdef\@beforespace{0pt}%
+  \gdef\@nextentry{}%
+  \gdef\@previouskey{}%
+  \global\let\old@newpage\newpage%
+  \global\let\old@pagebreak\pagebreak%
+  \global\let\old@nopagebreak\nopagebreak
+  \begin{xltabular}{\linewidth}{@{}kl@{~}X@{}}
+    \@rubrichead{#1}\\*[\rubricspace]
+    \endfirsthead
+    \@rubrichead{#1\@continuedname}\\*[\rubricspace]
+    \endhead
+    \noalign{\@rubricmark{#1}%
+      \global\let\in@newpage\newpage%
+      \global\let\in@pagebreak\pagebreak%
+      \global\let\in@nopagebreak\nopagebreak%
+      \gdef\newpage{\@nextentry\noalign{\gdef\@nextentry{}}\in@newpage}%
+      \gdef\pagebreak{\@nextentry\noalign{\gdef\@nextentry{}}\in@pagebreak}%
+      \gdef\nopagebreak{\@nextentry\noalign{\gdef\@nextentry{}}\in@nopagebreak}}}
+\newcommand{\cvcloserubric}{\@nextentry}
+\newcommand{\cvendrubric}{%
+  \par\vspace\rubricafterspace
+  \global\let\newpage\old@newpage%
+  \global\let\pagebreak\old@pagebreak%
+  \global\let\nopagebreak\old@nopagebreak}
+
+\defbibheading{subbibliography}{\vskip\subrubricbeforespace{\@subrubricfont\hspace{3pt}#1}\par}
+
+\defbibfilter{booksandchapters}{%
+( type=book or type=incollection )
+}
+
+\newcommand{\cvcofirstmark}{\textsuperscript{\normalfont\#}}
+\newcommand{\cvcorrespondingmark}{\textsuperscript{\normalfont*}}
+
+\RequirePackage{pgffor}
+\newcommand{\mynames}[1]{\def\my@namelist{#1}}
+\newtoggle{boldname}
+\renewcommand*{\mkbibnamefamily}[1]{%
+  \global\togglefalse{boldname}%
+  \foreach \my@fname / \my@gname in \my@namelist {%
+    \ifboolexpr{ test {\ifdefstrequal{\namepartfamily}{\my@fname}}
+                 and
+                 test {\ifdefstrequal{\namepartgiven}{\my@gname}}}
+      {\global\toggletrue{boldname}}{}%
+  }%
+  \iftoggle{boldname}{\textbf{#1}}{#1}%
+  \ifitemannotation{cofirst}{\cvcofirstmark}{}%
+  \ifitemannotation{corresponding}{\cvcorrespondingmark}{}%
+}
+
+\renewcommand*{\mkbibnamegiven}[1]{%
+  \global\togglefalse{boldname}%
+  \foreach \my@fname / \my@gname in \my@namelist{%
+    \ifboolexpr{ test {\ifdefstrequal{\namepartfamily}{\my@fname}}
+                 and
+                 test {\ifdefstrequal{\namepartgiven}{\my@gname}}}
+      {\global\toggletrue{boldname}\breakforeach}{}%
+  }%
+  \iftoggle{boldname}{\textbf{#1}}{#1}%
+}
+
+\renewbibmacro*{finentry}{%
+  \iffieldundef{usera}{}{\setunit{\addspace}\printfield[cvpubtag]{usera}}%
+  \iffieldundef{userb}{}{\setunit{\addspace}\printfield[cvpubdetail]{userb}}%
+  \finentry}
+
+\RequirePackage[colorlinks=true,allcolors=black,breaklinks=true]{hyperref}
+
+\makeatother
+
+% Remove the default "[Online] Available:" prefix before URLs when using the IEEE style:
+\DefineBibliographyStrings{english}{url={\textsc{url}}}
+
+%% Specify your last name(s) and first name(s) to automatically bold your own name in the publications list.
+\mynames{Si/Weixin,
+  Si/W.}
+%% MAKE SURE THERE IS NO SPACE AFTER THE FINAL NAME IN YOUR \mynames LIST
+
+% Change the fonts if you want
+\ifxetexorluatex % If you're using XeLaTeX or LuaLaTeX
+  \usepackage{fontspec}
+  \usepackage{xeCJK}
+  \usepackage[p,osf,swashQ]{cochineal}
+  \usepackage[medium,bold]{cabin}
+  \setCJKmainfont{SimSun}
+  \setCJKsansfont{Microsoft YaHei}
+  \setCJKmonofont{SimSun}
+  \setmonofont{Inconsolatazi4}[Extension=.otf,UprightFont=*-Regular,BoldFont=*-Bold,Scale=0.9]
+\else % If you're using pdfLaTeX or latex
+  \usepackage[T1]{fontenc}
+  \usepackage[p,osf,swashQ]{cochineal}
+  \usepackage{cabin}
+  \usepackage[varqu,varl,scale=0.9]{zi4}
+\fi
+
+% Change the page margins if you want
+% \geometry{left=1cm,right=1cm,top=1.5cm,bottom=1.5cm}
+
+%% Photo is only shown if "fullonly" is included
+\includecomment{fullonly}
+% \excludecomment{fullonly}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\leftheader{%
+  {\LARGE\bfseries\sffamily Weixin Si, Ph.D.}
+
+  \makefield{\faEnvelope[regular]}{\href{mailto:siweixin@suat-sz.edu.cn}{\texttt{siweixin@suat-sz.edu.cn}}}
+
+  %% Next line
+  \makefield{\faFlask}{\textbf{Research Interests:} Computer-Assisted Surgery and Digital Twins}
+}
+
+\rightheader{~}
+\begin{fullonly}
+\photo[r]{images/swx.jpg}
+\photoscale{0.15}
+\end{fullonly}
+
+\title{Curriculum Vitae}
+
+\begin{document}
+\makeheaders[c]
+
+% -----------------------------------------------------------------------------
+% Professional and Academic Appointments
+% -----------------------------------------------------------------------------
+\cvbeginrubric{Professional and Academic Appointments}
+\entry*[2025/04 -- Present]%
+	\textbf{Associate Professor (Teaching \& Research),} Faculty of Computer Science and Artificial Intelligence, Shenzhen University of Advanced Technology.
+%
+\entry*[2018/11 -- 2025/03]%
+	\textbf{Associate Researcher,} Center for Cognitive Interaction, Institute of Advanced Integration Technology, Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences.
+%
+\entry*[2017/08 -- 2018/10]%
+	\textbf{Postdoctoral Fellow,} Department of Computer Science and Engineering, The Chinese University of Hong Kong. Supervisor: Pheng-Ann Heng.
+%
+\cvcloserubric
+\end{xltabular}
+\cvendrubric
+
+% -----------------------------------------------------------------------------
+% Education
+% -----------------------------------------------------------------------------
+\cvbeginrubric{Education}
+\entry*[2013/08 -- 2017/07]%
+	\textbf{Ph.D., Department of Computer Science and Engineering, The Chinese University of Hong Kong.}
+	\par Advisors: Pheng-Ann Heng, Chi-Wing Fu.
+%
+\entry*[2011/09 -- 2013/06]%
+	\textbf{M.S., School of Computer Science, Wuhan University.}
+	\par Advisor: Zhiyong Yuan.
+%
+\entry*[2007/09 -- 2011/06]%
+	\textbf{B.S., School of Computer Science, Wuhan University.}
+\cvcloserubric
+\end{xltabular}
+\cvendrubric
+
+%% Manually formatted publication list; publication-records.bib is kept in sync as a data source.
+\makerubrichead{Research Publications}
+\noindent\small{(\textsuperscript{\#} indicates co-first author; \textsuperscript{\textdagger} indicates equal contribution; \textsuperscript{*} indicates corresponding/co-corresponding author.)}
+\par\normalsize
+
+\providecommand{\WS}{\textbf{Weixin Si}}
+\providecommand{\COF}{\textsuperscript{\#}}
+\providecommand{\CORR}{\textsuperscript{*}}
+\providecommand{\EQA}{\textsuperscript{\textdagger}}
+
+\newcounter{pubitem}
+\newenvironment{publist}{%
+  \begin{list}{(\arabic{pubitem})}{%
+    \usecounter{pubitem}%
+    \setlength{\leftmargin}{3.1em}%
+    \setlength{\labelwidth}{2.6em}%
+    \setlength{\labelsep}{0.5em}%
+    \setlength{\itemsep}{0.65ex}%
+    \setlength{\parsep}{0pt}%
+    \setlength{\topsep}{0.3ex}%
+  }%
+  \clubpenalty=10000%
+  \widowpenalty=10000%
+}{\end{list}}
+
+{\large\bfseries\sffamily Journal Articles}\par
+\vspace{2pt}
+\begin{small}
+\begin{publist}
+\item Yi Pan, Shihao Zou, Jiawen Yang, \WS\CORR, Weimin Zheng. Surgical Data Science in Time-Critical Contexts: A Roadmap Toward Brain-Inspired Computing. \emph{Journal of Computer Science and Technology}, 2026. \textbf{(CCF-B)}
+\item Yangyang Shi, Beiji Zou, Xiaonian Deng, Yucong Zhang, Zehua Liu, Xiaoyan Kui, Gang Xu, \WS\CORR. Integrating Frequency-Aware Mamba with Diffusion for 4D Volumetric Image Synthesis. \emph{Pattern Recognition}, 2026. \textbf{(CAS Tier 1)}
+\item Ruize Cui\COF, \WS\COF, Zhixi Li\COF, Kai Wang, Jialun Pei\CORR, Pheng-Ann Heng, Jing Qin. Depth-Induced Prompt Learning for Laparoscopic Liver Landmark Detection. \emph{Medical Image Analysis}, 2026. \textbf{(CAS Tier 1)}
+\item Zheng Fang, Xiaoming Qi, Chun-Mei Feng, Jialun Pei, \WS, Yueming Jin. Spatio-Temporal Representation Decoupling and Enhancement for Federated Instrument Segmentation in Surgical Videos. \emph{IEEE Transactions on Medical Imaging}, 2026. \textbf{(CAS Tier 1)}
+\item Xiaoyan Kui, Yangyang Shi, Doudou Zhang, Caizi Li, Linxia Xiao, Haitong Xu, Liming Chen, Beiji Zou, \WS\CORR. Data and Knowledge Co-Driven Electrode Implantation Planning for Robot-Assisted DBS. \emph{Chinese Journal of Mechanical Engineering}, 2025. \textbf{(JCR Q1)}
+\item Meng Lan, \WS, Xinjian Yan, Xiaomeng Li. A new dataset and versatile multi-task surgical workflow analysis framework for thoracoscopic mitral valvuloplasty. \emph{Medical Image Analysis}, 2025. \textbf{(CAS Tier 1)}
+\item Linxia Xiao, Qingqing Zheng, Sixian Li, Yanjie Wei, \WS\CORR, Yi Pan. Integration of Spatiotemporal Dynamics and Structural Connectivity for Automated Epileptogenic Zone Localization in Temporal Lobe Epilepsy. \emph{IEEE Transactions on Neural Systems \& Rehabilitation Engineering}, 2025.
+\item Renzhe Tu, Congyu Tian, Linyuan Wang, Yongzhi Deng, Cheng Chen, \WS\CORR, Shanshan Wang. Mask SAM 3D for coronary artery and plaque segmentation in CCTA Images. \emph{International Journal of Computer Assisted Radiology and Surgery}, 2025.
+\item Shiyao Yu, Zi-An Wang, Kangning Yin, Zheng Tian, Mingyuan Zhang, \WS, Shihao Zou. Multi-Modal Motion Retrieval by Learning a Fine-Grained Joint Embedding Space. \emph{IEEE Transactions on Multimedia}, 2025. \textbf{(CAS Tier 1)}
+\item Shihao Zou, Yuxuan Mu, Wei Ji, Zian Wang, Xinxin Zuo, Sen Wang, \WS\CORR, Li Cheng. Highly Efficient 3D Human Pose Tracking from Events with Spiking Spatiotemporal Transformer. \emph{IEEE Transactions on Circuits and Systems for Video Technology}, 2025. \textbf{(CAS Tier 1)}
+\item Weili Jiang, Jiawen Li, Yihao Li, Xifei Wei, Jianping Huang, Gwenol\'e Quellec, \WS\CORR, Chubin Ou\CORR. Boundary-Aware Dynamic Re-weighting for Medical Class-Balanced Semi-Supervised Segmentation. \emph{Expert Systems with Applications}, 2025. \textbf{(CAS Tier 1)}
+\item Nazik Elsayed, Yousuf Babiker M. Osman, Cheng Li, Jiarun Liu, \WS, Jiong Zhang, Shanshan Wang\CORR. Automating Vessel Segmentation in the Heart and Brain: A Trend to Develop Multi-Modality and Label-Efficient Deep Learning Techniques. \emph{Biomedical Signal Processing and Control}, 2025. \textbf{(JCR Q1)}
+\item Congyu Tian, Zehua Liu, Linyuan Wang, Liang Shao, Yongzhi Deng, Xiangyun Liao, \WS\CORR. Bi-VesTreeFormer: A Bidirectional Topology-Aware Transformer Framework for Coronary vFFR Estimation. \emph{Computerized Medical Imaging and Graphics}, 2025. \textbf{(JCR Q1)}
+\item Kai Wang, Qian Yang, Kang Li, Shanhua Tang, Baoluhe Zhang, Xiangyun Liao, Shunda Du, Wenguang Fu, Zhiwei Li, Huanwei Chen, Haorong Xie, Pengxiang Huang, Jieyuan Li, Qiuting Wang, Haiqing Liu, Zhiwei Huang, Pheng-Ann Heng, Xueshuai Wan, Chuanjiang Li, \WS\CORR. Learning-based Early Detection of Post-hepatectomy Liver Failure Using Temporal Perioperative Data: A Nationwide Multicenter Retrospective Study in China. \emph{eClinicalMedicine}, 2025. \textbf{(The Lancet family; CAS Tier 1)}
+\item Shihao Zou, Yuanlu Xu, Nikolaos Sarafianos, Federica Bogo, Tony Tung, \WS\CORR, Li Cheng. Generating High-Fidelity Clothed Human Dynamics with Temporal Diffusion. \emph{ACM Transactions on Multimedia Computing, Communications, and Applications}, 2025. \textbf{(JCR Q1)}
+\item Congyu Tian, Yan Hu, Meng Zhang, Xiangyun Liao, Jianping Lv, \WS\CORR. Self-Prompt Contextual Learning with AxialMamba for Multi-label Segmentation in Carotid Ultrasound. \emph{Expert Systems with Applications}, 2025. \textbf{(CAS Tier 1)}
+\item Qian Yang, Caizi Li, Chubin Ou, Kang Li, Xiangyun Liao, Chuanzhi Duan, Lequan Yu, \WS\CORR. Synthesizing Feature-Aligned and Category-aware Electronic Medical Records for Intracranial Aneurysm Rupture Prediction. \emph{IEEE Journal of Biomedical and Health Informatics}, 2024. \textbf{(JCR Q1)}
+\item Chengkun Li, Yuqi Tong, Yonghao Long, \WS, David Chun Man Yeung, Ying-Kuen Chan, Qi Dou. Extended Reality with HMD-Assisted Guidance and Console 3D Overlay for Robotic Surgery Remote Mentoring. \emph{IEEE Robotics and Automation Letters}, 2024. \textbf{(JCR Q1)}
+\item Qian Yang, Chubin Ou, Kang Li, Zhongxiao Wang, Yucong Zhang, Xiangyun Liao, Jianping Lv, \WS\CORR. Versatile Latent Distribution-preserving Tabular Data Synthesis-based Endovascular Treatment Selection for Intracranial Aneurysm. \emph{Expert Systems with Applications}, 2024. \textbf{(CAS Tier 1)}
+\item Congyu Tian, Yaoqian Li, Xin Xiong, Caizi Li, Kang Li, Xiangyun Liao, Yongzhi Deng, \WS\CORR. Multi-class Plaque Segmentation in Intravascular Ultrasound via Inter-frame Feature Fusion and Contrast Feature Extraction. \emph{Biomedical Signal Processing and Control}, 2024. \textbf{(JCR Q1)}
+\item Zehua Liu\EQA, Meng Zhang\EQA, Chao Wang, Zhongxiao Wang, Xiangyun Liao, Chubin Ou\CORR, \WS\CORR. Flow Diverters Treatment Planning of Small- and Medium-sized Intracranial Saccular Aneurysms on the Internal Carotid Artery via Constraint-based Virtual Deployment. \emph{International Journal of Computer Assisted Radiology and Surgery}, 2024.
+\item Renzhe Tu\EQA, Doudou Zhang\EQA, Caizi Li\CORR, Linxia Xiao, Yong Zhang, Xiaodong Cai, \WS\CORR. Multimodal MRI Segmentation of Key Structures for Microvascular Decompression via Knowledge-Driven Mutual Distillation and Topological Constraints. \emph{International Journal of Computer Assisted Radiology and Surgery}, 2024.
+\item Zehua Liu, Linxia Xiao, Yang Liu, Liyu Gao, Jinlong Zhang, \WS\CORR. Symmetrical Photoplethysmogram Signal based Cuff-less Blood Pressure Estimation. \emph{IEEE Sensors Journal}, 2024. \textbf{(JCR Q1)}
+\item \WS\CORR, Yuqi Tong, Pheng-Ann Heng. Metaverse in Minimally Invasive Partial Nephrectomy: Are We There Yet? \emph{European Urology}, 2024. \textbf{(CAS Tier 1)}
+\item Caizi Li, Yaoqian Li, Ruiqiang Liu, Guangsuo Wang, Jianping Lv, Yueming Jin, \WS\CORR, Pheng-Ann Heng. Structural and Pixel Relation Modeling for Semi-supervised Instrument Segmentation from Surgical Videos. \emph{IEEE Transactions on Instrumentation and Measurement}, 2024. \textbf{(JCR Q1)}
+\item Caizi Li, Ruiqiang Liu, Huanxin Zhong, Junming Fan, \WS\CORR, Meng Zhang, Pheng-Ann Heng. Semi-supervised Intracranial Aneurysm Segmentation from CTA Images via Weight-Perceptual Self-ensembling Model. \emph{Journal of Computer Science and Technology}, 2023. \textbf{(CCF-B)}
+\item Ruiqiang Liu, Xiaodong Cai, Renzhe Tu, Caizi Li, Wei Yan, Doudou Zhang, Linxia Xiao, \WS\CORR. Automatic localization of target point for STN-DBS via Hierarchical Attention-UNet based MRI segmentation. \emph{Medical Physics}, 2022. \textbf{(JCR Q1)}
+\item Yangyang Shi, Xuesong Deng, Yuqi Tong, Ruotong Li, Yanfang Zhang, Lijie Ren, \WS\CORR. Synergistic Digital Twin and Holographic Augmented Reality Guided Percutaneous Puncture of Respiratory Liver Tumor. \emph{IEEE Transactions on Human-Machine Systems}, 2022. \textbf{(JCR Q1)}
+\item Chubin Ou, Yi Qian, Winston Chong, Xiaoxi Hou, Mingzi Zhang, Xin Zhang, \WS\CORR, Chuan-Zhi Duan\CORR. A Deep Learning based Automatic System for Intracranial Aneurysms Diagnosis on Three-Dimensional Digital Subtraction Angiographic Images. \emph{Medical Physics}, 2022. \textbf{(JCR Q1)}
+\item Linxia Xiao, Caizi Li, Yanjiang Wang, \WS\CORR, Hai Lin, Doudou Zhang, Xiaodong Cai, Pheng-Ann Heng. Amplitude-frequency-aware deep fusion network for optimal contact selection on STN-DBS electrode. \emph{SCIENCE CHINA Information Sciences}, 2022. \textbf{(CAS Tier 1)}
+\item Chubin Ou, Caizi Li, Yi Qian\CORR, Chuan-Zhi Duan\CORR, \WS\CORR, Xin Zhang, Xifeng Li, Michael Morgan, Qi Dou, Pheng-Ann Heng. Morphology-aware Multi-source Fusion based Intracranial Aneurysms Rupture Prediction. \emph{European Radiology}, 2022. \textbf{(JCR Q1)}
+\item Yaoqian Li, Caizi Li, Ruiqiang Liu, \WS\CORR, Yueming Jin, Pheng-Ann Heng. A Semi-supervised Spatiotemporal Transformer Network for Surgical Instrument Semantic Segmentation. \emph{Journal of Software}, 2022.
+\item Ruotong Li, Yangyang Shi, \WS\CORR, Li Huang, Bowen Zhuang, Michael Weinmann, Reinhard Klein, Pheng-Ann Heng. Versatile Multi-constrained Planning for Thermal Ablation of Large Liver Tumors. \emph{Computerized Medical Imaging and Graphics}, 2021. \textbf{(JCR Q1)}
+\item Caizi Li, Li Dong, Qi Dou, Fan Lin, Kebao Zhang, Zuxin Feng, \WS\CORR, Xuesong Deng, Zhe Deng, Pheng-Ann Heng. Self-Ensembling Co-Training Framework for Semi-supervised COVID-19 CT Segmentation. \emph{IEEE Journal of Biomedical and Health Informatics}, 2021. \textbf{(JCR Q1)}
+\item Linxia Xiao, Caizi Li, Yanjiang Wang, Junxi Chen, \WS\CORR, Chen Yao, Xifeng Li, Chuanzhi Duan, Pheng-Ann Heng. Automatic Localization of Seizure Onset Zone from High-frequency SEEG Signals: A Preliminary Study. \emph{IEEE Journal of Translational Engineering in Health and Medicine}, 2021.
+\item Linxia Xiao, Caizi Li, Yanjiang Wang, \WS\CORR, Doudou Zhang, Hai Lin, Xiaodong Cai, Pheng-Ann Heng. Automatic Identification of Sweet Spots from MERs for Electrodes Implantation in STN-DBS. \emph{International Journal of Computer Assisted Radiology and Surgery}, 2021.
+\item Ruotong Li, Yuqi Tong, Tianpei Yang, Jianxi Guo, \WS\CORR, Yanfang Zhang, Reinhard Klein, Pheng-Ann Heng. Towards Quantitative and Intuitive Percutaneous Tumor Puncture via Augmented Virtual Reality. \emph{Computerized Medical Imaging and Graphics}, 2021. \textbf{(JCR Q1)}
+\item Qi Dou, Tiffany So, Meirui Jiang, Quande Liu, Varut Vardhanabhuti, Georgios Kaissis, Zeju Li, \WS, Heather Lee, Kevin Yu, Zuxin Feng, Li Dong, Egon Burian, Friederike Jungmann, Rickmer Braren, Marcus Makowski, Bernhard Kainz, Daniel Rueckert, Ben Glocker, Simon Yu, Pheng-Ann Heng. Federated deep learning for detecting COVID-19 lung abnormalities in CT: A privacy-preserving multinational validation study. \emph{npj Digital Medicine}, 2021. \textbf{(CAS Tier 1)}
+\item Caizi Li, Ruiqiang Liu, \WS\CORR, Zhiyong Yuan, Pheng-Ann Heng. A Semi-supervised Spatial Consistency Constrained Network for Cardiac MRI Segmentation. \emph{Journal of Computer-Aided Design \& Computer Graphics}, 2020, 32(07): 1145--1153.
+\item Qianqian Tong, Xiaosa Li, Kai Lin, Caizi Li, \WS\CORR, Zhiyong Yuan\CORR. Cascade-LSTM-Based Visual-Inertial Navigation for Magnetic Levitation Haptic Interaction. \emph{IEEE Network}, 2019. \textbf{(JCR Q1)}
+\item \WS, Xiangyun Liao, Yinling Qian, Qiong Wang\CORR, Pheng-Ann Heng. Versatile Numerical Fractures Removal for SPH-based Free Surface Liquids. \emph{Computers \& Graphics}, 2019.
+\item \WS, Xiangyun Liao, Yinling Qian, Haitao Sun, Xiangdong Chen, Qiong Wang, Pheng-Ann Heng. Assessing performance of augmented reality-based neurosurgical training. \emph{Visual Computing for Industry, Biomedicine, and Art}, 2019. \textbf{(JCR Q1)}
+\item Ruotong Li\COF, \WS\COF, Xiangyun Liao, Qiong Wang\CORR, Reinhard Klein, Pheng-Ann Heng. Mixed Reality based Respiratory Liver Tumor Puncture Navigation. \emph{Computational Visual Media}, 2019, 5(4): 363--374. \textbf{(CAS Tier 1)}
+\item \WS, Jing Qin, Zhuchao Chen, Xiangyun Liao\CORR, Yinling Qian, Qiong Wang\CORR, Pheng-Ann Heng. Thin Feature-Aware Transport-Velocity Formulation for SPH-Based Liquid Animation. \emph{IEEE Transactions on Multimedia}, 2018, 20(11): 3033--3044. \textbf{(CAS Tier 1)}
+\item Xiangyun Liao\COF, \WS\COF, Zhiyong Yuan\CORR, Hanqiu Sun, Jing Qin, Qiong Wang\CORR, Pheng-Ann Heng. Animating Wall-bounded Turbulent Smoke via Filament-Mesh Particle-Particle Method. \emph{IEEE Transactions on Visualization and Computer Graphics}, 2018, 24(3): 1260--1273. \textbf{(CCF-A)}
+\item \WS\COF, Xiangyun Liao\COF, Qiong Wang\CORR, Pheng-Ann Heng. Personalized heterogeneous deformable model for fast volumetric registration. \emph{BioMedical Engineering OnLine}, 2017, 16: 1--17.
+\item Xiangyun Liao\COF, \WS\COF, Biao Xu, Zhiyong Yuan\CORR, Qiong Wang, Pheng-Ann Heng. Filament-based realistic turbulent wake synthesis. \emph{Computer Animation \& Virtual Worlds}, 2017, 28(3--4): 1--10.
+\item Meng Zhang, \WS\CORR, Yinling Qian, Hanqiu Sun\CORR, Jing Qin, Pheng-Ann Heng. Vortex Filaments in Grids for Scalable, Fine Smoke Simulation. \emph{IEEE Computer Graphics and Applications}, 2015, 35(6): 60--68.
+\item \WS, Zhiyong Yuan\CORR, Xiangyun Liao, Zhaoliang Duan, Mingui Sun, Pengfei Hu, Jianhui Zhao. An Energy Based Free Boundary Asynchronous Diffusion Model for 3D Warping of Tissue Dynamics. \emph{Journal of Statistical Computation and Simulation}, 2014, 84(6): 1280--1296.
+\item Zhiyong Yuan\CORR, \WS, Xiangyun Liao, Zhaoliang Duan, Yihua Ding, Jianhui Zhao. Parallel Computing of 3D Smoking Simulation Based on OpenCL Heterogeneous Platform. \emph{Journal of Supercomputing}, 2012, Vol. 61, No. 1, pp. 84--102.
+\item \WS, Zhiyong Yuan\CORR, Xiangyun Liao, Zhaoliang Duan, Yihua Ding, Jianhui Zhao. 3D Soft Tissue Warping Dynamics Simulation Based on Force Asynchronous Diffusion Model. \emph{Computer Animation and Virtual Worlds}, 2011, Vol. 22, pp. 251--259.
+\end{publist}
+\end{small}
+
+{\large\bfseries\sffamily Conference Papers}\par
+\vspace{2pt}
+\begin{small}
+\setcounter{pubitem}{0}
+\begin{publist}
+\item Jincai Huang, Shihao Zou, Yuchen Guo, Jingjing Li, Wei Ji, Kai Wang, Shanshan Wang, \WS\CORR. Towards Unified Surgical Scene Understanding: Bridging Reasoning and Grounding via MLLMs. MICCAI 2026. \textbf{(CCF-B)}
+\item Yang Liu, Zehua Liu, Xiangyun Liao, Chuanzhi Duan, \WS\CORR. Physics-Inspired Continuous Transformer for Fast QDSA Reconstruction. MICCAI 2026. \textbf{(CCF-B)}
+\item Ziqiao Qu, Yangyang Shi, Yuanqing Wang, Linxia Xiao, \WS\CORR. Towards Versatile and Safe Multi-Electrode Path Planning for SEEG Implantation. MICCAI 2026. \textbf{(CCF-B)}
+\item Yixin Wang, Haipeng Wang, Xin Feng, Xiangyun Liao, \WS\CORR. Frequency-Aware Prototype Learning in VLM for Intracranial Aneurysm HR-VWI Segmentation. MICCAI 2026. \textbf{(CCF-B)}
+\item Fang Li\COF, Shihao Zou\COF, \WS\CORR, Yang Gao\CORR, Shuai Li, Aimin Hao. TRCoRSurg: Temporal-Relational Co-Reasoning for Surgical Video Triplet Recognition. IEEE CVPR 2026. \textbf{(CCF-A)}
+\item Zehua Liu, Shihao Zou, Jincai Huang, Yanfang Zhang, Chao Tong, \WS\CORR. TempDiffReg: Temporal Diffusion Model for Non-Rigid 2D-3D Vascular Registration. IEEE BIBM 2025. \textbf{(CCF-B, ORAL)}
+\item Zehua Liu, Meng Zhang, Yang Gao, Jianping Lv, Feng Lu, \WS\CORR. Fast Intra-operative Angiographic Parametric Imaging for Surgical Outcome Prediction of Interventional Cerebral Aneurysms Treatment. IEEE BIBM 2025. \textbf{(CCF-B, ORAL)}
+\item Yangyang Shi, Yucong Zhang, Beiji Zou, Xiaoyan Kui, Zexin Ji, Zuheng Ming, Azeddine Beghdadi, \WS\CORR. From Global to Local: Mamba-Based Hierarchical Registration for Respiratory Lung Deformation. IEEE BIBM 2025. \textbf{(CCF-B, ORAL)}
+\item Wenfeng Huang, Xiangyun Liao, Wei Cao, Wenjing Jia, \WS\CORR. Versatile and Efficient Medical Image Super-Resolution Via Frequency-Gated Mamba. IEEE BIBM 2025. \textbf{(CCF-B, ORAL)}
+\item Yangyang Shi, Xiaoyan Kui, Yucong Zhang, Shihao Zou, Zuheng Ming, \WS\CORR, Azeddine Beghdadi, Beiji Zou. Distance-Aware and Knowledge-Driven Vision Mamba U-Net for Radiotherapy Dose Prediction. IEEE BIBM 2025. \textbf{(CCF-B, ORAL)}
+\item Congyu Tian, Shihao Zou, Xiangyun Liao, Cheng Chen, Chubin Ou, Jianping Lv, Shanshan Wang, \WS\CORR. Cerebrovascular Diseases Screening from Color Fundus Photography via Cross-View Fusion and Graph-Based Discrimination. MICCAI 2025. \textbf{(CCF-B, ORAL)}
+\item Wei Cao, Zhengyang Li, Yuchen He, Zehua Liu, Meng Zhang, Jianping Lv, \WS\CORR. A Cost-effective Tangible Rehearsal Interface for Microsurgical Clipping of Intracranial Aneurysm. IEEE VR 2025. \textbf{(CCF-A)}
+\item Diandian Guo\COF, \WS\COF, Zhixi Li, Jialun Pei\CORR, Pheng-Ann Heng. Surgical Workflow Recognition and Blocking Effectiveness Detection in Laparoscopic Liver Resection with Pringle Maneuver. AAAI 2025. \textbf{(CCF-A)}
+\item Jialun Pei, Ruize Cui, Yaoqian Li, \WS\CORR, Jing Qin, Pheng-Ann Heng. Depth-Driven Geometric Prompt Learning for Laparoscopic Liver Landmark Detection. MICCAI 2024. \textbf{(CCF-B, ORAL, Best Paper Award Finalist)}
+\item Ruotong Li, Tianpei Yang, \WS\CORR, Xiangyun Liao, Qiong Wang, Reinhard Klein, Pheng-Ann Heng. Augmented Reality Guided Respiratory Liver Tumors Punctures: A Preliminary Feasibility Study. SIGGRAPH Asia 2019 Technical Briefs. Brisbane, Australia, 2019.11.17--11.20.
+\item Yinling Qian, Wenbin Huang, \WS\CORR, Xiangyun Liao, Pheng-Ann Heng. Towards biomechanically and visually plausible volumetric cutting simulation of deformable bodies. Pacific Graphics 2019. Seoul, Korea, 2019.10.14--10.17. \textbf{(CCF-B)}
+\end{publist}
+\end{small}
+
+
+% -----------------------------------------------------------------------------
+% Selected Funded Research Projects
+% -----------------------------------------------------------------------------
+\cvbeginrubric{Selected Funded Research Projects}
+\entry*[2026/01 -- 2029/12]%
+	Guangdong Provincial Natural Science Foundation Distinguished Young Scholars Program (2026B1515020093),
+	\par Intelligent Digital Simulation and Translational Application for Personalized Minimally Invasive Surgery, CNY 1.00M, \textbf{PI}, \emph{Ongoing}.
+%
+\entry*[2025/10 -- 2028/09]%
+	Project in Key Areas of Guangdong Provincial Department of Education (2025ZDZX3027),
+	\par Development and Application of a Foundation Model for Predicting Adverse Outcomes After Interventional Treatment of Cerebrovascular Disease, CNY 0.20M, \textbf{PI}, \emph{Ongoing}.
+%
+\entry*[2025/06 -- 2027/05]%
+	State Key Laboratory of Virtual Reality Technology and Systems Open Project (VRLAB2025B02),
+	\par Development and Application of an Interactive Virtual Microscopic Neurosurgery System, CNY 0.025M, \textbf{PI}, \emph{Ongoing}.
+%
+\entry*[2025/01 -- 2025/12]%
+	State Key Laboratory of Digital Medical Engineering Open Project (2025-M05),
+	\par Generalized Prediction of Panvascular Plaque Stability, CNY 0.03M, \textbf{PI}, \emph{Completed}.
+%
+\entry*[2024/06 -- 2027/06]%
+	Shenzhen Excellent Young Scientist Program (RCYX20231211090127030),
+	\par Personalized Digital-Twin-Assisted Precision Diagnosis and Treatment
+	\par CNY 2.00M, \textbf{PI}, \emph{Ongoing}.
+%
+\entry*[2024/01 -- 2027/12]%
+	\raggedright National Natural Science Foundation of China, General Program (62372441),
+	\par Digital Twin Modeling and Intelligent Simulation of Personalized Intracranial Aneurysm--Vascular Stent Coupled Systems, CNY 0.50M, \textbf{PI}, \emph{Ongoing}.
+%
+\entry*[2023/01 -- 2026/12]%
+	Guangdong Provincial Natural Science Foundation for Distinguished Young Scholars (2023A1515030268), Precise Planning and Navigation for Lung Cancer Ablation Surgery by Integrating Digital Twins and Holographic Augmented Reality, CNY 0.30M, \textbf{PI}, \emph{Ongoing}.
+%
+\entry*[2023/01 -- 2026/12]%
+	NSFC Regional Innovation and Development Joint Fund (Hunan) Key Project (U22A2034), Key Technologies for Intelligent Precision Radiotherapy Throughout the Full Clinical Workflow Guided by Multimodal Imaging, CNY 2.52M, \textbf{Lead at Collaborating Institution}, \emph{Ongoing}.
+%
+\entry*[2022--2027]%
+	Research Grants Council -- Theme-based Research Scheme (T45-401/22-N),
+	\par Institute of Medical Intelligence and XR, HK\$43.547M, \textbf{Collaborator}, \emph{Ongoing}.
+%
+\entry*[2021/01 -- 2023/12]%
+	Guangdong Provincial Natural Science Foundation General Program (2021A1515012604),
+	\par AI-Assisted Precise Estimation of Epileptogenic Zones via Multimodal Data Fusion for Focal Epilepsy, CNY 0.10M, \textbf{PI}, \emph{Completed}.
+%
+\entry*[2020/11 -- 2023/10]%
+	\raggedright Shenzhen Basic Research Key Project (JCYJ20200109110208764), Research on a Holographic Navigation Platform for Deep Brain Stimulation Surgery in Functional Neurological Disorders, CNY 2.00M, \textbf{PI}, \emph{Completed}.
+%
+\entry*[2020/11 -- 2023/10]%
+	Shenzhen Basic Research Key Project (JCYJ20200109110420626),
+	\par Hemodynamics and Mechanistic Study of Interventional Efficacy for Complex Cerebrovascular Diseases, CNY 2.00M, \textbf{Lead at Collaborating Institution}, \emph{Completed}.
+%
+\entry*[2020/01 -- 2022/12]%
+	\raggedright Guangdong Key-Area R\&D Program (2020B010165004),
+	\par Key Technologies for Human--Computer Interaction-Based Precision Surgical Planning and Real-Time Guidance Software, CNY 20.00M, \textbf{Subproject Lead}, \emph{Completed}.
+%
+\entry*[2019/01 -- 2021/12]%
+	NSFC Young Scientists Fund (Category C) (61802385),
+	\par Key Technologies for a 3D Interactive Mixed-Reality System for Precision Planning/Rehearsal of Microsurgical Meningioma Resection, CNY 0.27M, \textbf{PI}, \emph{Completed}.
+%
+\cvcloserubric
+\end{xltabular}
+\cvendrubric
+
+% -----------------------------------------------------------------------------
+% Academic Awards
+% -----------------------------------------------------------------------------
+\makerubrichead{Academic Awards}
+
+\begin{enumerate}
+\setlength{\itemsep}{0pt}
+\setlength{\parsep}{0pt}
+\setlength{\topsep}{0.4ex}
+\item \textbf{Weixin Si} (1/9). Development and Clinical Application of a Full-Stack Simulation System for Precision Interventional Diagnosis and Treatment of Cardiovascular and Cerebrovascular Diseases. \textbf{Second Prize for Innovative Technology, 2026 China Simulation Federation Science and Technology Awards.}\\
+(\textbf{Weixin Si}, Xiangyun Liao, Jianhui Zhao, Zhiyong Yuan, Jianping Lv, Shu Chen, Chubin Ou, Peidong Qian, Linxia Xiao)
+
+\item \textbf{Weixin Si} (2/6). Generative AI-Driven Interdisciplinary Medical--Engineering Simulation Education and Innovative Talent Development. \textbf{First Prize for Higher Education Teaching Achievement, 2026 China Simulation Federation Science and Technology Awards.}\\
+(Shanshan Wang, \textbf{Weixin Si}, Cheng Li, Yi Pan, Yang Jiao, Ye Li)
+
+\item \textbf{Weixin Si} (2/13). Innovative Technologies and Applications for Intelligent Quantitative Diagnosis and Treatment of Intracranial Aneurysms. \textbf{First Prize, 7th Guangdong Medical Science and Technology Award.}\\
+(Chuanzhi Duan, \textbf{Weixin Si}, Xifeng Li, Chubin Ou, Pheng-Ann Heng, Aihua Liu, Jianping Lv, Xin Zhang, Xiangyun Liao, Meng Zhang, Yi Qian, Xin Feng, Linxia Xiao)
+
+\item \textbf{Weixin Si} (1/6). R\&D and Broad Deployment of Key Technologies for General-Purpose Interactive Virtual Surgery Training. \textbf{R\&D Innovation Award, 2025 China Hospital Association Hospital Science and Technology Innovation Awards.}\\
+(\textbf{Weixin Si}, Jianping Lv, Xiangyun Liao, Zhiyong Yuan, Meng Zhang, Shihao Zou)
+
+\item \textbf{Weixin Si} (4/4). Medical Open Set Recognition via Intra-class Clustering. The 24th International Conference on Cyberworlds (CW 2025). \textbf{Best Paper Award.}\\
+(Hanqiu Deng, Shihao Zou, Xiangyun Liao, \textbf{Weixin Si*})
+
+\item \textbf{Weixin Si} (8/8). PlaqueNet: deep-learning-enabled coronary artery plaque segmentation from coronary computed tomography angiography. \textbf{High-Impact Paper 2024 of} \emph{Visual Computing for Industry, Biomedicine, and Art}.\\
+(Linyuan Wang, Xiaofeng Zhang, Congyu Tian, Shu Chen, Yongzhi Deng, Xiangyun Liao, Qiong Wang, \textbf{Weixin Si})
+
+\item \textbf{Weixin Si} (4/5). B-spline-Based Elastic Registration of 4D CT Images Optimized by ICP. 19th China Conference on Virtual Reality (ChinaVR 2019). \textbf{Best Paper Nomination Award.}\\
+(Wenjie Tang, Ruotong Li, Xuesong Deng, \textbf{Weixin Si*}, Qiong Wang)
+
+\item \textbf{Weixin Si} (1/5). An Energy Based Free Boundary Asynchronous Diffusion Model for 3D Warping of Tissue Dynamics. Asia Simulation Conference \& The International Conference on System Simulation and Scientific Computing 2012. \textbf{Best Paper Award.}\\
+(\textbf{Weixin Si}, Zhiyong Yuan, Xiangyun Liao, Zhaoliang Duan, Jianhui Zhao)
+\end{enumerate}
+
+% -----------------------------------------------------------------------------
+% Patents
+% -----------------------------------------------------------------------------
+\makerubrichead{Patents}
+
+\begin{enumerate}
+\setlength{\itemsep}{0pt}
+\setlength{\parsep}{0pt}
+\setlength{\topsep}{0.4ex}
+\item Jiang Zhengxu, Liao Xiangyun, Si Weixin. Fast automatic electrocardiogram diagnosis method and system based on multi-module collaboration. 2025-10-03, China, ZL202510276398.X.
+
+\item Si Weixin, Xiao Linxia. Multimodal multi-target segmentation method and system for microvascular decompression. 2025-10-17, China, ZL202311569268.2.
+
+\item Si Weixin, Li Caizi. Image processing method, apparatus, device, and computer-readable storage medium. 2025-08-26, China, ZL202210831407.3.
+
+\item Si Weixin, Li Caizi, Wang Qiong, Pheng-Ann Heng. Image segmentation method, apparatus, and terminal device. 2023-05-17, China, ZL201911172254.0.
+
+\item Si Weixin, Qian Yinling, Wang Qiong, Pheng-Ann Heng. Image registration method, apparatus, and terminal device. 2023-03-09, China, ZL201911182551.3.
+
+\item Si Weixin, Pheng-Ann Heng. Force-feedback method, force-feedback device, and electronic device. 2023-02-24, China, ZL202110564294.0.
+
+\item Liao Xiangyun, Si Weixin, Wang Qiong, Sun Yinzi. Simulation method and terminal device for foam generation during liquid--solid collision. 2022-10-14, China, ZL201711434248.9.
+
+\item Si Weixin, Shao Zehao, Pheng-Ann Heng. Surgical training apparatus and system, and method for acquiring motion information of surgical instruments. 2022-09-05, China, ZL202111499425.8.
+
+\item Si Weixin, Shi Yangyang, Pheng-Ann Heng. Method, apparatus, system, and electronic device for predicting displacement of internal liver tissue. 2022-02-12, China, ZL202110489024.8.
+
+\item Si Weixin, Li Ruotong, Pheng-Ann Heng. Surgical navigation apparatus, device, and computer-readable storage medium. 2021-10-25, China, ZL202011270615.8.
+
+\item Si Weixin, Li Ruotong, Pheng-Ann Heng. Method, system, apparatus, and electronic device for target localization and display. 2021-08-18, China, ZL202011364324.5.
+
+\item Si Weixin, Qian Yinling, Liu Cong, Sun Yinzi, Wang Qiong, Pheng-Ann Heng. Image segmentation method and apparatus based on a multi-path convolutional neural network model. 2020-11-05, China, ZL201811551759.3.
+
+\item Si Weixin, Qian Yinling, Dai Sha, Peng Liu, Sun Yinzi, Pheng-Ann Heng. Virtual microscopic ophthalmic surgery training method and system. 2020-09-01, China, ZL201810942749.6.
+
+\item Si Weixin, Peng Liu, Liao Xiangyun, Sun Yinzi, Pheng-Ann Heng. Surgical simulation method, apparatus, and system. 2020-07-31, China, ZL201811058325.X.
+\end{enumerate}
+
+% -----------------------------------------------------------------------------
+% Teaching Experience
+% -----------------------------------------------------------------------------
+\makerubrichead{Teaching Experience}
+
+\begin{itemize}
+\setlength{\itemsep}{0pt}
+\setlength{\parsep}{0pt}
+\setlength{\topsep}{0.4ex}
+\item FCAB335 Human--Computer Interaction and Virtual Reality
+\item FCCA221 Data Structures and Algorithm Analysis
+\item FCCA511 Advanced Artificial Intelligence
+\end{itemize}
+
+% -----------------------------------------------------------------------------
+% Academic Service and Professional Memberships
+% -----------------------------------------------------------------------------
+\makerubrichead{Academic Service and Professional Memberships}
+
+\begin{itemize}
+\setlength{\itemsep}{0pt}
+\setlength{\parsep}{0pt}
+\setlength{\topsep}{0.4ex}
+\item Associate Editor, \emph{The Visual Computer}
+\item Young Editorial Board Member, \emph{The Innovation Informatics}
+\item Organizing Chair, ChinaVR 2026
+\item Standing Committee Member, Smart Healthcare Expert Committee, Chinese Institute of Electronics
+\item Secretary-General, Medical Simulation Committee, China Simulation Federation
+\end{itemize}
+
+
+% -----------------------------------------------------------------------------
+% Legacy reference layouts retained as inactive source for future use.
+% Remove \iffalse / \fi around the desired layout to enable it.
+\iffalse
+
+% Detailed reference layout
+%% Probably not the best way of doing it but what the heck, I just winged-it :p
+
+\makerubrichead{References}
+
+\begin{tabularx}{\textwidth}{@{}X X@{}}
+\textbf{Prof X}\par
+Professor\par
+ABC University,\par
+Address.\par
+\makefield{\faEnvelopeO}{\url{abc@def.edu}}
+&
+\textbf{Prof Y}\par
+Professor\par
+ABC University,\par
+Address.\par
+\makefield{\faEnvelopeO}{\url{abc@def.edu}}
+\\
+\end{tabularx}
+
+
+% Summary reference layout
+%!TEX encoding = UTF8
+%!TEX root =weixin-si-cv.tex
+
+\prefix{}
+\begin{rubric}{References}
+
+{\large Available on Request\par}
+\end{rubric}
+
+\fi
+\end{document}
