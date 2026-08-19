@@ -147,7 +147,7 @@
 @include breakpoint($large) {
   .sidebar {
     @include span(2.5 of 12);
-    max-width: none;
+    max-width: $sidebar-link-max-width;
   }
 
   .author__avatar img {
