@@ -170,6 +170,12 @@
     line-height: 1.45;
   }
 
+  .sidebar .author__employer {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    align-items: start;
+  }
+
   .page,
   .archive {
     @include span(9.5 of 12 last);
