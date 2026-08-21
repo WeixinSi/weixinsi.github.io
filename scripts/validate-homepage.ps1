@@ -625,6 +625,7 @@ function Invoke-HomepageValidation {
     $academicStyles = Read-Utf8File '_sass/layout/_academic-profile.scss'
     Assert-Match $academicStyles '(?ms)^\.recruitment-note\s*\{[^}]*color:\s*#c62828\s*;' 'Recruitment note must use the approved red text color.'
     Assert-Match $academicStyles '(?ms)^\.academic-gallery__heading\s*\{[^}]*text-align:\s*center\s*;[^}]*color:\s*var\(--global-link-color\)\s*;' 'Gallery group headings must use the centered accent treatment from the reference layout.'
+    Assert-Match $academicStyles '(?ms)^\.page__content\s*>\s*\.academic-gallery__group:first-child\s*>\s*\.academic-gallery__heading\s*\{[^}]*margin-top:\s*0\s*;' 'The first visible Gallery group must release the vertical space formerly occupied by the hidden page title.'
     Assert-Match $academicStyles '(?ms)^\.academic-gallery__section\s*\{[^}]*display:\s*grid\s*;[^}]*grid-template-columns:\s*repeat\(3,\s*minmax\(0,\s*1fr\)\)\s*;[^}]*gap:\s*1\.25rem\s*;' 'Gallery must use a three-column desktop card grid.'
     Assert-Match $academicStyles '(?ms)^\.academic-gallery__item\s*\{[^}]*display:\s*flex\s*;[^}]*flex-direction:\s*column\s*;[^}]*border-radius:\s*0\.5rem\s*;[^}]*box-shadow:\s*0\s+2px\s+6px\s+rgba\(0,\s*0,\s*0,\s*0\.1\)\s*;' 'Gallery items must use the reference-inspired card treatment.'
     Assert-Match $academicStyles '(?ms)^\.academic-gallery__media\s*\{[^}]*overflow-x:\s*auto\s*;[^}]*scroll-snap-type:\s*x\s+mandatory\s*;' 'Gallery media must remain usable when a card contains multiple images.'

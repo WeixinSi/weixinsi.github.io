@@ -22,6 +22,10 @@
   color: var(--global-link-color);
 }
 
+.page__content > .academic-gallery__group:first-child > .academic-gallery__heading {
+  margin-top: 0;
+}
+
 .academic-gallery__section {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
