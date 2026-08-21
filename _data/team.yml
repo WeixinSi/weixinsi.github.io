@@ -35,8 +35,6 @@ current_members:
       - name: "Haipeng Wang"
         background: "SUAT"
         image: "/images/whp.jpg"
-      - name: "Incoming Research Assistant"
-        image: "/images/bio-photo.jpg"
 
   - id: masters-students
     title: "Master's Students"

@@ -372,7 +372,7 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
     foreach ($heading in @('Research Assistant Professor', 'Postdoctoral Fellows', 'Ph.D. Students', 'Research Assistants', "Master's Students")) {
         Assert-Match $TeamData ([regex]::Escape($heading)) "Team data is missing the $heading group."
     }
-    foreach ($memberName in @('Yingying Wang', 'Jiawen Yang', 'Peiji Li', 'Congyu Tian', 'Haipeng Wang', 'Incoming Postdoctoral Fellow', 'Incoming Research Assistant', 'Yufan Ding', 'Jincai Huang', 'Yixin Wang', 'Ziqiao Qu', 'Yang Liu', 'Jiaxin Ni', 'Shunduo Zhang', 'Zili Li')) {
+    foreach ($memberName in @('Yingying Wang', 'Jiawen Yang', 'Peiji Li', 'Congyu Tian', 'Haipeng Wang', 'Incoming Postdoctoral Fellow', 'Yufan Ding', 'Jincai Huang', 'Yixin Wang', 'Ziqiao Qu', 'Yang Liu', 'Jiaxin Ni', 'Shunduo Zhang', 'Zili Li')) {
         Assert-Match $TeamData ([regex]::Escape($memberName)) "Team data is missing $memberName."
     }
     $membershipYear2025 = '2025' + [char]0x2013
@@ -404,7 +404,7 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
             throw "Team affiliations must use institution abbreviations only: $expandedInstitutionName"
         }
     }
-    foreach ($redundantRole in @('Research Assistant Professor', 'Ph.D. Student', 'Research Assistant', 'Incoming Postdoctoral Fellow', 'Incoming Research Assistant', "Master's Student")) {
+    foreach ($redundantRole in @('Research Assistant Professor', 'Ph.D. Student', 'Research Assistant', 'Incoming Postdoctoral Fellow', "Master's Student")) {
         if ($TeamData -match ('(?m)^\s+role:\s*"[^"\r\n]*' + [regex]::Escape($redundantRole))) {
             throw "Team member roles must not repeat group headings: $redundantRole"
         }
@@ -442,8 +442,8 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
         Assert-Match $TeamData $portraitPattern "Team portrait mismatch for $($portrait.Key): expected $($portrait.Value)"
     }
     $placeholderPortraitCount = [regex]::Matches($TeamData, '(?m)^\s+image:\s*"/images/bio-photo\.jpg"\s*$').Count
-    if ($placeholderPortraitCount -ne 2) {
-        throw "Expected exactly 2 temporary team portraits, found $placeholderPortraitCount."
+    if ($placeholderPortraitCount -ne 1) {
+        throw "Expected exactly 1 temporary team portrait, found $placeholderPortraitCount."
     }
     Assert-Match $AcademicStyles '(?ms)^\.team-grid\s*\{[^}]*grid-template-columns:\s*repeat\(4,\s*minmax\(0,\s*1fr\)\)\s*;' 'Team desktop layout must use four compact columns.'
     Assert-Match $AcademicStyles '(?ms)^\.team-card\s*\{[^}]*border:\s*0\s*;[^}]*box-shadow:\s*none\s*;' 'Team member blocks must not use the former large card treatment.'
