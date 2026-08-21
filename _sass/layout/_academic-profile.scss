@@ -295,6 +295,17 @@
     padding-right: 0;
   }
 
+  #main > .page:first-child,
+  #main > .archive:first-child {
+    width: 100%;
+    float: none;
+    max-width: 62.5rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   .masthead__menu {
     @include span(9.5 of 12 last);
     @include prefix(0.5 of 12);

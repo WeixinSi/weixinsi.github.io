@@ -633,6 +633,13 @@ function Invoke-HomepageValidation {
     }
     Assert-Match $academicStyles '(?ms)@media\s*\(max-width:\s*1024px\)\s*\{.*?\.academic-gallery__section\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)\s*;' 'Gallery must switch to two columns on tablet-sized screens.'
     Assert-Match $academicStyles '(?ms)@media\s*\(max-width:\s*768px\)\s*\{.*?\.academic-gallery__section\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)\s*;' 'Gallery must switch to one column on mobile screens.'
+    $sidebarInclude = Read-Utf8File '_includes/sidebar.html'
+    Assert-Match $sidebarInclude '(?ms)\{%\s*assign\s+show_author_profile\s*=\s*false\s*%\}.*?\{%\s*if\s+page\.url\s*==\s*"/"\s*%\}.*?\{%\s*if\s+page\.author_profile\s+or\s+layout\.author_profile\s*%\}.*?\{%\s*assign\s+show_author_profile\s*=\s*true\s*%\}.*?\{%\s*endif\s*%\}.*?\{%\s*endif\s*%\}' 'The author profile must be enabled only when the rendered page is Home.'
+    Assert-Match $sidebarInclude '(?ms)\{%\s*if\s+show_author_profile\s+or\s+page\.sidebar\s*%\}.*?\{%\s*if\s+show_author_profile\s*%\}\s*\{%\s*include\s+author-profile\.html\s*%\}\s*\{%\s*endif\s*%\}' 'Subpages must omit the author profile while retaining support for explicit custom sidebars.'
+    if ($sidebarInclude -match '\{%\s*if\s+page\.author_profile\s+or\s+layout\.author_profile\s+or\s+page\.sidebar\s*%\}') {
+        throw 'The legacy sidebar condition would still render the author profile on subpages.'
+    }
+    Assert-Match $academicStyles '(?ms)^\s*#main\s*>\s*\.page:first-child,\s*\r?\n\s*#main\s*>\s*\.archive:first-child\s*\{[^}]*width:\s*100%\s*;[^}]*float:\s*none\s*;[^}]*max-width:\s*62\.5rem\s*;[^}]*margin-left:\s*auto\s*;[^}]*margin-right:\s*auto\s*;[^}]*padding-left:\s*0\s*;[^}]*padding-right:\s*0\s*;' 'Desktop subpages without a sidebar must use a centered content column instead of leaving an empty author column.'
     $authorProfile = Read-Utf8File '_includes/author-profile.html'
     Assert-Match $authorProfile '(?ms)<li class="author__desktop author__employer">\s*<i class="[^"]*\bicon-pad-right\b[^"]*"[^>]*></i>\s*<span class="author__employer-text">\{\{\s*author\.employer\s*\}\}</span>\s*</li>' 'The author employer must separate its icon and text so wrapped lines can align with the text column.'
     Assert-Match $academicStyles '(?ms)\.sidebar \.author__employer\s*\{[^}]*display:\s*grid\s*;[^}]*grid-template-columns:\s*max-content\s+minmax\(0,\s*1fr\)\s*;[^}]*align-items:\s*start\s*;' 'The author employer must use separate icon and text columns for aligned wrapped lines.'
