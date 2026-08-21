@@ -12,19 +12,128 @@
   h3 { margin-top: 0; }
 }
 
+.academic-gallery__group {
+  margin: 0 0 2.5rem;
+}
+
+.academic-gallery__heading {
+  margin: 2rem 0 1.25rem;
+  text-align: center;
+  color: var(--global-link-color);
+}
+
+.academic-gallery__section {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  align-items: stretch;
+  margin: 0;
+}
+
 .academic-gallery__item {
-  margin: 1.25rem 0 2.25rem;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin: 0;
+  padding: 0.625rem;
+  overflow: hidden;
+  border: 1px solid var(--global-border-color);
+  border-radius: 0.5rem;
+  background: var(--global-bg-color);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.academic-gallery__item + .academic-gallery__item {
-  border-top: 1px solid var(--global-border-color);
-  padding-top: 1.25rem;
+.academic-gallery__media {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0;
+  margin: 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
 }
 
-.academic-gallery__meta,
+.academic-gallery__item .academic-gallery__media > a,
+.academic-gallery__item .academic-gallery__media > img {
+  display: block;
+  flex: 0 0 100%;
+  width: 100%;
+  scroll-snap-align: start;
+}
+
+.academic-gallery__media img {
+  display: block;
+  width: 100%;
+  height: 12.5rem;
+  margin: 0;
+  object-fit: cover;
+  border-radius: 0.4rem;
+}
+
+.academic-gallery__media a:hover img {
+  box-shadow: none;
+}
+
+.academic-gallery__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  padding: 0.65rem 0.25rem 0.15rem;
+}
+
+.academic-gallery__title {
+  margin: 0 0 0.65rem;
+  font-size: 0.95em;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.academic-gallery__description {
+  flex: 1;
+  color: var(--global-text-color);
+  line-height: 1.6;
+}
+
+.academic-gallery__description p {
+  margin-bottom: 0.75rem;
+  font-size: 0.88em;
+}
+
+.academic-gallery__meta {
+  margin-top: auto;
+  margin-bottom: 0 !important;
+  color: var(--global-fig-caption-color);
+  font-size: 0.82em;
+}
+
 .gallery-empty {
   color: var(--global-text-color-light);
   font-size: 0.9em;
+}
+
+@media (max-width: 1024px) {
+  .academic-gallery__section {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .academic-gallery__section {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+  }
+
+  .academic-gallery__item {
+    width: 90%;
+    max-width: 21.875rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .academic-gallery__item {
+    width: 95%;
+  }
 }
 
 .recruitment-note {

@@ -1,18 +1,25 @@
 {% assign gallery_items = site.gallery | where: "category", include.category | sort: "date" | reverse %}
 {% if gallery_items.size > 0 %}
-  <section class="academic-gallery__section">
-    {% for item in gallery_items %}
-      <article class="academic-gallery__item">
-        {% if item.images and item.images.size > 0 %}
-          {% include gallery images=item.images %}
-        {% endif %}
-        <h3>{{ item.title }}</h3>
-        {% if item.description %}{{ item.description | markdownify }}{% endif %}
-        <p class="academic-gallery__meta">
-          {% if item.date %}{{ item.date | date: "%B %Y" }}{% endif %}
-          {% if item.source_url %} · <a href="{{ item.source_url }}">Source</a>{% endif %}
-        </p>
-      </article>
-    {% endfor %}
+  <section class="academic-gallery__group" aria-labelledby="gallery-{{ include.category }}">
+    <h2 id="gallery-{{ include.category }}" class="academic-gallery__heading">{{ include.title }}</h2>
+    <div class="academic-gallery__section">
+      {% for item in gallery_items %}
+        <article class="academic-gallery__item">
+          {% if item.images and item.images.size > 0 %}
+            {% include gallery images=item.images class="academic-gallery__media" %}
+          {% endif %}
+          <div class="academic-gallery__body">
+            <h3 class="academic-gallery__title">{{ item.title }}</h3>
+            {% if item.description %}
+              <div class="academic-gallery__description">{{ item.description | markdownify }}</div>
+            {% endif %}
+            <p class="academic-gallery__meta">
+              {% if item.date %}{{ item.date | date: "%B %Y" }}{% endif %}
+              {% if item.source_url %} &middot; <a href="{{ item.source_url }}">Source</a>{% endif %}
+            </p>
+          </div>
+        </article>
+      {% endfor %}
+    </div>
   </section>
 {% endif %}

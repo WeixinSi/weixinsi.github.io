@@ -567,6 +567,18 @@ function Invoke-HomepageValidation {
     foreach ($heading in @('Distinguished Visitors', 'Publicity', 'Academic Events & Activities')) {
         Assert-Match $gallery ([regex]::Escape($heading)) "Gallery heading missing: $heading"
     }
+    foreach ($gallerySection in @(
+        @{ Category = 'visitors'; Title = 'Distinguished Visitors' },
+        @{ Category = 'publicity'; Title = 'Publicity' },
+        @{ Category = 'activities'; Title = 'Academic Events & Activities' }
+    )) {
+        $sectionIncludePattern = '\{%\s*include\s+gallery-section\.html\s+category="' + [regex]::Escape($gallerySection.Category) + '"\s+title="' + [regex]::Escape($gallerySection.Title) + '"\s*%\}'
+        Assert-Match $gallery $sectionIncludePattern "Gallery must pass the heading into its $($gallerySection.Category) card section."
+    }
+    $gallerySectionInclude = Read-Utf8File '_includes/gallery-section.html'
+    Assert-Match $gallerySectionInclude '(?ms)\{%\s*if\s+gallery_items\.size\s*>\s*0\s*%\}.*?<section class="academic-gallery__group".*?<h2[^>]*class="academic-gallery__heading"[^>]*>\{\{\s*include\.title\s*\}\}</h2>.*?<div class="academic-gallery__section">' 'Gallery must hide empty groups and render populated groups with a centered section heading and card grid.'
+    Assert-Match $gallerySectionInclude '(?ms)\{%\s*include\s+gallery\s+images=item\.images\s+class="academic-gallery__media"\s*%\}' 'Gallery cards must mark their media region for responsive image sizing.'
+    Assert-Match $gallerySectionInclude '(?ms)<div class="academic-gallery__body">.*?<h3 class="academic-gallery__title">.*?<div class="academic-gallery__description">.*?<p class="academic-gallery__meta">' 'Gallery cards must separate title, description, and footer metadata inside a card body.'
 
     $aboutPage = Read-Utf8File '_pages/about.md'
     $cvAssetPath = 'files/weixin-si-cv.pdf'
@@ -609,14 +621,18 @@ function Invoke-HomepageValidation {
 
     $academicStyles = Read-Utf8File '_sass/layout/_academic-profile.scss'
     Assert-Match $academicStyles '(?ms)^\.recruitment-note\s*\{[^}]*color:\s*#c62828\s*;' 'Recruitment note must use the approved red text color.'
-    $firstGalleryItemStyles = [regex]::Match($academicStyles, '(?ms)^\.academic-gallery__item\s*\{(?<body>[^}]*)\}')
-    if (-not $firstGalleryItemStyles.Success -or $firstGalleryItemStyles.Groups['body'].Value -match '(?:border-top|padding-top)\s*:') {
-        throw 'The first Gallery item must not add a second line below its section heading.'
+    Assert-Match $academicStyles '(?ms)^\.academic-gallery__heading\s*\{[^}]*text-align:\s*center\s*;[^}]*color:\s*var\(--global-link-color\)\s*;' 'Gallery group headings must use the centered accent treatment from the reference layout.'
+    Assert-Match $academicStyles '(?ms)^\.academic-gallery__section\s*\{[^}]*display:\s*grid\s*;[^}]*grid-template-columns:\s*repeat\(3,\s*minmax\(0,\s*1fr\)\)\s*;[^}]*gap:\s*1\.25rem\s*;' 'Gallery must use a three-column desktop card grid.'
+    Assert-Match $academicStyles '(?ms)^\.academic-gallery__item\s*\{[^}]*display:\s*flex\s*;[^}]*flex-direction:\s*column\s*;[^}]*border-radius:\s*0\.5rem\s*;[^}]*box-shadow:\s*0\s+2px\s+6px\s+rgba\(0,\s*0,\s*0,\s*0\.1\)\s*;' 'Gallery items must use the reference-inspired card treatment.'
+    Assert-Match $academicStyles '(?ms)^\.academic-gallery__media\s*\{[^}]*overflow-x:\s*auto\s*;[^}]*scroll-snap-type:\s*x\s+mandatory\s*;' 'Gallery media must remain usable when a card contains multiple images.'
+    Assert-Match $academicStyles '(?ms)\.academic-gallery__media\s+img\s*\{[^}]*height:\s*12\.5rem\s*;[^}]*object-fit:\s*cover\s*;' 'Gallery card images must use the reference layout fixed-height crop.'
+    Assert-Match $academicStyles '(?ms)^\.academic-gallery__body\s*\{[^}]*display:\s*flex\s*;[^}]*flex-direction:\s*column\s*;[^}]*flex:\s*1\s*;' 'Gallery card bodies must stretch so metadata can align at the bottom.'
+    Assert-Match $academicStyles '(?ms)^\.academic-gallery__meta\s*\{[^}]*margin-top:\s*auto\s*;' 'Gallery metadata must sit at the bottom of each card.'
+    if ($academicStyles -match '(?m)^\.academic-gallery__item\s*\+\s*\.academic-gallery__item\s*\{') {
+        throw 'Gallery cards must not retain list-style separator rules.'
     }
-    $laterGalleryItemStyles = [regex]::Match($academicStyles, '(?ms)^\.academic-gallery__item \+ \.academic-gallery__item\s*\{(?<body>[^}]*)\}')
-    if (-not $laterGalleryItemStyles.Success -or $laterGalleryItemStyles.Groups['body'].Value -notmatch 'border-top:\s*1px solid var\(--global-border-color\)\s*;' -or $laterGalleryItemStyles.Groups['body'].Value -notmatch 'padding-top:\s*1\.25rem\s*;') {
-        throw 'Gallery separators must appear only between adjacent items.'
-    }
+    Assert-Match $academicStyles '(?ms)@media\s*\(max-width:\s*1024px\)\s*\{.*?\.academic-gallery__section\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)\s*;' 'Gallery must switch to two columns on tablet-sized screens.'
+    Assert-Match $academicStyles '(?ms)@media\s*\(max-width:\s*768px\)\s*\{.*?\.academic-gallery__section\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)\s*;' 'Gallery must switch to one column on mobile screens.'
     $authorProfile = Read-Utf8File '_includes/author-profile.html'
     Assert-Match $authorProfile '(?ms)<li class="author__desktop author__employer">\s*<i class="[^"]*\bicon-pad-right\b[^"]*"[^>]*></i>\s*<span class="author__employer-text">\{\{\s*author\.employer\s*\}\}</span>\s*</li>' 'The author employer must separate its icon and text so wrapped lines can align with the text column.'
     Assert-Match $academicStyles '(?ms)\.sidebar \.author__employer\s*\{[^}]*display:\s*grid\s*;[^}]*grid-template-columns:\s*max-content\s+minmax\(0,\s*1fr\)\s*;[^}]*align-items:\s*start\s*;' 'The author employer must use separate icon and text columns for aligned wrapped lines.'

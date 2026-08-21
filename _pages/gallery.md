@@ -6,17 +6,11 @@ author_profile: true
 
 {% assign gallery_count = site.gallery | size %}
 
-## Distinguished Visitors
+{% include gallery-section.html category="visitors" title="Distinguished Visitors" %}
 
-{% include gallery-section.html category="visitors" %}
+{% include gallery-section.html category="publicity" title="Publicity" %}
 
-## Publicity
-
-{% include gallery-section.html category="publicity" %}
-
-## Academic Events & Activities
-
-{% include gallery-section.html category="activities" %}
+{% include gallery-section.html category="activities" title="Academic Events & Activities" %}
 
 {% if gallery_count == 0 %}
 <p class="gallery-empty">Selected photographs from academic events and activities will be added here.</p>
