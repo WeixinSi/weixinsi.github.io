@@ -564,6 +564,7 @@ function Invoke-HomepageValidation {
     }
 
     $gallery = Read-Utf8File '_pages/gallery.md'
+    Assert-Match $gallery '(?m)^hide_title:\s*true\s*$' 'Gallery must hide its repeated visible page title.'
     foreach ($heading in @('Distinguished Visitors', 'Publicity', 'Academic Events & Activities')) {
         Assert-Match $gallery ([regex]::Escape($heading)) "Gallery heading missing: $heading"
     }
@@ -576,9 +577,11 @@ function Invoke-HomepageValidation {
         Assert-Match $gallery $sectionIncludePattern "Gallery must pass the heading into its $($gallerySection.Category) card section."
     }
     $gallerySectionInclude = Read-Utf8File '_includes/gallery-section.html'
-    Assert-Match $gallerySectionInclude '(?ms)\{%\s*if\s+gallery_items\.size\s*>\s*0\s*%\}.*?<section class="academic-gallery__group".*?<h2[^>]*class="academic-gallery__heading"[^>]*>\{\{\s*include\.title\s*\}\}</h2>.*?<div class="academic-gallery__section">' 'Gallery must hide empty groups and render populated groups with a centered section heading and card grid.'
+    Assert-Match $gallerySectionInclude '(?ms)\{%\s*if\s+gallery_items\.size\s*>\s*0\s*%\}.*?<section class="academic-gallery__group".*?<h2[^>]*class="academic-gallery__heading"[^>]*>\{\{\s*include\.title\s*\}\}</h2>.*?<div class="academic-gallery__section academic-gallery__section--\{\{\s*include\.category\s*\}\}">' 'Gallery must hide empty groups and mark each populated card grid with its category.'
     Assert-Match $gallerySectionInclude '(?ms)\{%\s*include\s+gallery\s+images=item\.images\s+class="academic-gallery__media"\s*%\}' 'Gallery cards must mark their media region for responsive image sizing.'
     Assert-Match $gallerySectionInclude '(?ms)<div class="academic-gallery__body">.*?<h3 class="academic-gallery__title">.*?<div class="academic-gallery__description">.*?<p class="academic-gallery__meta">' 'Gallery cards must separate title, description, and footer metadata inside a card body.'
+    $singleLayout = Read-Utf8File '_layouts/single.html'
+    Assert-Match $singleLayout '(?ms)<h1 class="page__title\{%\s*if\s+page\.hide_title\s*%\}\s+screen-reader-text\{%\s*endif\s*%\}" itemprop="headline">' 'Single pages must support visually hiding an opted-in page title without removing document metadata.'
 
     $aboutPage = Read-Utf8File '_pages/about.md'
     $cvAssetPath = 'files/weixin-si-cv.pdf'
@@ -628,11 +631,15 @@ function Invoke-HomepageValidation {
     Assert-Match $academicStyles '(?ms)\.academic-gallery__media\s+img\s*\{[^}]*height:\s*12\.5rem\s*;[^}]*object-fit:\s*cover\s*;' 'Gallery card images must use the reference layout fixed-height crop.'
     Assert-Match $academicStyles '(?ms)^\.academic-gallery__body\s*\{[^}]*display:\s*flex\s*;[^}]*flex-direction:\s*column\s*;[^}]*flex:\s*1\s*;' 'Gallery card bodies must stretch so metadata can align at the bottom.'
     Assert-Match $academicStyles '(?ms)^\.academic-gallery__meta\s*\{[^}]*margin-top:\s*auto\s*;' 'Gallery metadata must sit at the bottom of each card.'
+    Assert-Match $academicStyles '(?ms)^\.academic-gallery__section\.academic-gallery__section--activities\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)\s*;' 'Academic activity cards must occupy the full Gallery content width.'
+    Assert-Match $academicStyles '(?ms)^\.academic-gallery__section--activities \.academic-gallery__item\s*\{[^}]*display:\s*grid\s*;[^}]*grid-template-columns:\s*minmax\(18rem,\s*2fr\)\s+minmax\(0,\s*3fr\)\s*;[^}]*align-items:\s*stretch\s*;' 'Desktop academic activity cards must use a wide media-and-text layout to avoid excessive height.'
+    Assert-Match $academicStyles '(?ms)^\.academic-gallery__section--activities \.academic-gallery__media\s*\{[^}]*height:\s*100%\s*;[^}]*min-height:\s*18rem\s*;' 'Wide academic activity cards must give their media a stable desktop height.'
     if ($academicStyles -match '(?m)^\.academic-gallery__item\s*\+\s*\.academic-gallery__item\s*\{') {
         throw 'Gallery cards must not retain list-style separator rules.'
     }
     Assert-Match $academicStyles '(?ms)@media\s*\(max-width:\s*1024px\)\s*\{.*?\.academic-gallery__section\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)\s*;' 'Gallery must switch to two columns on tablet-sized screens.'
     Assert-Match $academicStyles '(?ms)@media\s*\(max-width:\s*768px\)\s*\{.*?\.academic-gallery__section\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)\s*;' 'Gallery must switch to one column on mobile screens.'
+    Assert-Match $academicStyles '(?ms)@media\s*\(max-width:\s*768px\)\s*\{.*?\.academic-gallery__section--activities \.academic-gallery__item\s*\{[^}]*grid-template-columns:\s*minmax\(0,\s*1fr\)\s*;' 'Academic activity cards must stack media above text on mobile screens.'
     $sidebarInclude = Read-Utf8File '_includes/sidebar.html'
     Assert-Match $sidebarInclude '(?ms)\{%\s*assign\s+show_author_profile\s*=\s*false\s*%\}.*?\{%\s*if\s+page\.url\s*==\s*"/"\s*%\}.*?\{%\s*if\s+page\.author_profile\s+or\s+layout\.author_profile\s*%\}.*?\{%\s*assign\s+show_author_profile\s*=\s*true\s*%\}.*?\{%\s*endif\s*%\}.*?\{%\s*endif\s*%\}' 'The author profile must be enabled only when the rendered page is Home.'
     Assert-Match $sidebarInclude '(?ms)\{%\s*if\s+show_author_profile\s+or\s+page\.sidebar\s*%\}.*?\{%\s*if\s+show_author_profile\s*%\}\s*\{%\s*include\s+author-profile\.html\s*%\}\s*\{%\s*endif\s*%\}' 'Subpages must omit the author profile while retaining support for explicit custom sidebars.'

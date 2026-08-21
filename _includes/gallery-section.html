@@ -2,7 +2,7 @@
 {% if gallery_items.size > 0 %}
   <section class="academic-gallery__group" aria-labelledby="gallery-{{ include.category }}">
     <h2 id="gallery-{{ include.category }}" class="academic-gallery__heading">{{ include.title }}</h2>
-    <div class="academic-gallery__section">
+    <div class="academic-gallery__section academic-gallery__section--{{ include.category }}">
       {% for item in gallery_items %}
         <article class="academic-gallery__item">
           {% if item.images and item.images.size > 0 %}

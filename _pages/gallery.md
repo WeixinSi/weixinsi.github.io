@@ -2,6 +2,7 @@
 title: "Gallery"
 permalink: /gallery/
 author_profile: true
+hide_title: true
 ---
 
 {% assign gallery_count = site.gallery | size %}
