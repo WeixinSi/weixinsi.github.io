@@ -13,8 +13,11 @@
 }
 
 .academic-gallery__item {
-  border-top: 1px solid var(--global-border-color);
   margin: 1.25rem 0 2.25rem;
+}
+
+.academic-gallery__item + .academic-gallery__item {
+  border-top: 1px solid var(--global-border-color);
   padding-top: 1.25rem;
 }
 

@@ -609,6 +609,14 @@ function Invoke-HomepageValidation {
 
     $academicStyles = Read-Utf8File '_sass/layout/_academic-profile.scss'
     Assert-Match $academicStyles '(?ms)^\.recruitment-note\s*\{[^}]*color:\s*#c62828\s*;' 'Recruitment note must use the approved red text color.'
+    $firstGalleryItemStyles = [regex]::Match($academicStyles, '(?ms)^\.academic-gallery__item\s*\{(?<body>[^}]*)\}')
+    if (-not $firstGalleryItemStyles.Success -or $firstGalleryItemStyles.Groups['body'].Value -match '(?:border-top|padding-top)\s*:') {
+        throw 'The first Gallery item must not add a second line below its section heading.'
+    }
+    $laterGalleryItemStyles = [regex]::Match($academicStyles, '(?ms)^\.academic-gallery__item \+ \.academic-gallery__item\s*\{(?<body>[^}]*)\}')
+    if (-not $laterGalleryItemStyles.Success -or $laterGalleryItemStyles.Groups['body'].Value -notmatch 'border-top:\s*1px solid var\(--global-border-color\)\s*;' -or $laterGalleryItemStyles.Groups['body'].Value -notmatch 'padding-top:\s*1\.25rem\s*;') {
+        throw 'Gallery separators must appear only between adjacent items.'
+    }
     $authorProfile = Read-Utf8File '_includes/author-profile.html'
     Assert-Match $authorProfile '(?ms)<li class="author__desktop author__employer">\s*<i class="[^"]*\bicon-pad-right\b[^"]*"[^>]*></i>\s*<span class="author__employer-text">\{\{\s*author\.employer\s*\}\}</span>\s*</li>' 'The author employer must separate its icon and text so wrapped lines can align with the text column.'
     Assert-Match $academicStyles '(?ms)\.sidebar \.author__employer\s*\{[^}]*display:\s*grid\s*;[^}]*grid-template-columns:\s*max-content\s+minmax\(0,\s*1fr\)\s*;[^}]*align-items:\s*start\s*;' 'The author employer must use separate icon and text columns for aligned wrapped lines.'
