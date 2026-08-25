@@ -6,21 +6,23 @@ author_profile: true
 
 ## Awards
 
-1. **Second Prize for Innovative Technology, 2026 China Simulation Federation Science and Technology Awards.** *Development and Clinical Application of a Full-Stack Simulation System for Precision Interventional Diagnosis and Treatment of Cardiovascular and Cerebrovascular Diseases.* Contribution rank: **1/9**.<br> Team: **Weixin Si**, Xiangyun Liao, Jianhui Zhao, Zhiyong Yuan, Jianping Lv, Shu Chen, Chubin Ou, Peidong Qian, Linxia Xiao.
+1. **[Second Prize, 2026 China Graphics Society Incentive Program for Outstanding Achievements in Graphics Education and Teaching.](https://www.cgn.net.cn/cms/news/100000/0000000021/73694af04b5d4f59a07309842480d646.shtml)** *Development of an Intelligent “High-Fidelity + Safety” Mixed-Reality Curriculum System and Practice in Innovative Talent Cultivation.* Contribution rank: **3/6**.<br> Team: Boyu Gao, Yang Gao, **Weixin Si**, Tianlong Gu, Saiqin You, Ruize Han.
 
-2. **First Prize for Higher Education Teaching Achievement, 2026 China Simulation Federation Science and Technology Awards.** *Generative AI-Driven Interdisciplinary Medical–Engineering Simulation Education and Innovative Talent Development.* Contribution rank: **2/6**.<br> Team: Shanshan Wang, **Weixin Si**, Cheng Li, Yi Pan, Yang Jiao, Ye Li.
+2. **Second Prize for Innovative Technology, 2026 China Simulation Federation Science and Technology Awards.** *Development and Clinical Application of a Full-Stack Simulation System for Precision Interventional Diagnosis and Treatment of Cardiovascular and Cerebrovascular Diseases.* Contribution rank: **1/9**.<br> Team: **Weixin Si**, Xiangyun Liao, Jianhui Zhao, Zhiyong Yuan, Jianping Lv, Shu Chen, Chubin Ou, Peidong Qian, Linxia Xiao.
 
-3. **First Prize, 7th Guangdong Medical Science and Technology Award.** *Innovative Technologies and Applications for Intelligent Quantitative Diagnosis and Treatment of Intracranial Aneurysms.* Contribution rank: **2/13**.<br> Team: Chuanzhi Duan, **Weixin Si**, Xifeng Li, Chubin Ou, Pheng-Ann Heng, Aihua Liu, Jianping Lv, Xin Zhang, Xiangyun Liao, Meng Zhang, Yi Qian, Xin Feng, Linxia Xiao.
+3. **First Prize for Higher Education Teaching Achievement, 2026 China Simulation Federation Science and Technology Awards.** *Generative AI-Driven Interdisciplinary Medical–Engineering Simulation Education and Innovative Talent Development.* Contribution rank: **2/6**.<br> Team: Shanshan Wang, **Weixin Si**, Cheng Li, Yi Pan, Yang Jiao, Ye Li.
 
-4. **R&D Innovation Award, 2025 China Hospital Association Hospital Science and Technology Innovation Awards.** *R&D and Broad Deployment of Key Technologies for General-Purpose Interactive Virtual Surgery Training.* Contribution rank: **1/6**.<br> Team: **Weixin Si**, Jianping Lv, Xiangyun Liao, Zhiyong Yuan, Meng Zhang, Shihao Zou.
+4. **First Prize, 7th Guangdong Medical Science and Technology Award.** *Innovative Technologies and Applications for Intelligent Quantitative Diagnosis and Treatment of Intracranial Aneurysms.* Contribution rank: **2/13**.<br> Team: Chuanzhi Duan, **Weixin Si**, Xifeng Li, Chubin Ou, Pheng-Ann Heng, Aihua Liu, Jianping Lv, Xin Zhang, Xiangyun Liao, Meng Zhang, Yi Qian, Xin Feng, Linxia Xiao.
 
-5. **Best Paper Award, CW 2025.** *Medical Open Set Recognition via Intra-class Clustering.* Contribution rank: **4/4**.<br> Authors: Hanqiu Deng, Shihao Zou, Xiangyun Liao, **Weixin Si**<sup>*</sup>.
+5. **R&D Innovation Award, 2025 China Hospital Association Hospital Science and Technology Innovation Awards.** *R&D and Broad Deployment of Key Technologies for General-Purpose Interactive Virtual Surgery Training.* Contribution rank: **1/6**.<br> Team: **Weixin Si**, Jianping Lv, Xiangyun Liao, Zhiyong Yuan, Meng Zhang, Shihao Zou.
 
-6. **High-Impact Paper 2024,** *Visual Computing for Industry, Biomedicine, and Art*. *PlaqueNet: deep-learning-enabled coronary artery plaque segmentation from coronary computed tomography angiography.* Contribution rank: **8/8**.<br> Authors: Linyuan Wang, Xiaofeng Zhang, Congyu Tian, Shu Chen, Yongzhi Deng, Xiangyun Liao, Qiong Wang, **Weixin Si**.
+6. **Best Paper Award, CW 2025.** *Medical Open Set Recognition via Intra-class Clustering.* Contribution rank: **4/4**.<br> Authors: Hanqiu Deng, Shihao Zou, Xiangyun Liao, **Weixin Si**<sup>*</sup>.
 
-7. **Best Paper Nomination Award, ChinaVR 2019.** *B-spline-Based Elastic Registration of 4D CT Images Optimized by ICP.* Contribution rank: **4/5**.<br> Authors: Wenjie Tang, Ruotong Li, Xuesong Deng, **Weixin Si**<sup>*</sup>, Qiong Wang.
+7. **High-Impact Paper 2024,** *Visual Computing for Industry, Biomedicine, and Art*. *PlaqueNet: deep-learning-enabled coronary artery plaque segmentation from coronary computed tomography angiography.* Contribution rank: **8/8**.<br> Authors: Linyuan Wang, Xiaofeng Zhang, Congyu Tian, Shu Chen, Yongzhi Deng, Xiangyun Liao, Qiong Wang, **Weixin Si**.
 
-8. **Best Paper Award, Asia Simulation Conference & The International Conference on System Simulation and Scientific Computing 2012.** *An Energy Based Free Boundary Asynchronous Diffusion Model for 3D Warping of Tissue Dynamics.* Contribution rank: **1/5**.<br> Authors: **Weixin Si**, Zhiyong Yuan, Xiangyun Liao, Zhaoliang Duan, Jianhui Zhao.
+8. **Best Paper Nomination Award, ChinaVR 2019.** *B-spline-Based Elastic Registration of 4D CT Images Optimized by ICP.* Contribution rank: **4/5**.<br> Authors: Wenjie Tang, Ruotong Li, Xuesong Deng, **Weixin Si**<sup>*</sup>, Qiong Wang.
+
+9. **Best Paper Award, Asia Simulation Conference & The International Conference on System Simulation and Scientific Computing 2012.** *An Energy Based Free Boundary Asynchronous Diffusion Model for 3D Warping of Tissue Dynamics.* Contribution rank: **1/5**.<br> Authors: **Weixin Si**, Zhiyong Yuan, Xiangyun Liao, Zhaoliang Duan, Jianhui Zhao.
 
 ## Professional Services
 

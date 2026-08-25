@@ -54,6 +54,10 @@ reality.
 
 ## News
 
+- [08/2026] The project on an intelligent “high-fidelity + safety”
+  mixed-reality curriculum system was selected for the Second Prize in the
+  [2026 China Graphics Society Incentive Program for Outstanding Achievements
+  in Graphics Education and Teaching](https://www.cgn.net.cn/cms/news/100000/0000000021/73694af04b5d4f59a07309842480d646.shtml).
 - [07/2026] The project on full-stack simulation for precision
   interventional diagnosis and treatment received the Second Prize for
   Innovative Technology at the China Simulation Federation Science and
