@@ -13,8 +13,8 @@ description: >-
   speakers included Prof. Yikun Zhang, Prof. Shanshan Wang, Prof. Ruizhen Hu,
   Prof. Hongming Shan, and Prof. Chu Han. Prof. Yang Gao, Secretary of the CSF
   Medical Simulation Technical Committee, and Prof. Boyu Gao, Deputy
-  Secretary-General of CCF TCVRV, Prof. Lequan Yu from Hong Kong University were
-  also joined and organized this event.
+  Secretary-General of CCF TCVRV, Prof. Lequan Yu from the University of Hong
+  Kong also joined and organized this event.
 images:
   - image_path: "Intelligent Computing + X.jpg"
     url: "Intelligent Computing + X.jpg"
