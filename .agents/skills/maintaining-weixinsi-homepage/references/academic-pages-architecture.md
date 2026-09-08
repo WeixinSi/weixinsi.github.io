@@ -251,10 +251,10 @@ Portfolio 常用 `title`、`excerpt`、`collection: portfolio`，正文可为 Ma
 
 ## 部署与 Actions
 
-- 推送到远端与部署是两个独立结果。仅在用户明确授权 push 时推送。
+- 推送授权遵循 `../SKILL.md` 中的仓库既有授权与当前用户指令。每次推送后均须执行其中的“Required verification after every push”，分别核实远端提交、Pages 部署和线上网页结果。
 - GitHub Pages 的发布来源由仓库 `Settings → Pages` 决定；不要仅凭本地文件猜测当前设置。
 - `.github/workflows/jekyll-build.yml` 执行 `bundle exec jekyll build --strict_front_matter`，属于构建检查。工作流触发分支必须与仓库实际默认/发布分支核对；本项目当前工作分支是 `master`。
-- GitHub 自动生成的 `pages-build-deployment` 可能负责实际 Pages 发布；部署请求完成后检查仓库 `Actions` 和 Pages 设置中的状态与公开网址。
+- GitHub 自动生成的 `pages-build-deployment` 可能负责实际 Pages 发布；涉及网站的改动须确认对应提交已部署，并核对受影响公开页面的实际内容和显示效果，不能仅凭 Actions 成功或 HTTP 200 判定完成。
 - `scrape_talks.yml` 可执行 notebook 并回写 talk map。改动 `_talks/` 前先判断是否会触发它及是否需要相应权限。
 
 ## 常见故障定位

@@ -72,9 +72,19 @@ This fallback does not apply to `WeixinSi/weixinsi.github.io` while the standing
 
 When authorized, use Git Bash at `D:/Program Files/Git/bin/bash.exe` for staging, committing, pulling, and pushing. Run from `/d/Program/Code/LaTexProject/SWXCV/weixinsi.github.io`. Stage only reviewed files, inspect `git diff --cached`, and follow the commit-message contract above. Before pushing, use `git pull --rebase origin master`; report conflicts instead of guessing.
 
+## Required verification after every push
+
+- Verify the remote branch contains the intended commit, including when Git reports `Everything up-to-date`. A successful push alone does not prove that the website changed correctly.
+- For changes that affect the website, check the actual GitHub Pages deployment for that commit and wait for it to succeed. An unrelated Actions run or an older successful deployment is insufficient. Use bounded waits with backoff while publication is pending.
+- After deployment, fetch or open each affected public URL on `https://weixinsi.github.io/` with a fresh request or reload. Compare the rendered result with the user's requested change; HTTP 200, a keyword match, or a local build alone is insufficient. Check added or revised content, removal of obsolete content, ordering, formatting, and changed links or assets as applicable. For publications, verify the citation, author order, bold name, corresponding-author superscripts, year grouping, and numbering.
+- For layout, styling, or interaction changes, inspect the live page in a browser and exercise the affected behavior. Check desktop and mobile widths when responsive layout is affected; HTML source alone cannot verify appearance.
+- If the live result is incorrect, diagnose and correct the task-related source, validate it, commit and push the correction under the existing authorization, then repeat the deployment and live-page checks.
+- If network access, deployment failure, or a bounded wait prevents verification, report the specific blocker and mark online verification as incomplete. Do not claim that the requested website change is complete.
+- For changes that do not affect rendered pages, such as skill-only updates, verify the updated files at the remote commit and confirm the live site remains reachable. State that no visible page change is expected; do not invent a visual change to satisfy the check.
+
 ## Handoff
 
-Report modified files, validation evidence, commit hash if committed, push result if pushed, and Pages/Actions status if deployment was requested. State clearly when changes remain uncommitted.
+Report modified files, validation evidence, commit hash if committed, and push result if pushed. After every push, include the deployment and online-verification outcome, with the checked public URLs and a concise description of what was verified. For changes without rendered output, report the applicable remote-file and site-availability checks. State clearly when changes remain uncommitted or online verification is incomplete.
 
 ## Common mistakes
 
