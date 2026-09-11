@@ -32,6 +32,7 @@ author_profile: true
 
 ### Journal Services
 
+- Associate Editor, *Biomedical Signal Processing and Control*
 - Associate Editor, *The Visual Computer*
 - Young Editorial Board Member, *The Innovation Informatics*
 
@@ -72,4 +73,4 @@ author_profile: true
 
 ---
 
-*Last updated: August 2026.*
+*Last updated: September 2026.*

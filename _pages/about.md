@@ -54,6 +54,7 @@ reality.
 
 ## News
 
+- [09/2026] Served as an Associate Editor of *Biomedical Signal Processing and Control*.
 - [08/2026] The project on an intelligent “high-fidelity + safety”
   mixed-reality curriculum system was selected for the Second Prize in the
   [2026 China Graphics Society Incentive Program for Outstanding Achievements
