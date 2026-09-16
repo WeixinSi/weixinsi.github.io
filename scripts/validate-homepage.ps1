@@ -505,7 +505,7 @@ function Invoke-HomepageValidation {
     if (-not $trackedAvatarAsset) {
         throw "Sidebar avatar must be tracked: $avatarAsset"
     }
-    Assert-Match $config '(?m)^\s*bio\s*:\s*"IEEE/CCF Senior Member"\s*$' 'The sidebar biography is not the requested membership line.'
+    Assert-Match $config '(?m)^\s*bio\s*:\s*"IEEE Senior Member<br>CCF Distinguished Member"\s*$' 'The sidebar biography must show the IEEE and CCF membership grades on separate lines.'
     Assert-Match $config '(?m)^\s*uri\s*:\s*"https://csce\.suat-sz\.edu\.cn/info/1011/1311\.htm"\s*$' 'Institutional Website is not configured.'
     Assert-Match $config '(?m)^\s*googlescholar\s*:\s*"https://scholar\.google\.com/citations\?user=E4efwTgAAAAJ"\s*$' 'Google Scholar is not configured.'
     if ($config -match '(?m)^\s*github\s*:[^\S\r\n]*\S+') {
