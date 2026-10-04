@@ -33,7 +33,7 @@
           {% else %}
             "{{ img.image_path | prepend: "/images/" | prepend: base_path }}"
           {% endif %}
-          alt="{% if img.alt %}{{ img.alt }}{% endif %}">
+          alt="{% if img.alt %}{{ img.alt }}{% endif %}"{% if img.fit == "contain" %} style="object-fit: contain;"{% endif %}>
       </a>
     {% else %}
       <img src=
@@ -42,7 +42,7 @@
         {% else %}
           "{{ img.image_path | prepend: "/images/" | prepend: base_path }}"
         {% endif %}
-        alt="{% if img.alt %}{{ img.alt }}{% endif %}">
+        alt="{% if img.alt %}{{ img.alt }}{% endif %}"{% if img.fit == "contain" %} style="object-fit: contain;"{% endif %}>
     {% endif %}
   {% endfor %}
   {% if include.caption %}
