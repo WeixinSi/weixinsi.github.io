@@ -369,10 +369,10 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
         throw 'The Alumni section must appear after current team members.'
     }
 
-    foreach ($heading in @('Research Assistant Professor', 'Postdoctoral Fellows', 'Ph.D. Students', 'Research Assistants', "Master's Students")) {
+    foreach ($heading in @('Research Assistant Professor', 'Ph.D. Students', 'Research Assistants', "Master's Students")) {
         Assert-Match $TeamData ([regex]::Escape($heading)) "Team data is missing the $heading group."
     }
-    foreach ($memberName in @('Yingying Wang', 'Jiawen Yang', 'Peiji Li', 'Congyu Tian', 'Haipeng Wang', 'Incoming Postdoctoral Fellow', 'Yufan Ding', 'Jincai Huang', 'Yixin Wang', 'Ziqiao Qu', 'Yang Liu', 'Jiaxin Ni', 'Shunduo Zhang', 'Zili Li')) {
+    foreach ($memberName in @('Yingying Wang', 'Jiawen Yang', 'Peiji Li', 'Congyu Tian', 'Haipeng Wang', 'Yufan Ding', 'Jincai Huang', 'Yixin Wang', 'Ziqiao Qu', 'Yang Liu', 'Jiaxin Ni', 'Shunduo Zhang', 'Zili Li', 'Weilu Xu')) {
         Assert-Match $TeamData ([regex]::Escape($memberName)) "Team data is missing $memberName."
     }
     $membershipYear2025 = '2025' + [char]0x2013
@@ -386,7 +386,7 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
     }
     $expectedTeamFactCounts = [ordered]@{}
     $expectedTeamFactCounts[('role: "' + $membershipYear2025 + '"')] = 11
-    $expectedTeamFactCounts[('role: "' + $membershipYear2026 + '"')] = 1
+    $expectedTeamFactCounts[('role: "' + $membershipYear2026 + '"')] = 2
     $expectedTeamFactCounts[$sustechSuatJointProgram] = 8
     foreach ($teamFact in $expectedTeamFactCounts.GetEnumerator()) {
         $actualCount = [regex]::Matches($TeamData, [regex]::Escape($teamFact.Key)).Count
@@ -394,7 +394,7 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
             throw "Expected $($teamFact.Value) occurrences of '$($teamFact.Key)', found $actualCount."
         }
     }
-    foreach ($obsoletePlaceholder in @('Member Name 01', 'Alumnus Name 01', 'site.data.team.alumni_groups', 'Member information to be updated', 'Full name to be confirmed')) {
+    foreach ($obsoletePlaceholder in @('Member Name 01', 'Alumnus Name 01', 'site.data.team.alumni_groups', 'Member information to be updated', 'Full name to be confirmed', 'Postdoctoral Fellows', 'Incoming Postdoctoral Fellow')) {
         if ($TeamData -match [regex]::Escape($obsoletePlaceholder) -or $body -match [regex]::Escape($obsoletePlaceholder)) {
             throw "Team still contains obsolete placeholder content: $obsoletePlaceholder"
         }
@@ -436,14 +436,15 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
         'Jiaxin Ni' = '/images/njx.jpg'
         'Shunduo Zhang' = '/images/zsd.jpg'
         'Zili Li' = '/images/lzl.jpg'
+        'Weilu Xu' = '/images/xwl.jpg'
     }
     foreach ($portrait in $expectedMemberPortraits.GetEnumerator()) {
         $portraitPattern = '(?ms)^\s{6}- name:\s*"' + [regex]::Escape($portrait.Key) + '"\s*\r?\n(?:(?!^\s{6}- name:).)*?^\s{8}image:\s*"' + [regex]::Escape($portrait.Value) + '"\s*$'
         Assert-Match $TeamData $portraitPattern "Team portrait mismatch for $($portrait.Key): expected $($portrait.Value)"
     }
     $placeholderPortraitCount = [regex]::Matches($TeamData, '(?m)^\s+image:\s*"/images/bio-photo\.jpg"\s*$').Count
-    if ($placeholderPortraitCount -ne 1) {
-        throw "Expected exactly 1 temporary team portrait, found $placeholderPortraitCount."
+    if ($placeholderPortraitCount -ne 0) {
+        throw "Expected no temporary team portraits, found $placeholderPortraitCount."
     }
     Assert-Match $AcademicStyles '(?ms)^\.team-grid\s*\{[^}]*grid-template-columns:\s*repeat\(4,\s*minmax\(0,\s*1fr\)\)\s*;' 'Team desktop layout must use four compact columns.'
     Assert-Match $AcademicStyles '(?ms)^\.team-card\s*\{[^}]*border:\s*0\s*;[^}]*box-shadow:\s*none\s*;' 'Team member blocks must not use the former large card treatment.'
@@ -462,7 +463,7 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
     if (-not $trackedPlaceholderAsset) {
         throw "Team placeholder portrait must be tracked: $placeholderAsset"
     }
-    foreach ($portraitAsset in @('images/wyy.jpg', 'images/yjw.jpg', 'images/lpj.jpg', 'images/tcy.jpg', 'images/whp.jpg', 'images/dyf.jpg', 'images/hjc.jpg', 'images/wyx.jpg', 'images/qzq.jpg', 'images/ly.jpg', 'images/njx.jpg', 'images/zsd.jpg', 'images/lzl.jpg')) {
+    foreach ($portraitAsset in @('images/wyy.jpg', 'images/yjw.jpg', 'images/lpj.jpg', 'images/tcy.jpg', 'images/whp.jpg', 'images/dyf.jpg', 'images/hjc.jpg', 'images/wyx.jpg', 'images/qzq.jpg', 'images/ly.jpg', 'images/njx.jpg', 'images/zsd.jpg', 'images/lzl.jpg', 'images/xwl.jpg')) {
         $trackedPortraitAsset = (& git -C $RepositoryRoot ls-files -- $portraitAsset) -eq $portraitAsset
         if (-not $trackedPortraitAsset) {
             throw "Team portrait must be tracked: $portraitAsset"

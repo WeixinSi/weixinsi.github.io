@@ -7,12 +7,6 @@ current_members:
         background: "SUAT"
         image: "/images/wyy.jpg"
 
-  - id: postdoctoral-fellows
-    title: "Postdoctoral Fellows"
-    members:
-      - name: "Incoming Postdoctoral Fellow"
-        image: "/images/bio-photo.jpg"
-
   - id: phd-students
     title: "Ph.D. Students"
     members:
@@ -71,6 +65,9 @@ current_members:
         role: "2025–"
         background: "SUSTech–SUAT Joint Training Program"
         image: "/images/lzl.jpg"
+      - name: "Weilu Xu"
+        role: "2026–"
+        image: "/images/xwl.jpg"
 
 alumni:
   title: "Alumni"
