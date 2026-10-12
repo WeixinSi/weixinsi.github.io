@@ -387,7 +387,7 @@ function Assert-TeamContract([string]$TeamPage, [string]$TeamData, [string]$Acad
     $expectedTeamFactCounts = [ordered]@{}
     $expectedTeamFactCounts[('role: "' + $membershipYear2025 + '"')] = 11
     $expectedTeamFactCounts[('role: "' + $membershipYear2026 + '"')] = 2
-    $expectedTeamFactCounts[$sustechSuatJointProgram] = 8
+    $expectedTeamFactCounts[$sustechSuatJointProgram] = 9
     foreach ($teamFact in $expectedTeamFactCounts.GetEnumerator()) {
         $actualCount = [regex]::Matches($TeamData, [regex]::Escape($teamFact.Key)).Count
         if ($actualCount -ne $teamFact.Value) {
