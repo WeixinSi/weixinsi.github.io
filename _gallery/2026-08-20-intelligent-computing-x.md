@@ -12,8 +12,8 @@ description: >-
   Advanced Technology for the “Intelligent Computing + X” Workshop. Invited
   speakers included Prof. Yikun Zhang, Prof. Shanshan Wang, Prof. Ruizhen Hu,
   Prof. Hongming Shan, and Prof. Chu Han. Prof. Yang Gao, Secretary of the CSF
-  Medical Simulation Technical Committee, and Prof. Boyu Gao, Deputy
-  Secretary-General of CCF TCVRV, Prof. Lequan Yu from the University of Hong
+  Medical Simulation Technical Committee; Prof. Boyu Gao, Deputy
+  Secretary-General of CCF TCVRV; and Prof. Lequan Yu from the University of Hong
   Kong also joined and organized this event.
 images:
   - image_path: "Intelligent Computing + X.jpg"

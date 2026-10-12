@@ -184,6 +184,19 @@ exclude:
   - README
   - tmp
   - vendor
+  # Development documentation, utilities, and unused template examples.
+  - docs
+  - scripts
+  - markdown_generator
+  - talkmap
+  - talkmap.py
+  - files/bibtex1.bib
+  - files/paper1.pdf
+  - files/paper2.pdf
+  - files/paper3.pdf
+  - files/slides1.pdf
+  - files/slides2.pdf
+  - files/slides3.pdf
 keep_files:
   - .git
   - .svn
