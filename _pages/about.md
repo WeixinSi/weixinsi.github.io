@@ -54,6 +54,7 @@ reality.
 
 ## News
 
+- [10/2026] Elected as a Council Member of the Computer Academy of Guangdong.
 - [10/2026] Congratulations to both Jincai Huang and Yang Liu on being awarded the National Scholarship for Graduate Students — an incredible achievement!
 - [09/2026] Three papers accepted to BIBM 2026. Congrats to Shihao, Yangyang and Congyu.
 - [09/2026] Elected as a Distinguished Member of the China Computer Federation (CCF).

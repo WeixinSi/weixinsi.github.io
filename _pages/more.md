@@ -38,6 +38,7 @@ author_profile: true
 
 ### Professional Activities
 
+- Council Member, Computer Academy of Guangdong
 - Standing Committee Member, Smart Healthcare Expert Committee, Chinese Institute of Electronics
 - Secretary-General, Medical Simulation Committee, China Simulation Federation
 
@@ -73,4 +74,4 @@ author_profile: true
 
 ---
 
-*Last updated: September 2026.*
+*Last updated: October 2026.*
