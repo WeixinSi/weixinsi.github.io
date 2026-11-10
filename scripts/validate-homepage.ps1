@@ -153,15 +153,15 @@ function Assert-PublicationsContract([string]$Publications) {
     }
 
     $yearContracts = @(
-        [pscustomobject]@{ Year = '2026'; Start = 1; Count = 13 },
-        [pscustomobject]@{ Year = '2025'; Start = 14; Count = 20 },
-        [pscustomobject]@{ Year = '2024'; Start = 34; Count = 10 },
-        [pscustomobject]@{ Year = '2023'; Start = 44; Count = 1 },
-        [pscustomobject]@{ Year = '2022'; Start = 45; Count = 6 },
-        [pscustomobject]@{ Year = '2021'; Start = 51; Count = 6 },
-        [pscustomobject]@{ Year = '2020'; Start = 57; Count = 1 },
-        [pscustomobject]@{ Year = '2019'; Start = 58; Count = 6 },
-        [pscustomobject]@{ Year = '2018'; Start = 64; Count = 2 }
+        [pscustomobject]@{ Year = '2026'; Start = 1; Count = 14 },
+        [pscustomobject]@{ Year = '2025'; Start = 15; Count = 20 },
+        [pscustomobject]@{ Year = '2024'; Start = 35; Count = 10 },
+        [pscustomobject]@{ Year = '2023'; Start = 45; Count = 1 },
+        [pscustomobject]@{ Year = '2022'; Start = 46; Count = 6 },
+        [pscustomobject]@{ Year = '2021'; Start = 52; Count = 6 },
+        [pscustomobject]@{ Year = '2020'; Start = 58; Count = 1 },
+        [pscustomobject]@{ Year = '2019'; Start = 59; Count = 6 },
+        [pscustomobject]@{ Year = '2018'; Start = 65; Count = 2 }
     )
 
     $allYearHeadings = [regex]::Matches($Publications, '(?m)^(?<level>#{1,6})\s+(?<year>\d{4})\s*$')
@@ -293,14 +293,14 @@ function Assert-PublicationsContract([string]$Publications) {
     if (-not $currentYearHasIal) {
         throw "Publication year $($finalContract.Year) is missing its ordered-list start IAL."
     }
-    if ($publicationBodies.Count -ne 65) {
-        throw "Expected 65 publication entries, found $($publicationBodies.Count)."
+    if ($publicationBodies.Count -ne 66) {
+        throw "Expected 66 publication entries, found $($publicationBodies.Count)."
     }
 
-    # Reviewed digest of the 65 complete, unnumbered entries after CRLF/LF normalization,
+    # Reviewed digest of the 66 complete, unnumbered entries after CRLF/LF normalization,
     # joined with LF and no terminal newline.
     # Any intentional publication addition or text/order change requires review and a digest update.
-    $expectedPublicationDigest = 'b808851c58bd32e744a15b1400ee30c8d04510eb1c55bf5659f2b695b01d5e7b'
+    $expectedPublicationDigest = '09d963f44f2b7bc997da88ddd7af71f92d82bc247c636e95ea8a429a5c93f53f'
     $actualPublicationDigest = Get-Sha256Hex ($publicationBodies -join "`n")
     if ($actualPublicationDigest -ne $expectedPublicationDigest) {
         throw "Publication content digest mismatch: expected $expectedPublicationDigest, found $actualPublicationDigest."
