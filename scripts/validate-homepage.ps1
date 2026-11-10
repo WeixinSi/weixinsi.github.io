@@ -300,7 +300,7 @@ function Assert-PublicationsContract([string]$Publications) {
     # Reviewed digest of the 66 complete, unnumbered entries after CRLF/LF normalization,
     # joined with LF and no terminal newline.
     # Any intentional publication addition or text/order change requires review and a digest update.
-    $expectedPublicationDigest = '09d963f44f2b7bc997da88ddd7af71f92d82bc247c636e95ea8a429a5c93f53f'
+    $expectedPublicationDigest = 'd3817d1019c9216820b00e8fa336c1d4b5cef2291eb80ea27aeb697240f32993'
     $actualPublicationDigest = Get-Sha256Hex ($publicationBodies -join "`n")
     if ($actualPublicationDigest -ne $expectedPublicationDigest) {
         throw "Publication content digest mismatch: expected $expectedPublicationDigest, found $actualPublicationDigest."

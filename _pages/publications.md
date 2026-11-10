@@ -4,13 +4,13 @@ permalink: /publications/
 author_profile: true
 ---
 
-<p><sup>#</sup> Co-first author · <sup>†</sup> Equal contribution · <sup>&#42;</sup> Corresponding or co-corresponding author</p>
+<p><sup>†</sup> Co-first authors · <sup>&#42;</sup> Corresponding authors</p>
 
 ## Selected Publications
 
 ### 2026
 
-1. Peiji Li, Shanhua Tang, Haipeng Wang, Kai Wang, **Weixin Si**<sup>&#42;</sup>, Zhirong Yang, Yang Gao, and Shuai Li. Prototype-Guided Multi-Task Learning for HCC Postoperative Complications Prediction. *IEEE Journal of Biomedical and Health Informatics*, 2026.
+1. Peiji Li, Shanhua Tang, Haipeng Wang, Kai Wang, **Weixin Si**<sup>&#42;</sup>, Zhirong Yang, Yang Gao, and Shuai Li<sup>&#42;</sup>. Prototype-Guided Multi-Task Learning for HCC Postoperative Complications Prediction. *IEEE Journal of Biomedical and Health Informatics*, 2026.
 
 2. Rongfu Li, Yingying Wang, **Weixin Si**, and Qingqing Zheng<sup>&#42;</sup>. FAST-BiMamba: Frequency-Aware Spatio-Temporal Bidirectional Mamba for Efficient Finger-Level EEG Decoding. *IEEE Transactions on Industrial Informatics*, 2026.
 
@@ -18,7 +18,7 @@ author_profile: true
 
 4. Yangyang Shi, Beiji Zou, Xiaonian Deng, Yucong Zhang, Zehua Liu, Xiaoyan Kui, Gang Xu, **Weixin Si**<sup>&#42;</sup>. Integrating Frequency-Aware Mamba with Diffusion for 4D Volumetric Image Synthesis. *Pattern Recognition*, 2026.
 
-5. Ruize Cui<sup>#</sup>, **Weixin Si**<sup>#</sup>, Zhixi Li<sup>#</sup>, Kai Wang, Jialun Pei<sup>&#42;</sup>, Pheng-Ann Heng, Jing Qin. Depth-Induced Prompt Learning for Laparoscopic Liver Landmark Detection. *Medical Image Analysis*, 2026.
+5. Ruize Cui<sup>†</sup>, **Weixin Si**<sup>†</sup>, Zhixi Li<sup>†</sup>, Kai Wang, Jialun Pei<sup>&#42;</sup>, Pheng-Ann Heng, Jing Qin. Depth-Induced Prompt Learning for Laparoscopic Liver Landmark Detection. *Medical Image Analysis*, 2026.
 
 6. Zheng Fang, Xiaoming Qi, Chun-Mei Feng, Jialun Pei, **Weixin Si**, Yueming Jin. Spatio-Temporal Representation Decoupling and Enhancement for Federated Instrument Segmentation in Surgical Videos. *IEEE Transactions on Medical Imaging*, 2026.
 
@@ -36,7 +36,7 @@ author_profile: true
 
 13. Yixin Wang, Haipeng Wang, Xin Feng, Xiangyun Liao, **Weixin Si**<sup>&#42;</sup>. Frequency-Aware Prototype Learning in VLM for Intracranial Aneurysm HR-VWI Segmentation. MICCAI 2026.
 
-14. Fang Li<sup>#</sup>, Shihao Zou<sup>#</sup>, **Weixin Si**<sup>&#42;</sup>, Yang Gao<sup>&#42;</sup>, Shuai Li, Aimin Hao. TRCoRSurg: Temporal-Relational Co-Reasoning for Surgical Video Triplet Recognition. IEEE CVPR 2026.
+14. Fang Li<sup>†</sup>, Shihao Zou<sup>†</sup>, **Weixin Si**<sup>&#42;</sup>, Yang Gao<sup>&#42;</sup>, Shuai Li, Aimin Hao. TRCoRSurg: Temporal-Relational Co-Reasoning for Surgical Video Triplet Recognition. IEEE CVPR 2026.
 {: start="1"}
 
 ### 2025
@@ -79,7 +79,7 @@ author_profile: true
 
 33. Wei Cao, Zhengyang Li, Yuchen He, Zehua Liu, Meng Zhang, Jianping Lv, **Weixin Si**<sup>&#42;</sup>. A Cost-effective Tangible Rehearsal Interface for Microsurgical Clipping of Intracranial Aneurysm. IEEE VR 2025.
 
-34. Diandian Guo<sup>#</sup>, **Weixin Si**<sup>#</sup>, Zhixi Li, Jialun Pei<sup>&#42;</sup>, Pheng-Ann Heng. Surgical Workflow Recognition and Blocking Effectiveness Detection in Laparoscopic Liver Resection with Pringle Maneuver. AAAI 2025.
+34. Diandian Guo<sup>†</sup>, **Weixin Si**<sup>†</sup>, Zhixi Li, Jialun Pei<sup>&#42;</sup>, Pheng-Ann Heng. Surgical Workflow Recognition and Blocking Effectiveness Detection in Laparoscopic Liver Resection with Pringle Maneuver. AAAI 2025.
 {: start="15"}
 
 ### 2024
@@ -153,7 +153,7 @@ author_profile: true
 
 61. **Weixin Si**, Xiangyun Liao, Yinling Qian, Haitao Sun, Xiangdong Chen, Qiong Wang, Pheng-Ann Heng. Assessing performance of augmented reality-based neurosurgical training. *Visual Computing for Industry, Biomedicine, and Art*, 2019.
 
-62. Ruotong Li<sup>#</sup>, **Weixin Si**<sup>#</sup>, Xiangyun Liao, Qiong Wang<sup>&#42;</sup>, Reinhard Klein, Pheng-Ann Heng. Mixed Reality based Respiratory Liver Tumor Puncture Navigation. *Computational Visual Media*, 2019, 5(4): 363–374.
+62. Ruotong Li<sup>†</sup>, **Weixin Si**<sup>†</sup>, Xiangyun Liao, Qiong Wang<sup>&#42;</sup>, Reinhard Klein, Pheng-Ann Heng. Mixed Reality based Respiratory Liver Tumor Puncture Navigation. *Computational Visual Media*, 2019, 5(4): 363–374.
 
 63. Ruotong Li, Tianpei Yang, **Weixin Si**<sup>&#42;</sup>, Xiangyun Liao, Qiong Wang, Reinhard Klein, Pheng-Ann Heng. Augmented Reality Guided Respiratory Liver Tumors Punctures: A Preliminary Feasibility Study. SIGGRAPH Asia 2019 Technical Briefs. Brisbane, Australia, 2019.11.17–11.20.
 
@@ -164,7 +164,7 @@ author_profile: true
 
 65. **Weixin Si**, Jing Qin, Zhuchao Chen, Xiangyun Liao<sup>&#42;</sup>, Yinling Qian, Qiong Wang<sup>&#42;</sup>, Pheng-Ann Heng. Thin Feature-Aware Transport-Velocity Formulation for SPH-Based Liquid Animation. *IEEE Transactions on Multimedia*, 2018, 20(11): 3033–3044.
 
-66. Xiangyun Liao<sup>#</sup>, **Weixin Si**<sup>#</sup>, Zhiyong Yuan<sup>&#42;</sup>, Hanqiu Sun, Jing Qin, Qiong Wang<sup>&#42;</sup>, Pheng-Ann Heng. Animating Wall-bounded Turbulent Smoke via Filament-Mesh Particle-Particle Method. *IEEE Transactions on Visualization and Computer Graphics*, 2018, 24(3): 1260–1273.
+66. Xiangyun Liao<sup>†</sup>, **Weixin Si**<sup>†</sup>, Zhiyong Yuan<sup>&#42;</sup>, Hanqiu Sun, Jing Qin, Qiong Wang<sup>&#42;</sup>, Pheng-Ann Heng. Animating Wall-bounded Turbulent Smoke via Filament-Mesh Particle-Particle Method. *IEEE Transactions on Visualization and Computer Graphics*, 2018, 24(3): 1260–1273.
 {: start="65"}
 
 [View the complete publication record on Google Scholar →](https://scholar.google.com/citations?user=E4efwTgAAAAJ)
